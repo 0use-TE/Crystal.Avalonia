@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Example/">
+    <Project Path="Crystal.AvaloniaExample/Crystal.AvaloniaExample.Android/Crystal.AvaloniaExample.Android.csproj" Id="a0e2ad81-8e4b-48e1-94ad-b54d8a23c6a5">
+      <Deploy />
+    </Project>
+    <Project Path="Crystal.AvaloniaExample/Crystal.AvaloniaExample.Browser/Crystal.AvaloniaExample.Browser.csproj" Id="4e6802a9-688d-48ea-9325-065e392a381e" />
+    <Project Path="Crystal.AvaloniaExample/Crystal.AvaloniaExample.Desktop/Crystal.AvaloniaExample.Desktop.csproj" Id="e83cf53d-568d-4d50-bdab-275284f2c827" />
+    <Project Path="Crystal.AvaloniaExample/Crystal.AvaloniaExample.iOS/Crystal.AvaloniaExample.iOS.csproj" Id="6a2a63cd-e277-4b30-87b3-cf19056f24c0">
+      <Deploy />
+    </Project>
+    <Project Path="Crystal.AvaloniaExample/Crystal.AvaloniaExample/Crystal.AvaloniaExample.csproj" Id="e6a6d13c-2025-49f7-baf8-15e15534bde9" />
+    <Project Path="ShareBaseClass/ShareContract.csproj" Id="3e2e0ebd-1e7b-4db3-b15a-76ba95ddfe01" />
+  </Folder>
+  <Folder Name="/Example/Modules/">
+    <Project Path="ModuleA/ModuleAExample.csproj" Id="0ad8d507-1083-4bc1-aa57-990330c70382" />
+    <Project Path="ModuleB/ModuleBExample.csproj" Id="bc900236-5bba-413e-bc96-3fdc7a8ee769" />
+  </Folder>
+  <Folder Name="/解决方案项/">
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Crystal.Avalonia/Crystal.Avalonia.csproj" Id="65e2481a-6fad-4733-b4cb-61b6fe52c9f2" />
+</Solution>
