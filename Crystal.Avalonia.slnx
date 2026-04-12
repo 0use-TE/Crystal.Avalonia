@@ -1,6 +1,20 @@
 <Solution>
-  <Folder Name="/CrystalTemplate/" />
-  <Folder Name="/CrystalTemplate/TemplateContent/" />
+  <Folder Name="/CrystalTemplate/">
+    <Project Path="CrystalTemplate/CrystalTemplate/CrystalTemplate.csproj" />
+  </Folder>
+  <Folder Name="/CrystalTemplate/TemplateContent/">
+    <File Path="Crystal.AvaloniaExample/Directory.Packages.props" />
+    <File Path="CrystalTemplate/TemplateContent/TemplateContent/.editorconfig" />
+    <Project Path="CrystalTemplate/TemplateContent/TemplateContent.Android/TemplateContent.Android.csproj">
+      <Deploy />
+    </Project>
+    <Project Path="CrystalTemplate/TemplateContent/TemplateContent.Browser/TemplateContent.Browser.csproj" />
+    <Project Path="CrystalTemplate/TemplateContent/TemplateContent.Desktop/TemplateContent.Desktop.csproj" />
+    <Project Path="CrystalTemplate/TemplateContent/TemplateContent.iOS/TemplateContent.iOS.csproj">
+      <Deploy />
+    </Project>
+    <Project Path="CrystalTemplate/TemplateContent/TemplateContent/TemplateContent.csproj" />
+  </Folder>
   <Folder Name="/Example/">
     <Project Path="Crystal.AvaloniaExample/Crystal.AvaloniaExample.Android/Crystal.AvaloniaExample.Android.csproj" Id="a0e2ad81-8e4b-48e1-94ad-b54d8a23c6a5">
       <Deploy />

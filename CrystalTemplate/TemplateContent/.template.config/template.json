@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Ouse",
+  "name": "Crystal.Template",
+  "identity": "Ouse.Unique.Crystal.Template.V2",
+  "shortName": "CT",
+  "classifications": [ "Avalonia" ],
+  "sourceName": "CrystalTemplate",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "specialCustomOperations": {
+    "**/*.cs": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "tokenPrefix": "//-template-"
+          }
+        }
+      ]
+    }
+  }
+}
