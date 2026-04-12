@@ -12,7 +12,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Crystal.Avalonia\Crystal.Avalonia.csproj" />
+	  <ProjectReference Include="..\..\Crystal.Avalonia\Crystal.Avalonia.csproj" />
 	</ItemGroup>
+
+
 
 </Project>

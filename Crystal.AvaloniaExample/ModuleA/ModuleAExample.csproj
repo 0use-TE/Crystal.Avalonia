@@ -6,9 +6,8 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
-
 	<ItemGroup>
-		<ProjectReference Include="..\ShareBaseClass\ShareContract.csproj" />
+	  <ProjectReference Include="..\ShareBaseClass\ShareContract.csproj" />
 	</ItemGroup>
 
 </Project>

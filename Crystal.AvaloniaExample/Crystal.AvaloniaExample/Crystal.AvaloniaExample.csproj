@@ -19,9 +19,9 @@
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\ModuleA\ModuleAExample.csproj" />
-		<ProjectReference Include="..\..\ModuleB\ModuleBExample.csproj" />
-		<ProjectReference Include="..\..\ShareBaseClass\ShareContract.csproj" />
+		<ProjectReference Include="..\ModuleA\ModuleAExample.csproj" />
+		<ProjectReference Include="..\ModuleB\ModuleBExample.csproj" />
+		<ProjectReference Include="..\ShareBaseClass\ShareContract.csproj" />
 	</ItemGroup>
 
 </Project>
