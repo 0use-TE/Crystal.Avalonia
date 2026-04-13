@@ -95,4 +95,4 @@ services.AddMvvmBindingTransient<MainView, MainViewModel>();
 ## Next Steps
 
 - [Getting Started](getting-started.md) - Create your first Crystal.Avalonia application
-- [API Reference](api/index.md) - Explore the full API documentation
+- [API Reference](../api/index.html) - Explore the full API documentation

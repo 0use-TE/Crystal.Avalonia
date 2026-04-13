@@ -10,21 +10,21 @@ A lightweight, AOT-friendly MVVM framework for Avalonia UI applications.
 
 New to Crystal.Avalonia? Start here:
 
-- [Introduction](introduction.md) - Overview of Crystal.Avalonia and its core concepts
-- [Getting Started](getting-started.md) - Step-by-step tutorial to create your first app
-- [MVVM Pattern](tutorials/mvvm-pattern.md) - Learn the MVVM pattern with Crystal.Avalonia
+- [Introduction](docs/introduction.md) - Overview of Crystal.Avalonia and its core concepts
+- [Getting Started](docs/getting-started.md) - Step-by-step tutorial to create your first app
+- [MVVM Pattern](docs/tutorials/mvvm-pattern.md) - Learn the MVVM pattern with Crystal.Avalonia
 
 ## Tutorials
 
 Step-by-step guides for common tasks:
 
-- [Create Your First App](tutorials/create-first-app.md) - Build a complete counter application
-- [Module Development](tutorials/module-development.md) - Create reusable, shareable modules
-- [Dependency Injection](tutorials/dependency-injection.md) - Master DI patterns in Crystal.Avalonia
+- [Create Your First App](docs/tutorials/create-first-app.md) - Build a complete counter application
+- [Module Development](docs/tutorials/module-development.md) - Create reusable, shareable modules
+- [Dependency Injection](docs/tutorials/dependency-injection.md) - Master DI patterns in Crystal.Avalonia
 
 ## API Reference
 
-- [API Documentation](api/index.md) - Generated API reference for Crystal.Avalonia
+- [API Documentation](docs/api/index.md) - Generated API reference for Crystal.Avalonia
 
 ## Quick Links
 
