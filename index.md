@@ -22,4 +22,4 @@ cd MyApp && dotnet run
 
 ## API Reference
 
-- [API Documentation](https://0use.net/Crystal.Avalonia/api/) - Generated API reference
+- [API Documentation](https://0use.net/Crystal.Avalonia/api/Crystal.Avalonia.md) - Generated API reference

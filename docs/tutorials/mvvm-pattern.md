@@ -1,313 +1,109 @@
-# Tutorial: MVVM Pattern in Crystal.Avalonia
+# Tutorial: MVVM with Crystal.Avalonia
 
-This tutorial explains how the MVVM (Model-View-ViewModel) pattern works in Crystal.Avalonia.
+This tutorial explains the two MVVM binding modes in Crystal.Avalonia.
 
-## MVVM Overview
+## Two Binding Modes
 
-```
-┌─────────────┐         ┌──────────────────┐         ┌─────────────┐
-│    View     │◄───────│   ViewModel      │─────────│    Model    │
-│  (AXAML)    │  Data  │   (C# Class)     │  Data   │  (C# Class) │
-└─────────────┘  Binding└──────────────────┘  Access └─────────────┘
-```
+Crystal.Avalonia provides two ways to bind Views and ViewModels:
 
-- **Model** - Your data and business logic
-- **ViewModel** - Exposes data and commands for the View
-- **View** - Declarative UI (AXAML)
+| Mode | Description | Use Case |
+|------|-------------|----------|
+| **ViewModelLocator** | View sets `AutoWireViewModel="True"`, system injects DataContext | View-first development |
+| **ViewLocator** | ViewModel is assigned to ContentControl, system resolves View from DI | ViewModel-first development |
 
-## ViewModel Base Class
+## Mode 1: ViewModelLocator (View-First)
 
-Crystal.Avalonia uses `ObservableObject` as the base class for ViewModels. It provides:
-
-- `SetProperty()` - For notifying the UI when properties change
-- `OnPropertyChanged()` - For manual property change notifications
-
-### Example: Basic ViewModel
+### Register
 
 ```csharp
-using System;
-
-public class MainViewModel : ObservableObject
+public override void RegisterServices(IServiceCollection services)
 {
-    private string _title = "My App";
-    private int _itemCount;
-    private bool _isLoading;
-
-    public string Title
-    {
-        get => _title;
-        set => SetProperty(ref _title, value);
-    }
-
-    public int ItemCount
-    {
-        get => _itemCount;
-        set => SetProperty(ref _itemCount, value);
-    }
-
-    public bool IsLoading
-    {
-        get => _isLoading;
-        set => SetProperty(ref _isLoading, value);
-    }
+    services.AddMvvmBindingTransient<MainView, MainViewModel>();
 }
 ```
 
-## Property Binding
-
-### In ViewModel
-
-```csharp
-private string _message;
-public string Message
-{
-    get => _message;
-    set => SetProperty(ref _message, value);  // Notifies UI of change
-}
-```
-
-### In View (AXAML)
-
-```xml
-<TextBlock Text="{Binding Message}"/>
-```
-
-When `Message` is updated in the ViewModel, the TextBlock automatically updates.
-
-## Command Binding
-
-Commands allow the View to invoke methods in the ViewModel.
-
-### ViewModel with Commands
-
-```csharp
-using System.Windows.Input;
-
-public class CounterViewModel : ObservableObject
-{
-    private int _count;
-
-    public int Count
-    {
-        get => _count;
-        set => SetProperty(ref _count, value);
-    }
-
-    // Commands using Action
-    public void Increment()
-    {
-        Count++;
-    }
-
-    public void Decrement()
-    {
-        Count--;
-    }
-
-    public void Reset()
-    {
-        Count = 0;
-    }
-}
-```
-
-### Command Binding in View
-
-```xml
-<StackPanel Orientation="Horizontal" Spacing="10">
-    <Button Content="-" Command="{Binding Decrement}"/>
-    <Button Content="Reset" Command="{Binding Reset}"/>
-    <Button Content="+" Command="{Binding Increment}"/>
-</StackPanel>
-```
-
-## Collection Binding
-
-### ViewModel with ObservableCollection
-
-```csharp
-using System.Collections.ObjectModel;
-
-public class ListViewModel : ObservableObject
-{
-    public ObservableCollection<ItemViewModel> Items { get; } = new();
-
-    public ListViewModel()
-    {
-        // Initialize with some items
-        Items.Add(new ItemViewModel { Name = "Item 1" });
-        Items.Add(new ItemViewModel { Name = "Item 2" });
-    }
-}
-
-public class ItemViewModel : ObservableObject
-{
-    private string _name;
-    private bool _isSelected;
-
-    public string Name
-    {
-        get => _name;
-        set => SetProperty(ref _name, value);
-    }
-
-    public bool IsSelected
-    {
-        get => _isSelected;
-        set => SetProperty(ref _isSelected, value);
-    }
-}
-```
-
-### List Binding in View
-
-```xml
-<ListBox ItemsSource="{Binding Items}">
-    <ListBox.ItemTemplate>
-        <DataTemplate>
-            <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding IsSelected}"/>
-                <TextBlock Text="{Binding Name}"/>
-            </StackPanel>
-        </DataTemplate>
-    </ListBox.ItemTemplate>
-</ListBox>
-```
-
-## Automatic ViewModel Binding
-
-Crystal.Avalonia can automatically inject ViewModels into Views.
-
-### Enable Auto-Wiring
+### XAML
 
 ```xml
 <UserControl xmlns:vm="using:Crystal.Avalonia"
              ViewModelLocator.AutoWireViewModel="True">
+    <TextBlock Text="{Binding Title}"/>
+</UserControl>
 ```
 
 ### How It Works
 
-1. View loads with `AutoWireViewModel="True"`
-2. Crystal looks up the registered ViewModel type for this View
-3. Resolves the ViewModel from the DI container
-4. Assigns it to `DataContext`
+1. View loads with `ViewModelLocator.AutoWireViewModel="True"`
+2. System looks up the registered ViewModel type for this View
+3. Resolves ViewModel from DI container
+4. Assigns to `DataContext`
 
-### Manual Resolution
+## Mode 2: ViewLocator (ViewModel-First)
 
-You can also manually resolve ViewModels:
+ViewLocator is a built-in `IDataTemplate` that automatically resolves View from ViewModel type.
+
+### Register
 
 ```csharp
-public partial class MainWindow : Window
+public override void RegisterServices(IServiceCollection services)
 {
-    public MainWindow()
-    {
-        InitializeComponent();
-        Loaded += OnLoaded;
-    }
-
-    private void OnLoaded(object sender, RoutedEventArgs e)
-    {
-        var vm = MvvmManager.ServiceProvider!.GetService<MainViewModel>();
-        DataContext = vm;
-    }
+    services.AddMvvmBindingTransient<MainView, MainViewModel>();
 }
 ```
 
-## Two-Way Binding
-
-By default, bindings are one-way. Use two-way for input controls:
+### XAML
 
 ```xml
-<TextBox Text="{Binding UserName, Mode=TwoWay}"/>
-<TextBox Text="{Binding SearchQuery, Mode=TwoWay}"/>
+<!-- No extra attributes needed -->
+<ContentControl Content="{Binding MainViewModel}"/>
 ```
 
-## Best Practices
+### How It Works
 
-| Practice | Description |
-|----------|-------------|
-| Keep ViewModels thin | Move logic to services/models |
-| Use interfaces | Makes testing easier |
-| Avoid code-behind | Keep UI logic in ViewModel |
-| Use ObservableCollection | For collections that change |
-| Immutable models | Use immutable records for data transfer |
+1. ViewModel is assigned to ContentControl
+2. ViewLocator matches the ViewModel type against registered mappings
+3. Resolves View from DI container
+4. Creates View with ViewModel as DataContext
 
-## Complete Example
+ViewLocator is enabled by default (controlled by `CrystalOptions.EnableViewModelLocator`).
 
-### ViewModel
+## Example with CommunityToolkit.Mvvm
 
 ```csharp
-public class OrderViewModel : ObservableObject
+using CommunityToolkit.Mvvm.ComponentModel;
+
+public partial class MainViewModel : ObservableObject
 {
-    private string _orderId = "";
-    private OrderStatus _status;
-    private bool _isEditing;
-
-    public string OrderId
-    {
-        get => _orderId;
-        set => SetProperty(ref _orderId, value);
-    }
-
-    public OrderStatus Status
-    {
-        get => _status;
-        set => SetProperty(ref _status, value);
-    }
-
-    public bool IsEditing
-    {
-        get => _isEditing;
-        set => SetProperty(ref _isEditing, value);
-    }
-
-    public void Approve() => Status = OrderStatus.Approved;
-    public void Reject() => Status = OrderStatus.Rejected;
-    public void Edit() => IsEditing = true;
-    public void Save() => IsEditing = false;
+    [ObservableProperty]
+    private string _title = "My App";
 }
-
-public enum OrderStatus { Pending, Approved, Rejected }
 ```
 
-### View
+### ViewModelLocator (View-First)
 
 ```xml
-<UserControl xmlns:vm="using:Crystal.Avalonia"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             ViewModelLocator.AutoWireViewModel="True">
-
-    <StackPanel Margin="20" Spacing="15">
-        <StackPanel Orientation="Horizontal" Spacing="10">
-            <TextBlock Text="Order ID:" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding OrderId}"
-                       FontWeight="Bold"
-                       VerticalAlignment="Center"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Spacing="10">
-            <TextBlock Text="Status:" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Status}"
-                       VerticalAlignment="Center"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Spacing="10">
-            <Button Content="Approve"
-                    Command="{Binding Approve}"
-                    IsVisible="{Binding !IsEditing}"/>
-            <Button Content="Reject"
-                    Command="{Binding Reject}"
-                    IsVisible="{Binding !IsEditing}"/>
-            <Button Content="Edit"
-                    Command="{Binding Edit}"
-                    IsVisible="{Binding !IsEditing}"/>
-            <Button Content="Save"
-                    Command="{Binding Save}"
-                    IsVisible="{Binding IsEditing}"/>
-        </StackPanel>
-    </StackPanel>
+<UserControl ViewModelLocator.AutoWireViewModel="True">
+    <TextBlock Text="{Binding Title}"/>
 </UserControl>
 ```
+
+### ViewLocator (ViewModel-First)
+
+```xml
+<ContentControl Content="{Binding MyViewModel}"/>
+```
+
+Same ViewModel works with both modes.
+
+## Key Concepts
+
+| Concept | Description |
+|---------|-------------|
+| `AddMvvmBindingTransient` | Registers View and ViewModel types, builds bidirectional mapping |
+| `ViewModelLocator.AutoWireViewModel` | Attached property for View-first auto-binding |
+| `ViewLocator` | Built-in IDataTemplate for ViewModel-first resolution |
+| `MvvmManager.GetVmType(viewType)` | Looks up ViewModel type for a View type |
+| `MvvmManager.GetViewType(vmType)` | Looks up View type for a ViewModel type |
 
 ## Next Steps
 

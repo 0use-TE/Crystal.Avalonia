@@ -85,6 +85,8 @@ public MainWindow()
 
 ### After
 
+You still need `InitializeComponent()` (that's how Avalonia works), but DataContext is auto-injected:
+
 ```csharp
 // In RegisterServices
 public override void RegisterServices(IServiceCollection services)

@@ -1,17 +1,26 @@
 # Crystal.Avalonia
 
-A lightweight, AOT-friendly MVVM framework for Avalonia UI applications.
+A lightweight infrastructure layer for Avalonia UI applications with modular architecture and dependency injection.
 
 [![NuGet](https://img.shields.io/nuget/v/Crystal.Avalonia.svg)](https://www.nuget.org/packages/Crystal.Avalonia)
 [![AOT Compatible](https://img.shields.io/badge/AOT-Compatible-brightgreen)](https://0use.net/Crystal.Avalonia/docs/aot-compatibility.html)
 
-## Features
+## What It Provides
 
-- **Modular Architecture** - Divide your application into independent, self-contained modules
-- **Built-in MVVM Support** - View/ViewModel mapping with automatic DataContext injection
-- **Dependency Injection** - First-class DI support via Microsoft.Extensions.DependencyInjection
+- **Module System** - Organize code into independent, self-contained modules
+- **Dependency Injection** - Built-in support via Microsoft.Extensions.DependencyInjection
+- **View/ViewModel Wiring** - Simple registration with automatic DataContext injection
 - **AOT Friendly** - Full trimming and AOT compilation support
 - **Cross-Platform** - Works with all Avalonia-supported platforms (Windows, macOS, Linux, Android, iOS, WebAssembly)
+
+## What It's NOT
+
+Crystal.Avalonia is **not** an MVVM framework. It does not provide ViewModel base classes or commands. You can use **any** MVVM library:
+
+- CommunityToolkit.Mvvm
+- Prism
+- ReactiveUI
+- Any other
 
 ## Quick Start
 

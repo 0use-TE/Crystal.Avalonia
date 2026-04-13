@@ -7,7 +7,9 @@ Crystal.Avalonia uses Microsoft.Extensions.DependencyInjection for dependency in
 ### Constructor Injection (Recommended)
 
 ```csharp
-public class UserListViewModel : ObservableObject
+using CommunityToolkit.Mvvm.ComponentModel;
+
+public partial class UserListViewModel : ObservableObject
 {
     private readonly IUserService _userService;
     private readonly ILogger _logger;
@@ -24,7 +26,9 @@ public class UserListViewModel : ObservableObject
 ### Property Injection
 
 ```csharp
-public class SettingsViewModel : ObservableObject
+using CommunityToolkit.Mvvm.ComponentModel;
+
+public partial class SettingsViewModel : ObservableObject
 {
     public IConfigService? ConfigService { get; set; }
 }
@@ -126,7 +130,7 @@ public class ViewModelFactory : IViewModelFactory
 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
 
 // Usage
-public class DetailViewModel : ObservableObject
+public partial class DetailViewModel : ObservableObject
 {
     private readonly IViewModelFactory _factory;
 
@@ -146,7 +150,9 @@ public class DetailViewModel : ObservableObject
 ### Lazy Resolution
 
 ```csharp
-public class MyViewModel : ObservableObject
+using CommunityToolkit.Mvvm.ComponentModel;
+
+public partial class MyViewModel : ObservableObject
 {
     private readonly Lazy<IHeavyService> _heavyService;
 

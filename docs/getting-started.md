@@ -31,6 +31,28 @@ MyApp/
 └── Program.cs
 ```
 
+## Two Binding Modes
+
+Crystal.Avalonia supports two MVVM binding modes:
+
+### Mode 1: ViewModelLocator (View-First)
+
+Set `ViewModelLocator.AutoWireViewModel="True"` on the View:
+
+```xml
+<UserControl ViewModelLocator.AutoWireViewModel="True">
+    <TextBlock Text="{Binding Greeting}"/>
+</UserControl>
+```
+
+### Mode 2: ViewLocator (ViewModel-First)
+
+Bind ViewModel directly to ContentControl, ViewLocator auto-resolves View:
+
+```xml
+<ContentControl Content="{Binding MyViewModel}"/>
+```
+
 ## Quick Example
 
 ### App.axaml.cs
@@ -48,6 +70,7 @@ public partial class App : CrystalApplication
 
     public override void RegisterServices(IServiceCollection services)
     {
+        // Register View/ViewModel mapping
         services.AddMvvmBindingTransient<MainView, MainViewModel>();
     }
 
@@ -59,16 +82,18 @@ public partial class App : CrystalApplication
 }
 ```
 
-### ViewModel
+### ViewModel (using CommunityToolkit.Mvvm)
 
 ```csharp
-public class MainViewModel : ObservableObject
+using CommunityToolkit.Mvvm.ComponentModel;
+
+public partial class MainViewModel : ObservableObject
 {
     public string Greeting => "Welcome to Crystal.Avalonia!";
 }
 ```
 
-### View (AXAML)
+### View (AXAML) - ViewModelLocator Mode
 
 ```xml
 <UserControl xmlns:vm="using:Crystal.Avalonia"
@@ -79,6 +104,6 @@ public class MainViewModel : ObservableObject
 
 ## Next Steps
 
-- [MVVM Pattern](tutorials/mvvm-pattern.md) - Learn the MVVM pattern
+- [MVVM Pattern](tutorials/mvvm-pattern.md) - Learn both binding modes
 - [Module Development](tutorials/module-development.md) - Create reusable modules
 - [Migrate from Avalonia](tutorials/migrate-from-avalonia.md) - Convert official template to Crystal
