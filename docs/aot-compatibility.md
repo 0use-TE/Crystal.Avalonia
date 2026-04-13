@@ -77,26 +77,15 @@ dotnet publish -c Release -p:ShowTrimmedWarnings=true
 </Project>
 ```
 
-## Known Considerations
+## Avalonia Integration
 
-### Avalonia Framework
+Crystal.Avalonia template already enables compiled bindings by default:
 
-Avalonia itself uses reflection for XAML loading and data binding. When publishing with trimming:
+```xml
+<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+```
 
-1. **Enable compiled bindings** - This reduces reflection usage:
-
-   ```xml
-   <AvaloniaUseCompiledBindings>true</AvaloniaUseCompiledBindings>
-   ```
-
-2. **Use x:DataType** - Explicit types help the trimmer:
-
-   ```xml
-   <UserControl xmlns:vm="using:Crystal.Avalonia"
-                x:DataType="vm:MainViewModel">
-       <TextBlock Text="{Binding Title}"/>
-   </UserControl>
-   ```
+This means XAML bindings are pre-compiled and do not use reflection at runtime. Combined with `x:DataType`, binding is fully AOT-friendly.
 
 ## Troubleshooting
 
@@ -114,7 +103,7 @@ If types are missing at runtime:
 
 1. Check that all View/ViewModel types are registered
 2. Verify module assemblies are not trimmed away
-3. Use ` PreserveAll` or ` PreserveMember` where needed
+3. Use `PreserveAll` or `PreserveMember` where needed
 
 ## Further Reading
 
