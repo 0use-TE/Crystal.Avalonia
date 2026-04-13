@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>AOT Compatibility | Crystal.Avalonia Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="AOT Compatibility | Crystal.Avalonia Documentation ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/0use-TE/Crystal.Avalonia/blob/master/docs/aot-compatibility.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Crystal.Avalonia">
+            Crystal.Avalonia
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="aot-compatibility">AOT Compatibility</h1>
+
+<p>Crystal.Avalonia is fully compatible with .NET AOT (Ahead-of-Time) compilation and trimming.</p>
+<h2 id="what-is-aot">What is AOT?</h2>
+<p>AOT compilation converts your .NET code to native code at build time, rather than at runtime via JIT compilation. This results in:</p>
+<ul>
+<li>Faster startup time</li>
+<li>Reduced memory footprint</li>
+<li>Smaller deployment size (with trimming)</li>
+<li>No JIT overhead</li>
+</ul>
+<h2 id="crystalavalonia-aot-features">Crystal.Avalonia AOT Features</h2>
+<h3 id="isaotcompatible">IsAotCompatible</h3>
+<p>The library is marked as AOT-compatible:</p>
+<pre><code class="lang-xml">&lt;PropertyGroup&gt;
+    &lt;IsAotCompatible&gt;true&lt;/IsAotCompatible&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+<h3 id="dynamicallyaccessedmembers-annotations">DynamicallyAccessedMembers Annotations</h3>
+<p>All generic methods that use reflection (like <code>Activator.CreateInstance</code>) are properly annotated:</p>
+<pre><code class="lang-csharp">public static void AddMvvmBindingTransient&lt;
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel&gt;
+    (this IServiceCollection services)
+    where TView : Control where TViewModel : class
+{
+    // ...
+}
+</code></pre>
+<p>This tells the trimmer exactly what members are needed at runtime, preventing accidental removal.</p>
+<h2 id="publishing-with-aot">Publishing with AOT</h2>
+<h3 id="desktop-application">Desktop Application</h3>
+<pre><code class="lang-bash">dotnet publish -c Release -p:PublishAot=true
+</code></pre>
+<h3 id="with-trimming">With Trimming</h3>
+<pre><code class="lang-bash">dotnet publish -c Release -p:PublishTrimmed=true -p:PublishAot=true
+</code></pre>
+<h3 id="show-trim-warnings">Show Trim Warnings</h3>
+<pre><code class="lang-bash">dotnet publish -c Release -p:ShowTrimmedWarnings=true
+</code></pre>
+<h2 id="project-configuration">Project Configuration</h2>
+<h3 id="example-csproj">Example .csproj</h3>
+<pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&gt;
+
+    &lt;PropertyGroup&gt;
+        &lt;OutputType&gt;WinExe&lt;/OutputType&gt;
+        &lt;TargetFramework&gt;net10.0&lt;/TargetFramework&gt;
+        &lt;Nullable&gt;enable&lt;/Nullable&gt;
+        &lt;IsAotCompatible&gt;true&lt;/IsAotCompatible&gt;
+    &lt;/PropertyGroup&gt;
+
+&lt;/Project&gt;
+</code></pre>
+<h2 id="known-considerations">Known Considerations</h2>
+<h3 id="avalonia-framework">Avalonia Framework</h3>
+<p>Avalonia itself uses reflection for XAML loading and data binding. When publishing with trimming:</p>
+<ol>
+<li><p><strong>Enable compiled bindings</strong> - This reduces reflection usage:</p>
+<pre><code class="lang-xml">&lt;AvaloniaUseCompiledBindings&gt;true&lt;/AvaloniaUseCompiledBindings&gt;
+</code></pre>
+</li>
+<li><p><strong>Use x:DataType</strong> - Explicit types help the trimmer:</p>
+<pre><code class="lang-xml">&lt;UserControl xmlns:vm=&quot;using:Crystal.Avalonia&quot;
+             x:DataType=&quot;vm:MainViewModel&quot;&gt;
+    &lt;TextBlock Text=&quot;{Binding Title}&quot;/&gt;
+&lt;/UserControl&gt;
+</code></pre>
+</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="trimmed-types-missing">Trimmed Types Missing</h3>
+<p>If you see warnings about trimmed types:</p>
+<ol>
+<li>Add <code>[DynamicallyAccessedMembers]</code> to generic method parameters</li>
+<li>Use <code>Preserve&lt;&gt;</code> attribute on needed types</li>
+<li>Add entries to <code>rd.xml</code> file for complex scenarios</li>
+</ol>
+<h3 id="runtime-missing-types">Runtime Missing Types</h3>
+<p>If types are missing at runtime:</p>
+<ol>
+<li>Check that all View/ViewModel types are registered</li>
+<li>Verify module assemblies are not trimmed away</li>
+<li>Use <code> PreserveAll</code> or <code> PreserveMember</code> where needed</li>
+</ol>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/dotnet/core/deploying/trimming">.NET AOT Documentation</a></li>
+<li><a href="https://docs.avaloniaui.net/">Avalonia AOT Tips</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/0use-TE/Crystal.Avalonia/blob/master/docs/aot-compatibility.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Crystal.Avalonia © 2024
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

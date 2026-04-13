@@ -5,7 +5,7 @@
   "identity": "Ouse.Unique.Crystal.Template.V2",
   "shortName": "CT",
   "classifications": [ "Avalonia" ],
-  "sourceName": "CrystalTemplate",
+  "sourceName": "TemplateContent",
   "tags": {
     "language": "C#",
     "type": "project"

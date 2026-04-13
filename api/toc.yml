@@ -1,0 +1,28 @@
+### YamlMime:TableOfContent
+items:
+- uid: Crystal.Avalonia
+  name: Crystal.Avalonia
+  type: Namespace
+  items:
+  - uid: Crystal.Avalonia.CrystalApplication
+    name: CrystalApplication
+    type: Class
+  - uid: Crystal.Avalonia.CrystalOptions
+    name: CrystalOptions
+    type: Class
+  - uid: Crystal.Avalonia.IModule
+    name: IModule
+    type: Interface
+  - uid: Crystal.Avalonia.IModuleRegistrar
+    name: IModuleRegistrar
+    type: Interface
+  - uid: Crystal.Avalonia.ModuleManager
+    name: ModuleManager
+    type: Class
+  - uid: Crystal.Avalonia.MvvmManager
+    name: MvvmManager
+    type: Class
+  - uid: Crystal.Avalonia.ViewModelLocator
+    name: ViewModelLocator
+    type: Class
+memberLayout: SamePage

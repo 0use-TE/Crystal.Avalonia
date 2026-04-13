@@ -1,0 +1,656 @@
+### YamlMime:ManagedReference
+items:
+- uid: Crystal.Avalonia.MvvmManager
+  commentId: T:Crystal.Avalonia.MvvmManager
+  id: MvvmManager
+  parent: Crystal.Avalonia
+  children:
+  - Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - Crystal.Avalonia.MvvmManager.GetViewType(System.Type)
+  - Crystal.Avalonia.MvvmManager.GetVmType(System.Type)
+  - Crystal.Avalonia.MvvmManager.ServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: MvvmManager
+  nameWithType: MvvmManager
+  fullName: Crystal.Avalonia.MvvmManager
+  type: Class
+  source:
+    remote:
+      path: Crystal.Avalonia/MvvmManager.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: MvvmManager
+    path: Crystal.Avalonia/MvvmManager.cs
+    startLine: 18
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: Manages View-to-ViewModel mapping and MVVM binding registration.
+  remarks: >-
+    After registering View/ViewModel pairs using this class, the system will automatically:
+
+
+    <ul><li>Inject the DataContext via <xref href="Crystal.Avalonia.ViewModelLocator" data-throw-if-not-resolved="false"></xref> when <xref href="Crystal.Avalonia.CrystalOptions.EnableViewModelLocator" data-throw-if-not-resolved="false"></xref> is enabled</li><li>Resolve the corresponding View via <xref href="Crystal.Avalonia.ViewLocator" data-throw-if-not-resolved="false"></xref> based on the ViewModel type</li></ul>
+  example: []
+  syntax:
+    content: public static class MvvmManager
+    content.vb: Public Module MvvmManager
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Crystal.Avalonia.MvvmManager.ServiceProvider
+  commentId: P:Crystal.Avalonia.MvvmManager.ServiceProvider
+  id: ServiceProvider
+  parent: Crystal.Avalonia.MvvmManager
+  langs:
+  - csharp
+  - vb
+  name: ServiceProvider
+  nameWithType: MvvmManager.ServiceProvider
+  fullName: Crystal.Avalonia.MvvmManager.ServiceProvider
+  type: Property
+  source:
+    remote:
+      path: Crystal.Avalonia/MvvmManager.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: ServiceProvider
+    path: Crystal.Avalonia/MvvmManager.cs
+    startLine: 27
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: >-
+    Gets the current application's service provider instance.
+
+    Available after <xref href="Crystal.Avalonia.CrystalApplication.OnFrameworkInitializationCompleted" data-throw-if-not-resolved="false"></xref> completes.
+  example: []
+  syntax:
+    content: public static IServiceProvider? ServiceProvider { get; set; }
+    parameters: []
+    return:
+      type: System.IServiceProvider
+    content.vb: Public Shared Property ServiceProvider As IServiceProvider
+  overload: Crystal.Avalonia.MvvmManager.ServiceProvider*
+- uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddMvvmBindingTransient``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: Crystal.Avalonia.MvvmManager
+  langs:
+  - csharp
+  - vb
+  name: AddMvvmBindingTransient<TView, TViewModel>(IServiceCollection)
+  nameWithType: MvvmManager.AddMvvmBindingTransient<TView, TViewModel>(IServiceCollection)
+  fullName: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient<TView, TViewModel>(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/MvvmManager.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: AddMvvmBindingTransient
+    path: Crystal.Avalonia/MvvmManager.cs
+    startLine: 47
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: >-
+    Registers a View and ViewModel pair as Transient mappings.
+
+    Both the View and ViewModel are registered as Transient in the DI container.
+  example:
+  - <pre><code class="lang-csharp">services.AddMvvmBindingTransient&lt;MainView, MainViewModel&gt;();</code></pre>
+  syntax:
+    content: 'public static void AddMvvmBindingTransient<TView, TViewModel>(this IServiceCollection services) where TView : Control where TViewModel : class'
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The service collection.
+    typeParameters:
+    - id: TView
+      description: The View type, must inherit from <xref href="Avalonia.Controls.Control" data-throw-if-not-resolved="false"></xref>.
+    - id: TViewModel
+      description: The ViewModel type, can be any class.
+    content.vb: Public Shared Sub AddMvvmBindingTransient(Of TView As Control, TViewModel As Class)(services As IServiceCollection)
+  overload: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient*
+  nameWithType.vb: MvvmManager.AddMvvmBindingTransient(Of TView, TViewModel)(IServiceCollection)
+  fullName.vb: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient(Of TView, TViewModel)(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name.vb: AddMvvmBindingTransient(Of TView, TViewModel)(IServiceCollection)
+- uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddMvvmBindingSingleton``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: Crystal.Avalonia.MvvmManager
+  langs:
+  - csharp
+  - vb
+  name: AddMvvmBindingSingleton<TView, TViewModel>(IServiceCollection)
+  nameWithType: MvvmManager.AddMvvmBindingSingleton<TView, TViewModel>(IServiceCollection)
+  fullName: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton<TView, TViewModel>(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/MvvmManager.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: AddMvvmBindingSingleton
+    path: Crystal.Avalonia/MvvmManager.cs
+    startLine: 67
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: Registers a View and ViewModel pair with the View as Transient and ViewModel as Singleton.
+  example:
+  - <pre><code class="lang-csharp">services.AddMvvmBindingSingleton&lt;SettingsView, SettingsViewModel&gt;();</code></pre>
+  syntax:
+    content: 'public static void AddMvvmBindingSingleton<TView, TViewModel>(this IServiceCollection services) where TView : Control where TViewModel : class'
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The service collection.
+    typeParameters:
+    - id: TView
+      description: The View type, must inherit from <xref href="Avalonia.Controls.Control" data-throw-if-not-resolved="false"></xref>.
+    - id: TViewModel
+      description: The ViewModel type, can be any class.
+    content.vb: Public Shared Sub AddMvvmBindingSingleton(Of TView As Control, TViewModel As Class)(services As IServiceCollection)
+  overload: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton*
+  nameWithType.vb: MvvmManager.AddMvvmBindingSingleton(Of TView, TViewModel)(IServiceCollection)
+  fullName.vb: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton(Of TView, TViewModel)(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name.vb: AddMvvmBindingSingleton(Of TView, TViewModel)(IServiceCollection)
+- uid: Crystal.Avalonia.MvvmManager.GetViewType(System.Type)
+  commentId: M:Crystal.Avalonia.MvvmManager.GetViewType(System.Type)
+  id: GetViewType(System.Type)
+  parent: Crystal.Avalonia.MvvmManager
+  langs:
+  - csharp
+  - vb
+  name: GetViewType(Type)
+  nameWithType: MvvmManager.GetViewType(Type)
+  fullName: Crystal.Avalonia.MvvmManager.GetViewType(System.Type)
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/MvvmManager.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: GetViewType
+    path: Crystal.Avalonia/MvvmManager.cs
+    startLine: 81
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: Looks up the View type corresponding to the given ViewModel type.
+  example: []
+  syntax:
+    content: public static Type? GetViewType(Type vmType)
+    parameters:
+    - id: vmType
+      type: System.Type
+      description: The ViewModel type.
+    return:
+      type: System.Type
+      description: The corresponding View type, or <code>null</code> if not found.
+    content.vb: Public Shared Function GetViewType(vmType As Type) As Type
+  overload: Crystal.Avalonia.MvvmManager.GetViewType*
+- uid: Crystal.Avalonia.MvvmManager.GetVmType(System.Type)
+  commentId: M:Crystal.Avalonia.MvvmManager.GetVmType(System.Type)
+  id: GetVmType(System.Type)
+  parent: Crystal.Avalonia.MvvmManager
+  langs:
+  - csharp
+  - vb
+  name: GetVmType(Type)
+  nameWithType: MvvmManager.GetVmType(Type)
+  fullName: Crystal.Avalonia.MvvmManager.GetVmType(System.Type)
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/MvvmManager.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: GetVmType
+    path: Crystal.Avalonia/MvvmManager.cs
+    startLine: 88
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: Looks up the ViewModel type corresponding to the given View type.
+  example: []
+  syntax:
+    content: public static Type? GetVmType(Type viewType)
+    parameters:
+    - id: viewType
+      type: System.Type
+      description: The View type.
+    return:
+      type: System.Type
+      description: The corresponding ViewModel type, or <code>null</code> if not found.
+    content.vb: Public Shared Function GetVmType(viewType As Type) As Type
+  overload: Crystal.Avalonia.MvvmManager.GetVmType*
+references:
+- uid: Crystal.Avalonia.ViewModelLocator
+  commentId: T:Crystal.Avalonia.ViewModelLocator
+  href: Crystal.Avalonia.ViewModelLocator.html
+  name: ViewModelLocator
+  nameWithType: ViewModelLocator
+  fullName: Crystal.Avalonia.ViewModelLocator
+- uid: Crystal.Avalonia.CrystalOptions.EnableViewModelLocator
+  commentId: P:Crystal.Avalonia.CrystalOptions.EnableViewModelLocator
+  href: Crystal.Avalonia.CrystalOptions.html#Crystal_Avalonia_CrystalOptions_EnableViewModelLocator
+  name: EnableViewModelLocator
+  nameWithType: CrystalOptions.EnableViewModelLocator
+  fullName: Crystal.Avalonia.CrystalOptions.EnableViewModelLocator
+- uid: Crystal.Avalonia.ViewLocator
+  commentId: T:Crystal.Avalonia.ViewLocator
+  name: ViewLocator
+  nameWithType: ViewLocator
+  fullName: Crystal.Avalonia.ViewLocator
+- uid: Crystal.Avalonia
+  commentId: N:Crystal.Avalonia
+  href: Crystal.html
+  name: Crystal.Avalonia
+  nameWithType: Crystal.Avalonia
+  fullName: Crystal.Avalonia
+  spec.csharp:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html
+  spec.vb:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Crystal.Avalonia.CrystalApplication.OnFrameworkInitializationCompleted
+  commentId: M:Crystal.Avalonia.CrystalApplication.OnFrameworkInitializationCompleted
+  href: Crystal.Avalonia.CrystalApplication.html#Crystal_Avalonia_CrystalApplication_OnFrameworkInitializationCompleted
+  name: OnFrameworkInitializationCompleted()
+  nameWithType: CrystalApplication.OnFrameworkInitializationCompleted()
+  fullName: Crystal.Avalonia.CrystalApplication.OnFrameworkInitializationCompleted()
+  spec.csharp:
+  - uid: Crystal.Avalonia.CrystalApplication.OnFrameworkInitializationCompleted
+    name: OnFrameworkInitializationCompleted
+    href: Crystal.Avalonia.CrystalApplication.html#Crystal_Avalonia_CrystalApplication_OnFrameworkInitializationCompleted
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Crystal.Avalonia.CrystalApplication.OnFrameworkInitializationCompleted
+    name: OnFrameworkInitializationCompleted
+    href: Crystal.Avalonia.CrystalApplication.html#Crystal_Avalonia_CrystalApplication_OnFrameworkInitializationCompleted
+  - name: (
+  - name: )
+- uid: Crystal.Avalonia.MvvmManager.ServiceProvider*
+  commentId: Overload:Crystal.Avalonia.MvvmManager.ServiceProvider
+  href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_ServiceProvider
+  name: ServiceProvider
+  nameWithType: MvvmManager.ServiceProvider
+  fullName: Crystal.Avalonia.MvvmManager.ServiceProvider
+- uid: System.IServiceProvider
+  commentId: T:System.IServiceProvider
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  name: IServiceProvider
+  nameWithType: IServiceProvider
+  fullName: System.IServiceProvider
+- uid: Avalonia.Controls.Control
+  commentId: T:Avalonia.Controls.Control
+  parent: Avalonia.Controls
+  isExternal: true
+  name: Control
+  nameWithType: Control
+  fullName: Avalonia.Controls.Control
+- uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient*
+  commentId: Overload:Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient
+  href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_AddMvvmBindingTransient__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddMvvmBindingTransient
+  nameWithType: MvvmManager.AddMvvmBindingTransient
+  fullName: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient
+- uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
+  commentId: T:Microsoft.Extensions.DependencyInjection.IServiceCollection
+  parent: Microsoft.Extensions.DependencyInjection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
+  name: IServiceCollection
+  nameWithType: IServiceCollection
+  fullName: Microsoft.Extensions.DependencyInjection.IServiceCollection
+- uid: Avalonia.Controls
+  commentId: N:Avalonia.Controls
+  isExternal: true
+  name: Avalonia.Controls
+  nameWithType: Avalonia.Controls
+  fullName: Avalonia.Controls
+  spec.csharp:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true
+  spec.vb:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true
+- uid: Microsoft.Extensions.DependencyInjection
+  commentId: N:Microsoft.Extensions.DependencyInjection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.DependencyInjection
+  nameWithType: Microsoft.Extensions.DependencyInjection
+  fullName: Microsoft.Extensions.DependencyInjection
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
+- uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton*
+  commentId: Overload:Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton
+  href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_AddMvvmBindingSingleton__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddMvvmBindingSingleton
+  nameWithType: MvvmManager.AddMvvmBindingSingleton
+  fullName: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton
+- uid: Crystal.Avalonia.MvvmManager.GetViewType*
+  commentId: Overload:Crystal.Avalonia.MvvmManager.GetViewType
+  href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_GetViewType_System_Type_
+  name: GetViewType
+  nameWithType: MvvmManager.GetViewType
+  fullName: Crystal.Avalonia.MvvmManager.GetViewType
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Crystal.Avalonia.MvvmManager.GetVmType*
+  commentId: Overload:Crystal.Avalonia.MvvmManager.GetVmType
+  href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_GetVmType_System_Type_
+  name: GetVmType
+  nameWithType: MvvmManager.GetVmType
+  fullName: Crystal.Avalonia.MvvmManager.GetVmType

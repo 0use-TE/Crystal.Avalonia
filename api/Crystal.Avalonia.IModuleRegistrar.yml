@@ -1,0 +1,139 @@
+### YamlMime:ManagedReference
+items:
+- uid: Crystal.Avalonia.IModuleRegistrar
+  commentId: T:Crystal.Avalonia.IModuleRegistrar
+  id: IModuleRegistrar
+  parent: Crystal.Avalonia
+  children:
+  - Crystal.Avalonia.IModuleRegistrar.RegisterModule(Crystal.Avalonia.IModule)
+  - Crystal.Avalonia.IModuleRegistrar.RegisterModule``1
+  langs:
+  - csharp
+  - vb
+  name: IModuleRegistrar
+  nameWithType: IModuleRegistrar
+  fullName: Crystal.Avalonia.IModuleRegistrar
+  type: Interface
+  source:
+    remote:
+      path: Crystal.Avalonia/IModuleRegistrar.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: IModuleRegistrar
+    path: Crystal.Avalonia/IModuleRegistrar.cs
+    startLine: 9
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: >-
+    Provides module registration functionality.
+
+    Used to register all functional modules during application startup.
+  example: []
+  syntax:
+    content: public interface IModuleRegistrar
+    content.vb: Public Interface IModuleRegistrar
+  derivedClasses:
+  - Crystal.Avalonia.ModuleManager
+- uid: Crystal.Avalonia.IModuleRegistrar.RegisterModule(Crystal.Avalonia.IModule)
+  commentId: M:Crystal.Avalonia.IModuleRegistrar.RegisterModule(Crystal.Avalonia.IModule)
+  id: RegisterModule(Crystal.Avalonia.IModule)
+  parent: Crystal.Avalonia.IModuleRegistrar
+  langs:
+  - csharp
+  - vb
+  name: RegisterModule(IModule)
+  nameWithType: IModuleRegistrar.RegisterModule(IModule)
+  fullName: Crystal.Avalonia.IModuleRegistrar.RegisterModule(Crystal.Avalonia.IModule)
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/IModuleRegistrar.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: RegisterModule
+    path: Crystal.Avalonia/IModuleRegistrar.cs
+    startLine: 15
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: Registers an already instantiated module.
+  example: []
+  syntax:
+    content: void RegisterModule(IModule module)
+    parameters:
+    - id: module
+      type: Crystal.Avalonia.IModule
+      description: The module instance to register.
+    content.vb: Sub RegisterModule([module] As IModule)
+  overload: Crystal.Avalonia.IModuleRegistrar.RegisterModule*
+- uid: Crystal.Avalonia.IModuleRegistrar.RegisterModule``1
+  commentId: M:Crystal.Avalonia.IModuleRegistrar.RegisterModule``1
+  id: RegisterModule``1
+  parent: Crystal.Avalonia.IModuleRegistrar
+  langs:
+  - csharp
+  - vb
+  name: RegisterModule<TModule>()
+  nameWithType: IModuleRegistrar.RegisterModule<TModule>()
+  fullName: Crystal.Avalonia.IModuleRegistrar.RegisterModule<TModule>()
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/IModuleRegistrar.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: RegisterModule
+    path: Crystal.Avalonia/IModuleRegistrar.cs
+    startLine: 21
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: Registers a module type. The system will automatically instantiate the module.
+  example: []
+  syntax:
+    content: 'void RegisterModule<TModule>() where TModule : IModule'
+    typeParameters:
+    - id: TModule
+      description: The module type, must implement <xref href="Crystal.Avalonia.IModule" data-throw-if-not-resolved="false"></xref> and have a public parameterless constructor.
+    content.vb: Sub RegisterModule(Of TModule As IModule)()
+  overload: Crystal.Avalonia.IModuleRegistrar.RegisterModule*
+  nameWithType.vb: IModuleRegistrar.RegisterModule(Of TModule)()
+  fullName.vb: Crystal.Avalonia.IModuleRegistrar.RegisterModule(Of TModule)()
+  name.vb: RegisterModule(Of TModule)()
+references:
+- uid: Crystal.Avalonia
+  commentId: N:Crystal.Avalonia
+  href: Crystal.html
+  name: Crystal.Avalonia
+  nameWithType: Crystal.Avalonia
+  fullName: Crystal.Avalonia
+  spec.csharp:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html
+  spec.vb:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html
+- uid: Crystal.Avalonia.IModuleRegistrar.RegisterModule*
+  commentId: Overload:Crystal.Avalonia.IModuleRegistrar.RegisterModule
+  href: Crystal.Avalonia.IModuleRegistrar.html#Crystal_Avalonia_IModuleRegistrar_RegisterModule_Crystal_Avalonia_IModule_
+  name: RegisterModule
+  nameWithType: IModuleRegistrar.RegisterModule
+  fullName: Crystal.Avalonia.IModuleRegistrar.RegisterModule
+- uid: Crystal.Avalonia.IModule
+  commentId: T:Crystal.Avalonia.IModule
+  parent: Crystal.Avalonia
+  href: Crystal.Avalonia.IModule.html
+  name: IModule
+  nameWithType: IModule
+  fullName: Crystal.Avalonia.IModule

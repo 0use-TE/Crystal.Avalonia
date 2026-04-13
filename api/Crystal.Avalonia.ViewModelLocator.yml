@@ -1,0 +1,602 @@
+### YamlMime:ManagedReference
+items:
+- uid: Crystal.Avalonia.ViewModelLocator
+  commentId: T:Crystal.Avalonia.ViewModelLocator
+  id: ViewModelLocator
+  parent: Crystal.Avalonia
+  children:
+  - Crystal.Avalonia.ViewModelLocator.AutoWireViewModelProperty
+  - Crystal.Avalonia.ViewModelLocator.GetAutoWireViewModel(Avalonia.Controls.Control)
+  - Crystal.Avalonia.ViewModelLocator.SetAutoWireViewModel(Avalonia.Controls.Control,System.Nullable{System.Boolean})
+  langs:
+  - csharp
+  - vb
+  name: ViewModelLocator
+  nameWithType: ViewModelLocator
+  fullName: Crystal.Avalonia.ViewModelLocator
+  type: Class
+  source:
+    remote:
+      path: Crystal.Avalonia/ViewModelLocator.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: ViewModelLocator
+    path: Crystal.Avalonia/ViewModelLocator.cs
+    startLine: 20
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: >-
+    Provides automatic ViewModel binding via an attached property.
+
+    Works in conjunction with <xref href="Crystal.Avalonia.CrystalOptions.EnableViewModelLocator" data-throw-if-not-resolved="false"></xref>.
+  remarks: >-
+    Usage in XAML:
+
+
+    <pre><code class="lang-csharp">&lt;Window xmlns:vm="using:Crystal.Avalonia"
+            vm:ViewModelLocator.AutoWireViewModel="True"&gt;</code></pre>
+
+    When <code>AutoWireViewModel</code> is set to <code>True</code>,
+
+    the system automatically resolves the corresponding ViewModel from the DI container
+
+    and assigns it to the control's <code>DataContext</code>.
+  example: []
+  syntax:
+    content: public class ViewModelLocator
+    content.vb: Public Class ViewModelLocator
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Crystal.Avalonia.ViewModelLocator.AutoWireViewModelProperty
+  commentId: F:Crystal.Avalonia.ViewModelLocator.AutoWireViewModelProperty
+  id: AutoWireViewModelProperty
+  parent: Crystal.Avalonia.ViewModelLocator
+  langs:
+  - csharp
+  - vb
+  name: AutoWireViewModelProperty
+  nameWithType: ViewModelLocator.AutoWireViewModelProperty
+  fullName: Crystal.Avalonia.ViewModelLocator.AutoWireViewModelProperty
+  type: Field
+  source:
+    remote:
+      path: Crystal.Avalonia/ViewModelLocator.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: AutoWireViewModelProperty
+    path: Crystal.Avalonia/ViewModelLocator.cs
+    startLine: 26
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: >-
+    Identifies the <xref href="Crystal.Avalonia.ViewModelLocator.AutoWireViewModelProperty" data-throw-if-not-resolved="false"></xref> attached property registration.
+
+    When set to <code>True</code>, the system automatically binds the corresponding ViewModel to the control's DataContext.
+  example: []
+  syntax:
+    content: public static readonly AttachedProperty<bool> AutoWireViewModelProperty
+    return:
+      type: Avalonia.AttachedProperty{System.Boolean}
+    content.vb: Public Shared ReadOnly AutoWireViewModelProperty As AttachedProperty(Of Boolean)
+- uid: Crystal.Avalonia.ViewModelLocator.GetAutoWireViewModel(Avalonia.Controls.Control)
+  commentId: M:Crystal.Avalonia.ViewModelLocator.GetAutoWireViewModel(Avalonia.Controls.Control)
+  id: GetAutoWireViewModel(Avalonia.Controls.Control)
+  parent: Crystal.Avalonia.ViewModelLocator
+  langs:
+  - csharp
+  - vb
+  name: GetAutoWireViewModel(Control)
+  nameWithType: ViewModelLocator.GetAutoWireViewModel(Control)
+  fullName: Crystal.Avalonia.ViewModelLocator.GetAutoWireViewModel(Avalonia.Controls.Control)
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/ViewModelLocator.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: GetAutoWireViewModel
+    path: Crystal.Avalonia/ViewModelLocator.cs
+    startLine: 34
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: Gets the AutoWireViewModel attached property value for the specified control.
+  example: []
+  syntax:
+    content: public static bool GetAutoWireViewModel(Control element)
+    parameters:
+    - id: element
+      type: Avalonia.Controls.Control
+      description: The control to query.
+    return:
+      type: System.Boolean
+      description: <code>True</code> if the control has automatic ViewModel binding enabled.
+    content.vb: Public Shared Function GetAutoWireViewModel(element As Control) As Boolean
+  overload: Crystal.Avalonia.ViewModelLocator.GetAutoWireViewModel*
+- uid: Crystal.Avalonia.ViewModelLocator.SetAutoWireViewModel(Avalonia.Controls.Control,System.Nullable{System.Boolean})
+  commentId: M:Crystal.Avalonia.ViewModelLocator.SetAutoWireViewModel(Avalonia.Controls.Control,System.Nullable{System.Boolean})
+  id: SetAutoWireViewModel(Avalonia.Controls.Control,System.Nullable{System.Boolean})
+  parent: Crystal.Avalonia.ViewModelLocator
+  langs:
+  - csharp
+  - vb
+  name: SetAutoWireViewModel(Control, bool?)
+  nameWithType: ViewModelLocator.SetAutoWireViewModel(Control, bool?)
+  fullName: Crystal.Avalonia.ViewModelLocator.SetAutoWireViewModel(Avalonia.Controls.Control, bool?)
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/ViewModelLocator.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: SetAutoWireViewModel
+    path: Crystal.Avalonia/ViewModelLocator.cs
+    startLine: 41
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: Sets the AutoWireViewModel attached property value for the specified control.
+  example: []
+  syntax:
+    content: public static void SetAutoWireViewModel(Control element, bool? value)
+    parameters:
+    - id: element
+      type: Avalonia.Controls.Control
+      description: The control to set.
+    - id: value
+      type: System.Nullable{System.Boolean}
+      description: Whether to enable automatic binding.
+    content.vb: Public Shared Sub SetAutoWireViewModel(element As Control, value As Boolean?)
+  overload: Crystal.Avalonia.ViewModelLocator.SetAutoWireViewModel*
+  nameWithType.vb: ViewModelLocator.SetAutoWireViewModel(Control, Boolean?)
+  fullName.vb: Crystal.Avalonia.ViewModelLocator.SetAutoWireViewModel(Avalonia.Controls.Control, Boolean?)
+  name.vb: SetAutoWireViewModel(Control, Boolean?)
+references:
+- uid: Crystal.Avalonia.CrystalOptions.EnableViewModelLocator
+  commentId: P:Crystal.Avalonia.CrystalOptions.EnableViewModelLocator
+  href: Crystal.Avalonia.CrystalOptions.html#Crystal_Avalonia_CrystalOptions_EnableViewModelLocator
+  name: EnableViewModelLocator
+  nameWithType: CrystalOptions.EnableViewModelLocator
+  fullName: Crystal.Avalonia.CrystalOptions.EnableViewModelLocator
+- uid: Crystal.Avalonia
+  commentId: N:Crystal.Avalonia
+  href: Crystal.html
+  name: Crystal.Avalonia
+  nameWithType: Crystal.Avalonia
+  fullName: Crystal.Avalonia
+  spec.csharp:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html
+  spec.vb:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Crystal.Avalonia.ViewModelLocator.AutoWireViewModelProperty
+  commentId: F:Crystal.Avalonia.ViewModelLocator.AutoWireViewModelProperty
+  href: Crystal.Avalonia.ViewModelLocator.html#Crystal_Avalonia_ViewModelLocator_AutoWireViewModelProperty
+  name: AutoWireViewModelProperty
+  nameWithType: ViewModelLocator.AutoWireViewModelProperty
+  fullName: Crystal.Avalonia.ViewModelLocator.AutoWireViewModelProperty
+- uid: Avalonia.AttachedProperty{System.Boolean}
+  commentId: T:Avalonia.AttachedProperty{System.Boolean}
+  parent: Avalonia
+  definition: Avalonia.AttachedProperty`1
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: AttachedProperty<bool>
+  nameWithType: AttachedProperty<bool>
+  fullName: Avalonia.AttachedProperty<bool>
+  nameWithType.vb: AttachedProperty(Of Boolean)
+  fullName.vb: Avalonia.AttachedProperty(Of Boolean)
+  name.vb: AttachedProperty(Of Boolean)
+  spec.csharp:
+  - uid: Avalonia.AttachedProperty`1
+    name: AttachedProperty
+    isExternal: true
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: Avalonia.AttachedProperty`1
+    name: AttachedProperty
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Avalonia.AttachedProperty`1
+  commentId: T:Avalonia.AttachedProperty`1
+  isExternal: true
+  name: AttachedProperty<TValue>
+  nameWithType: AttachedProperty<TValue>
+  fullName: Avalonia.AttachedProperty<TValue>
+  nameWithType.vb: AttachedProperty(Of TValue)
+  fullName.vb: Avalonia.AttachedProperty(Of TValue)
+  name.vb: AttachedProperty(Of TValue)
+  spec.csharp:
+  - uid: Avalonia.AttachedProperty`1
+    name: AttachedProperty
+    isExternal: true
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Avalonia.AttachedProperty`1
+    name: AttachedProperty
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Avalonia
+  commentId: N:Avalonia
+  isExternal: true
+  name: Avalonia
+  nameWithType: Avalonia
+  fullName: Avalonia
+- uid: Crystal.Avalonia.ViewModelLocator.GetAutoWireViewModel*
+  commentId: Overload:Crystal.Avalonia.ViewModelLocator.GetAutoWireViewModel
+  href: Crystal.Avalonia.ViewModelLocator.html#Crystal_Avalonia_ViewModelLocator_GetAutoWireViewModel_Avalonia_Controls_Control_
+  name: GetAutoWireViewModel
+  nameWithType: ViewModelLocator.GetAutoWireViewModel
+  fullName: Crystal.Avalonia.ViewModelLocator.GetAutoWireViewModel
+- uid: Avalonia.Controls.Control
+  commentId: T:Avalonia.Controls.Control
+  parent: Avalonia.Controls
+  isExternal: true
+  name: Control
+  nameWithType: Control
+  fullName: Avalonia.Controls.Control
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Avalonia.Controls
+  commentId: N:Avalonia.Controls
+  isExternal: true
+  name: Avalonia.Controls
+  nameWithType: Avalonia.Controls
+  fullName: Avalonia.Controls
+  spec.csharp:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true
+  spec.vb:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true
+- uid: Crystal.Avalonia.ViewModelLocator.SetAutoWireViewModel*
+  commentId: Overload:Crystal.Avalonia.ViewModelLocator.SetAutoWireViewModel
+  href: Crystal.Avalonia.ViewModelLocator.html#Crystal_Avalonia_ViewModelLocator_SetAutoWireViewModel_Avalonia_Controls_Control_System_Nullable_System_Boolean__
+  name: SetAutoWireViewModel
+  nameWithType: ViewModelLocator.SetAutoWireViewModel
+  fullName: Crystal.Avalonia.ViewModelLocator.SetAutoWireViewModel
+- uid: System.Nullable{System.Boolean}
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool?
+  nameWithType: bool?
+  fullName: bool?
+  nameWithType.vb: Boolean?
+  fullName.vb: Boolean?
+  name.vb: Boolean?
+  spec.csharp:
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '?'
+  spec.vb:
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

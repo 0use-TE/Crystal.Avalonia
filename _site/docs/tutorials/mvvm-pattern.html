@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Tutorial: MVVM Pattern in Crystal.Avalonia | Crystal.Avalonia Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Tutorial: MVVM Pattern in Crystal.Avalonia | Crystal.Avalonia Documentation ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/0use-TE/Crystal.Avalonia/blob/master/docs/tutorials/mvvm-pattern.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Crystal.Avalonia">
+            Crystal.Avalonia
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="tutorial-mvvm-pattern-in-crystalavalonia">Tutorial: MVVM Pattern in Crystal.Avalonia</h1>
+
+<p>This tutorial explains how the MVVM (Model-View-ViewModel) pattern works in Crystal.Avalonia.</p>
+<h2 id="mvvm-overview">MVVM Overview</h2>
+<pre><code>┌─────────────┐         ┌──────────────────┐         ┌─────────────┐
+│    View     │◄───────│   ViewModel      │─────────│    Model    │
+│  (AXAML)    │  Data  │   (C# Class)     │  Data   │  (C# Class) │
+└─────────────┘  Binding└──────────────────┘  Access └─────────────┘
+</code></pre>
+<ul>
+<li><strong>Model</strong> - Your data and business logic</li>
+<li><strong>ViewModel</strong> - Exposes data and commands for the View</li>
+<li><strong>View</strong> - Declarative UI (AXAML)</li>
+</ul>
+<h2 id="viewmodel-base-class">ViewModel Base Class</h2>
+<p>Crystal.Avalonia uses <code>ObservableObject</code> as the base class for ViewModels. It provides:</p>
+<ul>
+<li><code>SetProperty()</code> - For notifying the UI when properties change</li>
+<li><code>OnPropertyChanged()</code> - For manual property change notifications</li>
+</ul>
+<h3 id="example-basic-viewmodel">Example: Basic ViewModel</h3>
+<pre><code class="lang-csharp">using System;
+
+public class MainViewModel : ObservableObject
+{
+    private string _title = &quot;My App&quot;;
+    private int _itemCount;
+    private bool _isLoading;
+
+    public string Title
+    {
+        get =&gt; _title;
+        set =&gt; SetProperty(ref _title, value);
+    }
+
+    public int ItemCount
+    {
+        get =&gt; _itemCount;
+        set =&gt; SetProperty(ref _itemCount, value);
+    }
+
+    public bool IsLoading
+    {
+        get =&gt; _isLoading;
+        set =&gt; SetProperty(ref _isLoading, value);
+    }
+}
+</code></pre>
+<h2 id="property-binding">Property Binding</h2>
+<h3 id="in-viewmodel">In ViewModel</h3>
+<pre><code class="lang-csharp">private string _message;
+public string Message
+{
+    get =&gt; _message;
+    set =&gt; SetProperty(ref _message, value);  // Notifies UI of change
+}
+</code></pre>
+<h3 id="in-view-axaml">In View (AXAML)</h3>
+<pre><code class="lang-xml">&lt;TextBlock Text=&quot;{Binding Message}&quot;/&gt;
+</code></pre>
+<p>When <code>Message</code> is updated in the ViewModel, the TextBlock automatically updates.</p>
+<h2 id="command-binding">Command Binding</h2>
+<p>Commands allow the View to invoke methods in the ViewModel.</p>
+<h3 id="viewmodel-with-commands">ViewModel with Commands</h3>
+<pre><code class="lang-csharp">using System.Windows.Input;
+
+public class CounterViewModel : ObservableObject
+{
+    private int _count;
+
+    public int Count
+    {
+        get =&gt; _count;
+        set =&gt; SetProperty(ref _count, value);
+    }
+
+    // Commands using Action
+    public void Increment()
+    {
+        Count++;
+    }
+
+    public void Decrement()
+    {
+        Count--;
+    }
+
+    public void Reset()
+    {
+        Count = 0;
+    }
+}
+</code></pre>
+<h3 id="command-binding-in-view">Command Binding in View</h3>
+<pre><code class="lang-xml">&lt;StackPanel Orientation=&quot;Horizontal&quot; Spacing=&quot;10&quot;&gt;
+    &lt;Button Content=&quot;-&quot; Command=&quot;{Binding Decrement}&quot;/&gt;
+    &lt;Button Content=&quot;Reset&quot; Command=&quot;{Binding Reset}&quot;/&gt;
+    &lt;Button Content=&quot;+&quot; Command=&quot;{Binding Increment}&quot;/&gt;
+&lt;/StackPanel&gt;
+</code></pre>
+<h2 id="collection-binding">Collection Binding</h2>
+<h3 id="viewmodel-with-observablecollection">ViewModel with ObservableCollection</h3>
+<pre><code class="lang-csharp">using System.Collections.ObjectModel;
+
+public class ListViewModel : ObservableObject
+{
+    public ObservableCollection&lt;ItemViewModel&gt; Items { get; } = new();
+
+    public ListViewModel()
+    {
+        // Initialize with some items
+        Items.Add(new ItemViewModel { Name = &quot;Item 1&quot; });
+        Items.Add(new ItemViewModel { Name = &quot;Item 2&quot; });
+    }
+}
+
+public class ItemViewModel : ObservableObject
+{
+    private string _name;
+    private bool _isSelected;
+
+    public string Name
+    {
+        get =&gt; _name;
+        set =&gt; SetProperty(ref _name, value);
+    }
+
+    public bool IsSelected
+    {
+        get =&gt; _isSelected;
+        set =&gt; SetProperty(ref _isSelected, value);
+    }
+}
+</code></pre>
+<h3 id="list-binding-in-view">List Binding in View</h3>
+<pre><code class="lang-xml">&lt;ListBox ItemsSource=&quot;{Binding Items}&quot;&gt;
+    &lt;ListBox.ItemTemplate&gt;
+        &lt;DataTemplate&gt;
+            &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                &lt;CheckBox IsChecked=&quot;{Binding IsSelected}&quot;/&gt;
+                &lt;TextBlock Text=&quot;{Binding Name}&quot;/&gt;
+            &lt;/StackPanel&gt;
+        &lt;/DataTemplate&gt;
+    &lt;/ListBox.ItemTemplate&gt;
+&lt;/ListBox&gt;
+</code></pre>
+<h2 id="automatic-viewmodel-binding">Automatic ViewModel Binding</h2>
+<p>Crystal.Avalonia can automatically inject ViewModels into Views.</p>
+<h3 id="enable-auto-wiring">Enable Auto-Wiring</h3>
+<pre><code class="lang-xml">&lt;UserControl xmlns:vm=&quot;using:Crystal.Avalonia&quot;
+             vm:ViewModelLocator.AutoWireViewModel=&quot;True&quot;&gt;
+</code></pre>
+<h3 id="how-it-works">How It Works</h3>
+<ol>
+<li>View loads with <code>AutoWireViewModel=&quot;True&quot;</code></li>
+<li>Crystal looks up the registered ViewModel type for this View</li>
+<li>Resolves the ViewModel from the DI container</li>
+<li>Assigns it to <code>DataContext</code></li>
+</ol>
+<h3 id="manual-resolution">Manual Resolution</h3>
+<p>You can also manually resolve ViewModels:</p>
+<pre><code class="lang-csharp">public partial class MainWindow : Window
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+        Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        var vm = MvvmManager.ServiceProvider!.GetService&lt;MainViewModel&gt;();
+        DataContext = vm;
+    }
+}
+</code></pre>
+<h2 id="two-way-binding">Two-Way Binding</h2>
+<p>By default, bindings are one-way. Use two-way for input controls:</p>
+<pre><code class="lang-xml">&lt;TextBox Text=&quot;{Binding UserName, Mode=TwoWay}&quot;/&gt;
+&lt;TextBox Text=&quot;{Binding SearchQuery, Mode=TwoWay}&quot;/&gt;
+</code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<table>
+<thead>
+<tr>
+<th>Practice</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keep ViewModels thin</td>
+<td>Move logic to services/models</td>
+</tr>
+<tr>
+<td>Use interfaces</td>
+<td>Makes testing easier</td>
+</tr>
+<tr>
+<td>Avoid code-behind</td>
+<td>Keep UI logic in ViewModel</td>
+</tr>
+<tr>
+<td>Use ObservableCollection</td>
+<td>For collections that change</td>
+</tr>
+<tr>
+<td>Immutable models</td>
+<td>Use immutable records for data transfer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="complete-example">Complete Example</h2>
+<h3 id="viewmodel">ViewModel</h3>
+<pre><code class="lang-csharp">public class OrderViewModel : ObservableObject
+{
+    private string _orderId = &quot;&quot;;
+    private OrderStatus _status;
+    private bool _isEditing;
+
+    public string OrderId
+    {
+        get =&gt; _orderId;
+        set =&gt; SetProperty(ref _orderId, value);
+    }
+
+    public OrderStatus Status
+    {
+        get =&gt; _status;
+        set =&gt; SetProperty(ref _status, value);
+    }
+
+    public bool IsEditing
+    {
+        get =&gt; _isEditing;
+        set =&gt; SetProperty(ref _isEditing, value);
+    }
+
+    public void Approve() =&gt; Status = OrderStatus.Approved;
+    public void Reject() =&gt; Status = OrderStatus.Rejected;
+    public void Edit() =&gt; IsEditing = true;
+    public void Save() =&gt; IsEditing = false;
+}
+
+public enum OrderStatus { Pending, Approved, Rejected }
+</code></pre>
+<h3 id="view">View</h3>
+<pre><code class="lang-xml">&lt;UserControl xmlns:vm=&quot;using:Crystal.Avalonia&quot;
+             xmlns:sys=&quot;clr-namespace:System;assembly=mscorlib&quot;
+             vm:ViewModelLocator.AutoWireViewModel=&quot;True&quot;&gt;
+
+    &lt;StackPanel Margin=&quot;20&quot; Spacing=&quot;15&quot;&gt;
+        &lt;StackPanel Orientation=&quot;Horizontal&quot; Spacing=&quot;10&quot;&gt;
+            &lt;TextBlock Text=&quot;Order ID:&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+            &lt;TextBlock Text=&quot;{Binding OrderId}&quot;
+                       FontWeight=&quot;Bold&quot;
+                       VerticalAlignment=&quot;Center&quot;/&gt;
+        &lt;/StackPanel&gt;
+
+        &lt;StackPanel Orientation=&quot;Horizontal&quot; Spacing=&quot;10&quot;&gt;
+            &lt;TextBlock Text=&quot;Status:&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+            &lt;TextBlock Text=&quot;{Binding Status}&quot;
+                       VerticalAlignment=&quot;Center&quot;/&gt;
+        &lt;/StackPanel&gt;
+
+        &lt;StackPanel Orientation=&quot;Horizontal&quot; Spacing=&quot;10&quot;&gt;
+            &lt;Button Content=&quot;Approve&quot;
+                    Command=&quot;{Binding Approve}&quot;
+                    IsVisible=&quot;{Binding !IsEditing}&quot;/&gt;
+            &lt;Button Content=&quot;Reject&quot;
+                    Command=&quot;{Binding Reject}&quot;
+                    IsVisible=&quot;{Binding !IsEditing}&quot;/&gt;
+            &lt;Button Content=&quot;Edit&quot;
+                    Command=&quot;{Binding Edit}&quot;
+                    IsVisible=&quot;{Binding !IsEditing}&quot;/&gt;
+            &lt;Button Content=&quot;Save&quot;
+                    Command=&quot;{Binding Save}&quot;
+                    IsVisible=&quot;{Binding IsEditing}&quot;/&gt;
+        &lt;/StackPanel&gt;
+    &lt;/StackPanel&gt;
+&lt;/UserControl&gt;
+</code></pre>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><a href="dependency-injection.html">Dependency Injection</a> - Learn about DI in Crystal.Avalonia</li>
+<li><a href="module-development.html">Module Development</a> - Organize code into modules</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/0use-TE/Crystal.Avalonia/blob/master/docs/tutorials/mvvm-pattern.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Crystal.Avalonia © 2024
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,292 @@
+### YamlMime:ManagedReference
+items:
+- uid: Crystal.Avalonia.IModule
+  commentId: T:Crystal.Avalonia.IModule
+  id: IModule
+  parent: Crystal.Avalonia
+  children:
+  - Crystal.Avalonia.IModule.InitializeModule(System.IServiceProvider)
+  - Crystal.Avalonia.IModule.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  langs:
+  - csharp
+  - vb
+  name: IModule
+  nameWithType: IModule
+  fullName: Crystal.Avalonia.IModule
+  type: Interface
+  source:
+    remote:
+      path: Crystal.Avalonia/IModule.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: IModule
+    path: Crystal.Avalonia/IModule.cs
+    startLine: 10
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: >-
+    Defines an application module, which is a self-contained unit of functionality.
+
+    Modules allow you to organize your application into independent feature areas,
+
+    each managing its own services and views.
+  example: []
+  syntax:
+    content: public interface IModule
+    content.vb: Public Interface IModule
+- uid: Crystal.Avalonia.IModule.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:Crystal.Avalonia.IModule.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  parent: Crystal.Avalonia.IModule
+  langs:
+  - csharp
+  - vb
+  name: RegisterServices(IServiceCollection)
+  nameWithType: IModule.RegisterServices(IServiceCollection)
+  fullName: Crystal.Avalonia.IModule.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/IModule.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: RegisterServices
+    path: Crystal.Avalonia/IModule.cs
+    startLine: 18
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: >-
+    Override this method to register services that belong to this module.
+
+    It is recommended to use <xref href="Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient%60%602(Microsoft.Extensions.DependencyInjection.IServiceCollection)" data-throw-if-not-resolved="false"></xref>
+
+    or <xref href="Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton%60%602(Microsoft.Extensions.DependencyInjection.IServiceCollection)" data-throw-if-not-resolved="false"></xref> to register View/ViewModel pairs.
+  example: []
+  syntax:
+    content: void RegisterServices(IServiceCollection services)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The service collection to register services into.
+    content.vb: Sub RegisterServices(services As IServiceCollection)
+  overload: Crystal.Avalonia.IModule.RegisterServices*
+- uid: Crystal.Avalonia.IModule.InitializeModule(System.IServiceProvider)
+  commentId: M:Crystal.Avalonia.IModule.InitializeModule(System.IServiceProvider)
+  id: InitializeModule(System.IServiceProvider)
+  parent: Crystal.Avalonia.IModule
+  langs:
+  - csharp
+  - vb
+  name: InitializeModule(IServiceProvider)
+  nameWithType: IModule.InitializeModule(IServiceProvider)
+  fullName: Crystal.Avalonia.IModule.InitializeModule(System.IServiceProvider)
+  type: Method
+  source:
+    remote:
+      path: Crystal.Avalonia/IModule.cs
+      branch: master
+      repo: https://github.com/0use-TE/Crystal.Avalonia.git
+    id: InitializeModule
+    path: Crystal.Avalonia/IModule.cs
+    startLine: 25
+  assemblies:
+  - Crystal.Avalonia
+  namespace: Crystal.Avalonia
+  summary: >-
+    Override this method to perform module initialization logic.
+
+    At this point, all services have been registered and can be resolved from <code class="paramref">serviceProvider</code>.
+  example: []
+  syntax:
+    content: void InitializeModule(IServiceProvider serviceProvider)
+    parameters:
+    - id: serviceProvider
+      type: System.IServiceProvider
+      description: The service provider, can be used to resolve services registered in this module.
+    content.vb: Sub InitializeModule(serviceProvider As IServiceProvider)
+  overload: Crystal.Avalonia.IModule.InitializeModule*
+references:
+- uid: Crystal.Avalonia
+  commentId: N:Crystal.Avalonia
+  href: Crystal.html
+  name: Crystal.Avalonia
+  nameWithType: Crystal.Avalonia
+  fullName: Crystal.Avalonia
+  spec.csharp:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html
+  spec.vb:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html
+- uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExternal: true
+  href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_AddMvvmBindingTransient__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddMvvmBindingTransient<TView, TViewModel>(IServiceCollection)
+  nameWithType: MvvmManager.AddMvvmBindingTransient<TView, TViewModel>(IServiceCollection)
+  fullName: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient<TView, TViewModel>(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  nameWithType.vb: MvvmManager.AddMvvmBindingTransient(Of TView, TViewModel)(IServiceCollection)
+  fullName.vb: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient(Of TView, TViewModel)(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name.vb: AddMvvmBindingTransient(Of TView, TViewModel)(IServiceCollection)
+  spec.csharp:
+  - uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+    name: AddMvvmBindingTransient
+    href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_AddMvvmBindingTransient__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  - name: <
+  - name: TView
+  - name: ','
+  - name: " "
+  - name: TViewModel
+  - name: '>'
+  - name: (
+  - uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
+    name: IServiceCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
+  - name: )
+  spec.vb:
+  - uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingTransient``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+    name: AddMvvmBindingTransient
+    href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_AddMvvmBindingTransient__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TView
+  - name: ','
+  - name: " "
+  - name: TViewModel
+  - name: )
+  - name: (
+  - uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
+    name: IServiceCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
+  - name: )
+- uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExternal: true
+  href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_AddMvvmBindingSingleton__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddMvvmBindingSingleton<TView, TViewModel>(IServiceCollection)
+  nameWithType: MvvmManager.AddMvvmBindingSingleton<TView, TViewModel>(IServiceCollection)
+  fullName: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton<TView, TViewModel>(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  nameWithType.vb: MvvmManager.AddMvvmBindingSingleton(Of TView, TViewModel)(IServiceCollection)
+  fullName.vb: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton(Of TView, TViewModel)(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name.vb: AddMvvmBindingSingleton(Of TView, TViewModel)(IServiceCollection)
+  spec.csharp:
+  - uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+    name: AddMvvmBindingSingleton
+    href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_AddMvvmBindingSingleton__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  - name: <
+  - name: TView
+  - name: ','
+  - name: " "
+  - name: TViewModel
+  - name: '>'
+  - name: (
+  - uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
+    name: IServiceCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
+  - name: )
+  spec.vb:
+  - uid: Crystal.Avalonia.MvvmManager.AddMvvmBindingSingleton``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+    name: AddMvvmBindingSingleton
+    href: Crystal.Avalonia.MvvmManager.html#Crystal_Avalonia_MvvmManager_AddMvvmBindingSingleton__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TView
+  - name: ','
+  - name: " "
+  - name: TViewModel
+  - name: )
+  - name: (
+  - uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
+    name: IServiceCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
+  - name: )
+- uid: Crystal.Avalonia.IModule.RegisterServices*
+  commentId: Overload:Crystal.Avalonia.IModule.RegisterServices
+  href: Crystal.Avalonia.IModule.html#Crystal_Avalonia_IModule_RegisterServices_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: RegisterServices
+  nameWithType: IModule.RegisterServices
+  fullName: Crystal.Avalonia.IModule.RegisterServices
+- uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
+  commentId: T:Microsoft.Extensions.DependencyInjection.IServiceCollection
+  parent: Microsoft.Extensions.DependencyInjection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
+  name: IServiceCollection
+  nameWithType: IServiceCollection
+  fullName: Microsoft.Extensions.DependencyInjection.IServiceCollection
+- uid: Microsoft.Extensions.DependencyInjection
+  commentId: N:Microsoft.Extensions.DependencyInjection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.DependencyInjection
+  nameWithType: Microsoft.Extensions.DependencyInjection
+  fullName: Microsoft.Extensions.DependencyInjection
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
+- uid: Crystal.Avalonia.IModule.InitializeModule*
+  commentId: Overload:Crystal.Avalonia.IModule.InitializeModule
+  href: Crystal.Avalonia.IModule.html#Crystal_Avalonia_IModule_InitializeModule_System_IServiceProvider_
+  name: InitializeModule
+  nameWithType: IModule.InitializeModule
+  fullName: Crystal.Avalonia.IModule.InitializeModule
+- uid: System.IServiceProvider
+  commentId: T:System.IServiceProvider
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  name: IServiceProvider
+  nameWithType: IServiceProvider
+  fullName: System.IServiceProvider
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System

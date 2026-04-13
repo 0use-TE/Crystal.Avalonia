@@ -1,0 +1,89 @@
+### YamlMime:ManagedReference
+items:
+- uid: Crystal.Avalonia
+  commentId: N:Crystal.Avalonia
+  id: Crystal.Avalonia
+  children:
+  - Crystal.Avalonia.CrystalApplication
+  - Crystal.Avalonia.CrystalOptions
+  - Crystal.Avalonia.IModule
+  - Crystal.Avalonia.IModuleRegistrar
+  - Crystal.Avalonia.ModuleManager
+  - Crystal.Avalonia.MvvmManager
+  - Crystal.Avalonia.ViewModelLocator
+  langs:
+  - csharp
+  - vb
+  name: Crystal.Avalonia
+  nameWithType: Crystal.Avalonia
+  fullName: Crystal.Avalonia
+  type: Namespace
+  assemblies:
+  - Crystal.Avalonia
+references:
+- uid: Crystal.Avalonia.CrystalApplication
+  commentId: T:Crystal.Avalonia.CrystalApplication
+  href: Crystal.Avalonia.CrystalApplication.html
+  name: CrystalApplication
+  nameWithType: CrystalApplication
+  fullName: Crystal.Avalonia.CrystalApplication
+- uid: Crystal.Avalonia.CrystalOptions
+  commentId: T:Crystal.Avalonia.CrystalOptions
+  href: Crystal.Avalonia.CrystalOptions.html
+  name: CrystalOptions
+  nameWithType: CrystalOptions
+  fullName: Crystal.Avalonia.CrystalOptions
+- uid: Crystal.Avalonia.IModule
+  commentId: T:Crystal.Avalonia.IModule
+  parent: Crystal.Avalonia
+  href: Crystal.Avalonia.IModule.html
+  name: IModule
+  nameWithType: IModule
+  fullName: Crystal.Avalonia.IModule
+- uid: Crystal.Avalonia.IModuleRegistrar
+  commentId: T:Crystal.Avalonia.IModuleRegistrar
+  parent: Crystal.Avalonia
+  href: Crystal.Avalonia.IModuleRegistrar.html
+  name: IModuleRegistrar
+  nameWithType: IModuleRegistrar
+  fullName: Crystal.Avalonia.IModuleRegistrar
+- uid: Crystal.Avalonia.ModuleManager
+  commentId: T:Crystal.Avalonia.ModuleManager
+  href: Crystal.Avalonia.ModuleManager.html
+  name: ModuleManager
+  nameWithType: ModuleManager
+  fullName: Crystal.Avalonia.ModuleManager
+- uid: Crystal.Avalonia.MvvmManager
+  commentId: T:Crystal.Avalonia.MvvmManager
+  href: Crystal.Avalonia.MvvmManager.html
+  name: MvvmManager
+  nameWithType: MvvmManager
+  fullName: Crystal.Avalonia.MvvmManager
+- uid: Crystal.Avalonia.ViewModelLocator
+  commentId: T:Crystal.Avalonia.ViewModelLocator
+  href: Crystal.Avalonia.ViewModelLocator.html
+  name: ViewModelLocator
+  nameWithType: ViewModelLocator
+  fullName: Crystal.Avalonia.ViewModelLocator
+- uid: Crystal.Avalonia
+  commentId: N:Crystal.Avalonia
+  href: Crystal.html
+  name: Crystal.Avalonia
+  nameWithType: Crystal.Avalonia
+  fullName: Crystal.Avalonia
+  spec.csharp:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html
+  spec.vb:
+  - uid: Crystal
+    name: Crystal
+    href: Crystal.html
+  - name: .
+  - uid: Crystal.Avalonia
+    name: Avalonia
+    href: Crystal.Avalonia.html

@@ -6,7 +6,6 @@ using Avalonia.Markup.Xaml;
 using Crystal.Avalonia;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
 using TemplateContent.ViewModels;
 using TemplateContent.Views;
 
@@ -18,15 +17,25 @@ namespace TemplateContent
         {
             AvaloniaXamlLoader.Load(this);
         }
+
+        /// <inheritdoc cref="CrystalApplication.RegisterModules"/>
         public override void RegisterModules(IModuleRegistrar moduleRegistrar)
         {
+            // Example: Register business modules
+            // moduleRegistrar.RegisterModule<MyModule>();
         }
+
+        /// <inheritdoc cref="CrystalApplication.RegisterServices"/>
         public override void RegisterServices(IServiceCollection services)
         {
+            // Register View and ViewModel mapping
             services.AddMvvmBindingTransient<MainView, MainViewModel>();
         }
+
+        /// <inheritdoc cref="CrystalApplication.CreateShell"/>
         public override void CreateShell(IServiceProvider serviceProvider)
         {
+            // Create the main window or main view based on application lifetime
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 desktop.MainWindow = new MainWindow();
             else if (ApplicationLifetime is IActivityApplicationLifetime singleViewFactoryApplicationLifetime)

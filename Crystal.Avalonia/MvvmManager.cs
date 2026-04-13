@@ -1,19 +1,30 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace Crystal.Avalonia
 {
+    /// <summary>
+    /// Manages View-to-ViewModel mapping and MVVM binding registration.
+    /// </summary>
+    /// <remarks>
+    /// After registering View/ViewModel pairs using this class, the system will automatically:
+    /// <list type="bullet">
+    ///   <item>Inject the DataContext via <see cref="ViewModelLocator"/> when <see cref="CrystalOptions.EnableViewModelLocator"/> is enabled</item>
+    ///   <item>Resolve the corresponding View via <see cref="ViewLocator"/> based on the ViewModel type</item>
+    /// </list>
+    /// </remarks>
     public static class MvvmManager
     {
-        // View -> VM (用于自动给 DataContext 赋值)
         private static readonly Dictionary<Type, Type> _viewToVm = new();
-        // VM -> View (用于根据 VM 实例生成 UI)
         private static readonly Dictionary<Type, Type> _vmToView = new();
 
+        /// <summary>
+        /// Gets the current application's service provider instance.
+        /// Available after <see cref="CrystalApplication.OnFrameworkInitializationCompleted"/> completes.
+        /// </summary>
         public static IServiceProvider? ServiceProvider { get; set; }
 
         private static void RegisterMapping(Type viewType, Type vmType)
@@ -22,6 +33,18 @@ namespace Crystal.Avalonia
             _vmToView[vmType] = viewType;
         }
 
+        /// <summary>
+        /// Registers a View and ViewModel pair as Transient mappings.
+        /// Both the View and ViewModel are registered as Transient in the DI container.
+        /// </summary>
+        /// <typeparam name="TView">The View type, must inherit from <see cref="Control"/>.</typeparam>
+        /// <typeparam name="TViewModel">The ViewModel type, can be any class.</typeparam>
+        /// <param name="services">The service collection.</param>
+        /// <example>
+        /// <code>
+        /// services.AddMvvmBindingTransient&lt;MainView, MainViewModel&gt;();
+        /// </code>
+        /// </example>
         public static void AddMvvmBindingTransient<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(this IServiceCollection services)
             where TView : Control where TViewModel : class
@@ -31,6 +54,17 @@ namespace Crystal.Avalonia
             RegisterMapping(typeof(TView), typeof(TViewModel));
         }
 
+        /// <summary>
+        /// Registers a View and ViewModel pair with the View as Transient and ViewModel as Singleton.
+        /// </summary>
+        /// <typeparam name="TView">The View type, must inherit from <see cref="Control"/>.</typeparam>
+        /// <typeparam name="TViewModel">The ViewModel type, can be any class.</typeparam>
+        /// <param name="services">The service collection.</param>
+        /// <example>
+        /// <code>
+        /// services.AddMvvmBindingSingleton&lt;SettingsView, SettingsViewModel&gt;();
+        /// </code>
+        /// </example>
         public static void AddMvvmBindingSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(this IServiceCollection services)
             where TView : Control where TViewModel : class
@@ -39,10 +73,19 @@ namespace Crystal.Avalonia
             services.AddSingleton<TViewModel>();
             RegisterMapping(typeof(TView), typeof(TViewModel));
         }
-        // 根据 VM 类型获取 View 类型
+
+        /// <summary>
+        /// Looks up the View type corresponding to the given ViewModel type.
+        /// </summary>
+        /// <param name="vmType">The ViewModel type.</param>
+        /// <returns>The corresponding View type, or <c>null</c> if not found.</returns>
         public static Type? GetViewType(Type vmType) => _vmToView.GetValueOrDefault(vmType);
 
-        // 根据 View 类型获取 VM 类型
+        /// <summary>
+        /// Looks up the ViewModel type corresponding to the given View type.
+        /// </summary>
+        /// <param name="viewType">The View type.</param>
+        /// <returns>The corresponding ViewModel type, or <c>null</c> if not found.</returns>
         public static Type? GetVmType(Type viewType) => _viewToVm.GetValueOrDefault(viewType);
     }
 }
