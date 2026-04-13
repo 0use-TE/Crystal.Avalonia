@@ -27,13 +27,13 @@ Crystal.Avalonia is **not** an MVVM framework. It does not provide ViewModel bas
 ### Install the Template
 
 ```bash
-dotnet new install Crystal.Avalonia.Template
+dotnet new install CrystalTemplate
 ```
 
 ### Create a New Project
 
 ```bash
-dotnet new crystal.avalonia -o MyApp
+dotnet new CT -o MyApp
 cd MyApp
 dotnet run
 ```

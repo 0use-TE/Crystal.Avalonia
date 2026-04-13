@@ -9,8 +9,8 @@ A lightweight, AOT-friendly MVVM framework for Avalonia UI applications.
 ## Quick Start
 
 ```bash
-dotnet new install Crystal.Avalonia.Template
-dotnet new crystal.avalonia -o MyApp
+dotnet new install CrystalTemplate
+dotnet new CT -o MyApp
 cd MyApp && dotnet run
 ```
 

@@ -9,7 +9,7 @@ A simple counter with increment/decrement buttons and reset.
 ## Step 1: Set Up the Project
 
 ```bash
-dotnet new crystal.avalonia -o CounterApp
+dotnet new CT -o CounterApp
 cd CounterApp
 ```
 

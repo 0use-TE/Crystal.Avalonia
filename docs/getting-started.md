@@ -7,13 +7,13 @@
 ## Step 1: Install the Template
 
 ```bash
-dotnet new install Crystal.Avalonia.Template
+dotnet new install CrystalTemplate
 ```
 
 ## Step 2: Create a New Project
 
 ```bash
-dotnet new crystal.avalonia -o MyApp
+dotnet new CT -o MyApp
 cd MyApp
 dotnet run
 ```
