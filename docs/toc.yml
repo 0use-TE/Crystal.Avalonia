@@ -10,8 +10,9 @@
       href: tutorials/module-development.md
     - name: MVVM Pattern
       href: tutorials/mvvm-pattern.md
-    - name: Dependency Injection
-      href: tutorials/dependency-injection.md
+    - name: Migrate from Avalonia
+      href: tutorials/migrate-from-avalonia.md
 - name: AOT Compatibility
   href: aot-compatibility.md
-
+- name: API Reference
+  href: api/index.md

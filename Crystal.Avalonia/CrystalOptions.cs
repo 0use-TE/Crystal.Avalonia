@@ -13,7 +13,7 @@ namespace Crystal.Avalonia
         /// </summary>
         /// <remarks>
         /// When enabled, the <see cref="ViewModelLocator.AutoWireViewModelProperty"/> attached property takes effect.
-        /// You can set <c>vm:ViewModelLocator.AutoWireViewModel="True"</c> in XAML to enable auto-binding.
+        /// You can set <c>ViewModelLocator.AutoWireViewModel="True"</c> in XAML to enable auto-binding.
         /// </remarks>
         public static bool EnableViewModelLocator { get; set; } = true;
     }

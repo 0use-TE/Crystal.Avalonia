@@ -1,98 +1,38 @@
 # Introduction
 
-Crystal.Avalonia is a lightweight MVVM framework designed specifically for [Avalonia UI](https://avaloniaui.net/) applications. It provides a clean architecture pattern that makes building complex, cross-platform applications simpler and more maintainable.
+Crystal.Avalonia is a lightweight MVVM framework for [Avalonia UI](https://avaloniaui.net/).
 
-## Why Crystal.Avalonia?
+## Core Features
 
-When building large-scale Avalonia applications, you often face challenges like:
+- **Modular Architecture** - Organize code into self-contained modules
+- **Automatic DI** - Built-in dependency injection via Microsoft.Extensions.DependencyInjection
+- **MVVM Binding** - Automatic View/ViewModel wiring with `ViewModelLocator.AutoWireViewModel="True"`
+- **AOT Ready** - Full trimming and AOT compilation support
 
-- **Code organization** - How to keep your code maintainable as the app grows
-- **View/ViewModel binding** - Managing the relationship between views and their view models
-- **Modularity** - How to split your app into independent, testable units
-- **Dependency Injection** - Properly wiring up services across your application
-
-Crystal.Avalonia addresses all of these concerns out of the box.
-
-## Core Concepts
-
-### 1. CrystalApplication
-
-The base application class that extends Avalonia's `Application` with modular development support:
+## Quick Example
 
 ```csharp
-public class MyApp : CrystalApplication
-{
-    public override void RegisterModules(IModuleRegistrar moduleRegistrar) { }
-    public override void RegisterServices(IServiceCollection services) { }
-    public override void CreateShell(IServiceProvider serviceProvider) { }
-}
-```
-
-### 2. Module System
-
-Modules are self-contained units of functionality that manage their own services and views:
-
-```csharp
-public class MyModule : IModule
-{
-    public void RegisterServices(IServiceCollection services)
-    {
-        // Register module services here
-    }
-
-    public void InitializeModule(IServiceProvider serviceProvider)
-    {
-        // Initialize module here
-    }
-}
-```
-
-### 3. MVVM Binding
-
-Crystal.Avalonia provides simple yet powerful View/ViewModel binding:
-
-```csharp
-// Register the mapping
+// Register View/ViewModel mapping
 services.AddMvvmBindingTransient<MainView, MainViewModel>();
-
-// In XAML, enable auto-binding
-<Window xmlns:vm="using:Crystal.Avalonia"
-        vm:ViewModelLocator.AutoWireViewModel="True">
 ```
 
-## Architecture Overview
-
-```
-┌─────────────────────────────────────────────────────┐
-│                  CrystalApplication                  │
-├─────────────────────────────────────────────────────┤
-│  RegisterModules()   - Register IModule impls       │
-│  RegisterServices()  - Register DI services         │
-│  CreateShell()       - Create main window/view      │
-└─────────────────────────────────────────────────────┘
-                              │
-        ┌─────────────────────┼─────────────────────┐
-        ▼                     ▼                     ▼
-┌───────────────┐    ┌───────────────┐    ┌───────────────┐
-│   Module A    │    │   Module B    │    │  Main App     │
-├───────────────┤    ├───────────────┤    ├───────────────┤
-│ • Services    │    │ • Services    │    │ • ViewModels  │
-│ • Views       │    │ • Views       │    │ • Views       │
-│ • ViewModels  │    │ • ViewModels  │    │ • Services    │
-└───────────────┘    └───────────────┘    └───────────────┘
+```xml
+<!-- Enable auto-binding in XAML -->
+<UserControl ViewModelLocator.AutoWireViewModel="True">
+    <TextBlock Text="{Binding Greeting}"/>
+</UserControl>
 ```
 
-## Key Features
+## Architecture
 
-| Feature | Description |
-|---------|-------------|
-| **Modular Architecture** | Organize code into independent modules with their own services and views |
-| **Automatic DI Wiring** | ViewModels and Views are automatically registered and resolved |
-| **Flexible Binding** | Two binding modes: `AddMvvmBindingTransient` and `AddMvvmBindingSingleton` |
-| **AOT Ready** | Full support for trimming and AOT compilation |
-| **Cross-Platform** | Supports all Avalonia platforms including WASM |
+| Component | Description |
+|-----------|-------------|
+| `CrystalApplication` | Base class with modular support |
+| `IModule` | Interface for creating modules |
+| `MvvmManager` | View/ViewModel registration |
+| `ViewModelLocator` | Auto-binding attached property |
 
 ## Next Steps
 
-- [Getting Started](getting-started.md) - Create your first Crystal.Avalonia application
-- [API Reference](../api/index.html) - Explore the full API documentation
+- [Getting Started](getting-started.md) - Create your first app
+- [Migrate from Avalonia](tutorials/migrate-from-avalonia.md) - Convert official template

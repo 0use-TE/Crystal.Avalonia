@@ -9,11 +9,9 @@ namespace Crystal.Avalonia
     /// Works in conjunction with <see cref="CrystalOptions.EnableViewModelLocator"/>.
     /// </summary>
     /// <remarks>
-    /// Usage in XAML:
+/// Usage in XAML:
     /// <code>
-    /// &lt;Window xmlns:vm="using:Crystal.Avalonia"
-    ///         vm:ViewModelLocator.AutoWireViewModel="True"&gt;
-    /// </code>
+    /// &lt;Window xmlns
     /// When <c>AutoWireViewModel</c> is set to <c>True</c>,
     /// the system automatically resolves the corresponding ViewModel from the DI container
     /// and assigns it to the control's <c>DataContext</c>.

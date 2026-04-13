@@ -47,7 +47,7 @@ Create `CounterView.axaml`:
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:Crystal.Avalonia"
-             vm:ViewModelLocator.AutoWireViewModel="True">
+             ViewModelLocator.AutoWireViewModel="True">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
         <TextBlock Text="{Binding Count}"
@@ -158,7 +158,7 @@ public class CounterViewModel : ObservableObject
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:Crystal.Avalonia"
-             vm:ViewModelLocator.AutoWireViewModel="True">
+             ViewModelLocator.AutoWireViewModel="True">
 
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Center"

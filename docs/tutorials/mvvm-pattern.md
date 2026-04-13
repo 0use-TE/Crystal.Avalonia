@@ -182,7 +182,7 @@ Crystal.Avalonia can automatically inject ViewModels into Views.
 
 ```xml
 <UserControl xmlns:vm="using:Crystal.Avalonia"
-             vm:ViewModelLocator.AutoWireViewModel="True">
+             ViewModelLocator.AutoWireViewModel="True">
 ```
 
 ### How It Works
@@ -275,7 +275,7 @@ public enum OrderStatus { Pending, Approved, Rejected }
 ```xml
 <UserControl xmlns:vm="using:Crystal.Avalonia"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             vm:ViewModelLocator.AutoWireViewModel="True">
+             ViewModelLocator.AutoWireViewModel="True">
 
     <StackPanel Margin="20" Spacing="15">
         <StackPanel Orientation="Horizontal" Spacing="10">
