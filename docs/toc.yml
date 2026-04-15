@@ -6,6 +6,10 @@
   items:
     - name: Create Your First App
       href: tutorials/create-first-app.md
+    - name: Navigation
+      href: tutorials/navigation.md
+    - name: Dependency Injection
+      href: tutorials/dependency-injection.md
     - name: Module Development
       href: tutorials/module-development.md
     - name: MVVM Pattern
