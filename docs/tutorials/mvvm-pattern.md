@@ -95,10 +95,48 @@ public partial class MainViewModel : ObservableObject
 
 Same ViewModel works with both modes.
 
+## ViewModel Lifecycle
+
+Crystal.Avalonia supports ViewModel lifecycle callbacks through the `ILifecycleAware` interface. When your ViewModel implements this interface, the locator automatically calls `OnLoadedAsync` when the View is first loaded and `OnUnloaded` when the View is removed from the visual tree.
+
+### Implementation Example
+
+```csharp
+using CommunityToolkit.Mvvm.ComponentModel;
+using Crystal.Avalonia;
+
+public partial class MainViewModel : ObservableObject, ILifecycleAware
+{
+    [ObservableProperty]
+    private string _title = "My App";
+
+    public async Task OnLoadedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    public async Task OnUnloaded()
+    {
+        await SaveDataAsync();
+    }
+}
+```
+
+### How Lifecycle Hookup Works
+
+Both `ViewModelLocator` and `ViewLocator` automatically detect when a ViewModel implements `ILifecycleAware`:
+
+1. When the View's `Loaded` event fires, the locator calls `OnLoadedAsync()` then unsubscribes
+2. When the View's `Unloaded` event fires, the locator calls `OnUnloaded()` then unsubscribes
+3. This single-fire pattern prevents memory leaks and duplicate calls
+
+No additional XAML or code is required - lifecycle hooks are automatic when the ViewModel implements `ILifecycleAware`.
+
 ## Key Concepts
 
 | Concept | Description |
 |---------|-------------|
+| `ILifecycleAware` | Interface for ViewModel lifecycle callbacks (OnLoadedAsync/OnUnloaded) |
 | `AddMvvmBindingTransient` | Registers View and ViewModel types, builds bidirectional mapping |
 | `ViewModelLocator.AutoWireViewModel` | Attached property for View-first auto-binding |
 | `ViewLocator` | Built-in IDataTemplate for ViewModel-first resolution |

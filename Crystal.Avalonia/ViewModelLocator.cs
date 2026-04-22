@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using System;
+using System.Diagnostics;
 
 namespace Crystal.Avalonia
 {
@@ -9,7 +10,7 @@ namespace Crystal.Avalonia
     /// Works in conjunction with <see cref="CrystalOptions.EnableViewModelLocator"/>.
     /// </summary>
     /// <remarks>
-/// Usage in XAML:
+    /// Usage in XAML:
     /// <code>
     /// &lt;Window xmlns
     /// When <c>AutoWireViewModel</c> is set to <c>True</c>,
@@ -66,11 +67,60 @@ namespace Crystal.Avalonia
 
                 var viewModel = MvvmManager.ServiceProvider.GetService(vmType);
                 view.DataContext = viewModel;
+                if (viewModel is ILifecycleAware lifecycleAware)
+                {
+                    view.Loaded += View_Loaded;
+                    view.Unloaded += View_Unloaded;
+                }
             }
             else
             {
                 throw new InvalidOperationException($"No ViewModel mapping found for view type {viewType.FullName}. Make sure to register the mapping using AddMvvmBindingTransient or AddMvvmBindingSingleton.");
             }
+        }
+        private static async void View_Unloaded(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if (sender is Control view)
+            {
+                view.Unloaded -= View_Unloaded;
+
+                if (view.DataContext is ILifecycleAware vm)
+                {
+                    try
+                    {
+                        await vm.OnUnloaded();
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine(ex);
+                    }
+                }
+            }
+
+        }
+
+        private static async void View_Loaded(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if (sender is Control view)
+            {
+                // 1. 关键：执行一次就立刻取消订阅，防止重复初始化或内存泄漏
+                view.Loaded -= View_Loaded;
+
+                if (view.DataContext is ILifecycleAware vm)
+                {
+                    try
+                    {
+                        // 2. 调用异步初始化
+                        await vm.OnLoadedAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        // 3. 在这里记录日志，开发者就能在调试时看到了
+                        Trace.WriteLine(ex);
+                    }
+                }
+            }
+
         }
     }
 }
