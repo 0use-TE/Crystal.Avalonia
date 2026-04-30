@@ -73,7 +73,7 @@ In `App.axaml.cs`:
 ```csharp
 public override void RegisterServices(IServiceCollection services)
 {
-    services.AddMvvmBindingTransient<CounterView, CounterViewModel>();
+    services.AddMvvmTransient<CounterView, CounterViewModel>();
 }
 ```
 
@@ -87,7 +87,7 @@ dotnet run
 
 | Concept | Description |
 |---------|-------------|
-| `AddMvvmBindingTransient` | Registers View/ViewModel pair in DI |
+| `AddMvvmTransient` | Registers View/ViewModel pair in DI |
 | `ViewModelLocator.AutoWireViewModel` | Auto-injects ViewModel into View's DataContext |
 | `MvvmManager.ServiceProvider` | Access DI container directly |
 

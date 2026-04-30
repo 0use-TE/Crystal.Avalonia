@@ -34,18 +34,18 @@ namespace Crystal.Avalonia
         }
 
         /// <summary>
-        /// Registers a View and ViewModel pair as Transient mappings.
-        /// Both the View and ViewModel are registered as Transient in the DI container.
+        /// Registers a View and ViewModel pair as Transient.
+        /// Both the View and ViewModel are created as new instances each time they are resolved.
         /// </summary>
         /// <typeparam name="TView">The View type, must inherit from <see cref="Control"/>.</typeparam>
         /// <typeparam name="TViewModel">The ViewModel type, can be any class.</typeparam>
         /// <param name="services">The service collection.</param>
         /// <example>
         /// <code>
-        /// services.AddMvvmBindingTransient&lt;MainView, MainViewModel&gt;();
+        /// services.AddMvvmTransient&lt;MainView, MainViewModel&gt;();
         /// </code>
         /// </example>
-        public static void AddMvvmBindingTransient<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
+        public static void AddMvvmTransient<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(this IServiceCollection services)
             where TView : Control where TViewModel : class
         {
@@ -55,21 +55,45 @@ namespace Crystal.Avalonia
         }
 
         /// <summary>
-        /// Registers a View and ViewModel pair with the View as Transient and ViewModel as Singleton.
+        /// Registers a View and ViewModel pair as Hybrid.
+        /// The View is Transient (new instance each time), while the ViewModel is Singleton (same instance reused).
+        /// Useful when you want the ViewModel to maintain state across multiple View instances.
         /// </summary>
         /// <typeparam name="TView">The View type, must inherit from <see cref="Control"/>.</typeparam>
         /// <typeparam name="TViewModel">The ViewModel type, can be any class.</typeparam>
         /// <param name="services">The service collection.</param>
         /// <example>
         /// <code>
-        /// services.AddMvvmBindingSingleton&lt;SettingsView, SettingsViewModel&gt;();
+        /// services.AddMvvmHybrid&lt;SettingsView, SettingsViewModel&gt;();
         /// </code>
         /// </example>
-        public static void AddMvvmBindingSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
+        public static void AddMvvmHybrid<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(this IServiceCollection services)
             where TView : Control where TViewModel : class
         {
             services.AddTransient<TView>();
+            services.AddSingleton<TViewModel>();
+            RegisterMapping(typeof(TView), typeof(TViewModel));
+        }
+
+        /// <summary>
+        /// Registers a View and ViewModel pair as Singleton.
+        /// Both the View and ViewModel are created once and reused for the lifetime of the application.
+        /// Use this when the View and ViewModel represent a single, long-lived instance.
+        /// </summary>
+        /// <typeparam name="TView">The View type, must inherit from <see cref="Control"/>.</typeparam>
+        /// <typeparam name="TViewModel">The ViewModel type, can be any class.</typeparam>
+        /// <param name="services">The service collection.</param>
+        /// <example>
+        /// <code>
+        /// services.AddMvvmSingleton&lt;MainView, MainViewModel&gt;();
+        /// </code>
+        /// </example>
+        public static void AddMvvmSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(this IServiceCollection services)
+            where TView : Control where TViewModel : class
+        {
+            services.AddSingleton<TView>();
             services.AddSingleton<TViewModel>();
             RegisterMapping(typeof(TView), typeof(TViewModel));
         }

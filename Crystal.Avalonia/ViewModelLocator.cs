@@ -75,7 +75,7 @@ namespace Crystal.Avalonia
             }
             else
             {
-                throw new InvalidOperationException($"No ViewModel mapping found for view type {viewType.FullName}. Make sure to register the mapping using AddMvvmBindingTransient or AddMvvmBindingSingleton.");
+                throw new InvalidOperationException($"No ViewModel mapping found for view type {viewType.FullName}. Make sure to register the mapping using AddMvvmTransient, AddMvvmHybrid, or AddMvvmSingleton.");
             }
         }
         private static async void View_Unloaded(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)

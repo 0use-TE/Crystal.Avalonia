@@ -29,7 +29,7 @@ namespace TemplateContent
         public override void RegisterServices(IServiceCollection services)
         {
             // Register View and ViewModel mapping
-            services.AddMvvmBindingTransient<MainView, MainViewModel>();
+            services.AddMvvmTransient<MainView, MainViewModel>();
         }
 
         /// <inheritdoc cref="CrystalApplication.CreateShell"/>

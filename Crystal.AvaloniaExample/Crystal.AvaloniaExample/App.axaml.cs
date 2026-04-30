@@ -27,8 +27,8 @@ namespace Crystal.AvaloniaExample
         }
         public override void RegisterServices(IServiceCollection services)
         {
-            services.AddMvvmBindingTransient<MainView, MainViewModel>();
-            services.AddMvvmBindingTransient<OuseView, OuseViewModel>();
+            services.AddMvvmTransient<MainView, MainViewModel>();
+            services.AddMvvmTransient<OuseView, OuseViewModel>();
         }
         public override void CreateShell(IServiceProvider serviceProvider)
         {

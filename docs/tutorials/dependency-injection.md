@@ -68,7 +68,7 @@ public override void RegisterServices(IServiceCollection services)
     services.AddSingleton<INavigationService, NavigationService>();
 
     // Register View/ViewModel pairs
-    services.AddMvvmBindingTransient<MainView, MainViewModel>();
+    services.AddMvvmTransient<MainView, MainViewModel>();
 }
 ```
 

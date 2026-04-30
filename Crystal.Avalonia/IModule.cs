@@ -12,8 +12,8 @@ namespace Crystal.Avalonia
     {
         /// <summary>
         /// Override this method to register services that belong to this module.
-        /// It is recommended to use <see cref="MvvmManager.AddMvvmBindingTransient{TView, TViewModel}(IServiceCollection)"/>
-        /// or <see cref="MvvmManager.AddMvvmBindingSingleton{TView, TViewModel}(IServiceCollection)"/> to register View/ViewModel pairs.
+        /// It is recommended to use <see cref="MvvmManager.AddMvvmTransient{TView, TViewModel}(IServiceCollection)"/>
+        /// or <see cref="MvvmManager.AddMvvmHybrid{TView, TViewModel}(IServiceCollection)"/> to register View/ViewModel pairs.
         /// </summary>
         /// <param name="services">The service collection to register services into.</param>
         void RegisterServices(IServiceCollection services);

@@ -27,8 +27,8 @@ public class UserManagementModule : IModule
     public void RegisterServices(IServiceCollection services)
     {
         // Register View/ViewModel pairs
-        services.AddMvvmBindingTransient<UserListView, UserListViewModel>();
-        services.AddMvvmBindingTransient<UserDetailView, UserDetailViewModel>();
+        services.AddMvvmTransient<UserListView, UserListViewModel>();
+        services.AddMvvmTransient<UserDetailView, UserDetailViewModel>();
 
         // Register other services
         services.AddSingleton<IUserRepository, UserRepository>();
@@ -117,7 +117,7 @@ public class ReportingModule : IModule
 {
     public void RegisterServices(IServiceCollection services)
     {
-        services.AddMvvmBindingTransient<ReportView, ReportViewModel>();
+        services.AddMvvmTransient<ReportView, ReportViewModel>();
     }
 
     public void InitializeModule(IServiceProvider serviceProvider)
@@ -174,7 +174,7 @@ public class MyModule : AppModule
 {
     protected override void OnRegisterServices()
     {
-        Services!.AddMvvmBindingTransient<MyView, MyViewModel>();
+        Services!.AddMvvmTransient<MyView, MyViewModel>();
     }
 
     protected override void OnInitialize()

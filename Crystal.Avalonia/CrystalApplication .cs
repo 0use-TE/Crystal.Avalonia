@@ -28,7 +28,7 @@ namespace Crystal.Avalonia
     ///
     ///     public override void RegisterServices(IServiceCollection services)
     ///     {
-    ///         services.AddMvvmBindingTransient&lt;MainView, MainViewModel&gt;();
+    ///         services.AddMvvmTransient&lt;MainView, MainViewModel&gt;();
     ///     }
     ///
     ///     public override void CreateShell(IServiceProvider serviceProvider)
@@ -86,8 +86,8 @@ namespace Crystal.Avalonia
 
         /// <summary>
         /// Override this method to register application-level services.
-        /// It is recommended to use <see cref="MvvmManager.AddMvvmBindingTransient{TView, TViewModel}(IServiceCollection)"/>
-        /// or <see cref="MvvmManager.AddMvvmBindingSingleton{TView, TViewModel}(IServiceCollection)"/> to register View/ViewModel pairs.
+        /// It is recommended to use <see cref="MvvmManager.AddMvvmTransient{TView, TViewModel}(IServiceCollection)"/>
+        /// or <see cref="MvvmManager.AddMvvmHybrid{TView, TViewModel}(IServiceCollection)"/> to register View/ViewModel pairs.
         /// </summary>
         /// <param name="services">The service collection to add application-level services to.</param>
         public virtual void RegisterServices(IServiceCollection services)

@@ -15,7 +15,7 @@ namespace ModuleBExample
 
         public void RegisterServices(IServiceCollection services)
         {
-            services.AddMvvmBindingTransient<ModuleBView, ModuleBViewModel>();
+            services.AddMvvmTransient<ModuleBView, ModuleBViewModel>();
         }
     }
 }

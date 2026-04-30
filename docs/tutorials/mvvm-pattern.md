@@ -18,7 +18,10 @@ Crystal.Avalonia provides two ways to bind Views and ViewModels:
 ```csharp
 public override void RegisterServices(IServiceCollection services)
 {
-    services.AddMvvmBindingTransient<MainView, MainViewModel>();
+    // All three registration modes available:
+    services.AddMvvmTransient<MainView, MainViewModel>();        // New instance each time
+    services.AddMvvmHybrid<SettingsView, SettingsViewModel>(); // View=Transient, VM=Singleton
+    services.AddMvvmSingleton<AboutView, AboutViewModel>();      // Same instance reused
 }
 ```
 
@@ -47,7 +50,10 @@ ViewLocator is a built-in `IDataTemplate` that automatically resolves View from 
 ```csharp
 public override void RegisterServices(IServiceCollection services)
 {
-    services.AddMvvmBindingTransient<MainView, MainViewModel>();
+    // All three registration modes available:
+    services.AddMvvmTransient<MainView, MainViewModel>();        // New instance each time
+    services.AddMvvmHybrid<SettingsView, SettingsViewModel>(); // View=Transient, VM=Singleton
+    services.AddMvvmSingleton<AboutView, AboutViewModel>();      // Same instance reused
 }
 ```
 
@@ -132,12 +138,52 @@ Both `ViewModelLocator` and `ViewLocator` automatically detect when a ViewModel 
 
 No additional XAML or code is required - lifecycle hooks are automatic when the ViewModel implements `ILifecycleAware`.
 
+## Registration Modes
+
+Crystal.Avalonia provides three modes to register View/ViewModel pairs:
+
+| Mode | View Lifetime | ViewModel Lifetime | Use Case |
+|------|---------------|-------------------|----------|
+| `AddMvvmTransient` | New instance each time | New instance each time | Default, for most scenarios |
+| `AddMvvmHybrid` | New instance each time | Same instance shared | Settings, shared state across views |
+| `AddMvvmSingleton` | Same instance reused | Same instance reused | Single-instance views like main window |
+
+### Example: Choosing a Registration Mode
+
+```csharp
+public override void RegisterServices(IServiceCollection services)
+{
+    // Transient: New MainView + MainViewModel each navigation
+    services.AddMvvmTransient<MainView, MainViewModel>();
+
+    // Hybrid: New view instances share the same SettingsViewModel
+    // Useful when multiple views need to share the same state
+    services.AddMvvmHybrid<SettingsView, SettingsViewModel>();
+
+    // Singleton: Single AboutView instance for entire app lifetime
+    services.AddMvvmSingleton<AboutView, AboutViewModel>();
+}
+```
+
+### ViewModel-First Registration
+
+Same registration works with ViewLocator - the mode determines View lifetime:
+
+```csharp
+services.AddMvvmHybrid<MainView, MainViewModel>();
+
+// When you do: ContentControl.Content = MainViewModel (singleton VM)
+// Each time the VM is shown, a new MainView is created but shares the same VM
+```
+
 ## Key Concepts
 
 | Concept | Description |
 |---------|-------------|
 | `ILifecycleAware` | Interface for ViewModel lifecycle callbacks (OnLoadedAsync/OnUnloaded) |
-| `AddMvvmBindingTransient` | Registers View and ViewModel types, builds bidirectional mapping |
+| `AddMvvmTransient` | Both View and ViewModel are Transient (new instance each time) |
+| `AddMvvmHybrid` | View is Transient, ViewModel is Singleton (shared state across views) |
+| `AddMvvmSingleton` | Both View and ViewModel are Singleton (single instance reused) |
 | `ViewModelLocator.AutoWireViewModel` | Attached property for View-first auto-binding |
 | `ViewLocator` | Built-in IDataTemplate for ViewModel-first resolution |
 | `MvvmManager.GetVmType(viewType)` | Looks up ViewModel type for a View type |

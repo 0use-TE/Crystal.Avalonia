@@ -91,7 +91,7 @@ You still need `InitializeComponent()` (that's how Avalonia works), but DataCont
 // In RegisterServices
 public override void RegisterServices(IServiceCollection services)
 {
-    services.AddMvvmBindingTransient<MainView, MainViewModel>();
+    services.AddMvvmTransient<MainView, MainViewModel>();
 }
 ```
 
@@ -118,7 +118,7 @@ public class SettingsModule : IModule
 {
     public void RegisterServices(IServiceCollection services)
     {
-        services.AddMvvmBindingTransient<SettingsView, SettingsViewModel>();
+        services.AddMvvmTransient<SettingsView, SettingsViewModel>();
     }
 
     public void InitializeModule(IServiceProvider serviceProvider)
@@ -188,7 +188,7 @@ MyApp/
 |----------------|-----|
 | Base class | `Application` → `CrystalApplication` |
 | App startup | Override `CreateShell()` instead of `OnFrameworkInitializationCompleted()` |
-| View/VM wiring | Use `AddMvvmBindingTransient` + `ViewModelLocator.AutoWireViewModel="True"` |
+| View/VM wiring | Use `AddMvvmTransient` + `ViewModelLocator.AutoWireViewModel="True"` |
 | Modules | Create classes implementing `IModule` and register via `RegisterModules()` |
 
 ## Next Steps

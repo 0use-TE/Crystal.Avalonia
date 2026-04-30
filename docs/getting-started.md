@@ -71,7 +71,7 @@ public partial class App : CrystalApplication
     public override void RegisterServices(IServiceCollection services)
     {
         // Register View/ViewModel mapping
-        services.AddMvvmBindingTransient<MainView, MainViewModel>();
+        services.AddMvvmTransient<MainView, MainViewModel>();
     }
 
     public override void CreateShell(IServiceProvider serviceProvider)

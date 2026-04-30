@@ -28,7 +28,7 @@ The library is marked as AOT-compatible:
 All generic methods that use reflection (like `Activator.CreateInstance`) are properly annotated:
 
 ```csharp
-public static void AddMvvmBindingTransient<
+public static void AddMvvmTransient<
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>
     (this IServiceCollection services)
@@ -37,6 +37,8 @@ public static void AddMvvmBindingTransient<
     // ...
 }
 ```
+
+Similarly, `AddMvvmHybrid` and `AddMvvmSingleton` also use these annotations to ensure AOT compatibility.
 
 This tells the trimmer exactly what members are needed at runtime, preventing accidental removal.
 
