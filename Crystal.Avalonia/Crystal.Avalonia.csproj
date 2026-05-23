@@ -5,14 +5,10 @@
 		<Nullable>enable</Nullable>
 		<IsAotCompatible>true</IsAotCompatible>
 
-		<PackageVersion>1.1.0</PackageVersion>
-
+		<PackageVersion>1.2.0</PackageVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-
 		<Authors>Ouse</Authors>
-
 		<PackageProjectUrl>https://github.com/0use-TE/Crystal.Avalonia</PackageProjectUrl>
-
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	</PropertyGroup>
 
