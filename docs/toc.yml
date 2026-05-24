@@ -6,14 +6,13 @@
   items:
     - name: Create Your First App
       href: tutorials/create-first-app.md
-    - name: Navigation
-      href: tutorials/navigation.md
-    - name: Dependency Injection
-      href: tutorials/dependency-injection.md
-    - name: Module Development
-      href: tutorials/module-development.md
     - name: MVVM Pattern
       href: tutorials/mvvm-pattern.md
+    - name: Navigation
+      href: tutorials/navigation.md
+    - name: Module Development
+      href: tutorials/module-development.md
+
     - name: Migrate from Avalonia
       href: tutorials/migrate-from-avalonia.md
 - name: AOT Compatibility
