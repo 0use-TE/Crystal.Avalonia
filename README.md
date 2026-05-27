@@ -3,7 +3,7 @@
 A lightweight infrastructure layer for Avalonia UI applications with modular architecture and dependency injection.
 
 [![NuGet](https://img.shields.io/nuget/v/Crystal.Avalonia.svg)](https://www.nuget.org/packages/Crystal.Avalonia)
-[![AOT Compatible](https://img.shields.io/badge/AOT-Compatible-brightgreen)](https://0use.net/Crystal.Avalonia/docs/aot-compatibility.html)
+[![AOT Compatible](https://img.shields.io/badge/AOT-Compatible-brightgreen)](https://0use.net/Crystal.Avalonia/docs/v2.0/aot-compatibility.html)
 
 ## What It Provides
 
@@ -40,9 +40,10 @@ dotnet run
 
 ## Documentation
 
-- [Introduction](https://0use.net/Crystal.Avalonia/docs/introduction.html) - Overview of Crystal.Avalonia
-- [Getting Started](https://0use.net/Crystal.Avalonia/docs/getting-started.html) - Step-by-step tutorial
-- [API Documentation](https://0use.net/Crystal.Avalonia/api/) - Generated API reference
+- [v2.0 (Current)](https://0use.net/Crystal.Avalonia/docs/v2.0/introduction.html)
+- [v1.2 (Legacy)](https://0use.net/Crystal.Avalonia/docs/v1.2/introduction.html)
+- [Upgrade from v1.2](https://0use.net/Crystal.Avalonia/docs/v2.0/upgrade-from-1.2.html)
+- [API Reference](https://0use.net/Crystal.Avalonia/api/) — v2.0+
 
 ## AOT & Trimming Support
 
@@ -52,7 +53,7 @@ Crystal.Avalonia is fully compatible with .NET trimming and AOT compilation:
 - Properly annotated `[DynamicallyAccessedMembers]` for reflection-heavy operations
 - No dynamic assembly scanning or runtime type discovery
 
-See [AOT Compatibility](https://0use.net/Crystal.Avalonia/docs/aot-compatibility.html) for more details.
+See [AOT Compatibility](https://0use.net/Crystal.Avalonia/docs/v2.0/aot-compatibility.html) for more details.
 
 ## License
 

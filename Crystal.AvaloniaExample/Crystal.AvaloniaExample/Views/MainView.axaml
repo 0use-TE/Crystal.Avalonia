@@ -1,24 +1,20 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:moduleaexample="using:ModuleAExample"
-			 xmlns:vm="using:Crystal.AvaloniaExample.ViewModels"
-			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 x:Class="Crystal.AvaloniaExample.Views.MainView"
-			 x:DataType="vm:MainViewModel"
-			 ViewModelLocator.AutoWireViewModel="True"
-			 >
-	<Design.DataContext>
-		<!-- This only sets the DataContext for the previewer in an IDE,
-		to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-		<vm:MainViewModel />
-	</Design.DataContext>
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Crystal.AvaloniaExample.ViewModels"
+             xmlns:views="using:Crystal.AvaloniaExample.Views"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400"
+             x:Class="Crystal.AvaloniaExample.Views.MainView"
+             x:DataType="vm:MainViewModel"
+             ViewModelLocator.AutoWireViewModel="True">
+    <StackPanel Spacing="16" Margin="24" VerticalAlignment="Center">
+        <TextBlock Text="{Binding Greeting}" FontSize="22" HorizontalAlignment="Center"/>
 
-	<StackPanel VerticalAlignment="Center">
-		<TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<ContentControl Content="{Binding OuseViewModel}" />
-		<moduleaexample:ModuleAView HorizontalAlignment="Center"></moduleaexample:ModuleAView>
-		<ContentControl Content="{Binding ModuleBViewModel}"  HorizontalAlignment="Center"></ContentControl>
-	</StackPanel>
+        <ContentControl Content="{Binding OuseViewModel}"/>
+
+        <views:ModuleAView HorizontalAlignment="Stretch"/>
+
+        <ContentControl Content="{Binding ModuleBViewModel}"/>
+    </StackPanel>
 </UserControl>

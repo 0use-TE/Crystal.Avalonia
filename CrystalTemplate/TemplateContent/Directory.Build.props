@@ -1,0 +1,7 @@
+<Project>
+  <!-- Use project reference when building inside the repo; NuGet package when installed via dotnet new -->
+  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\Crystal.Avalonia\Crystal.Avalonia.csproj')">
+    <PackageReference Remove="Crystal.Avalonia" />
+    <ProjectReference Include="$(MSBuildThisFileDirectory)..\..\Crystal.Avalonia\Crystal.Avalonia.csproj" />
+  </ItemGroup>
+</Project>

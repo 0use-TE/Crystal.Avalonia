@@ -1,23 +1,21 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using ModuleAExample;
-using ModuleBExample;
-using ShareContract;
 
-namespace Crystal.AvaloniaExample.ViewModels
+namespace Crystal.AvaloniaExample.ViewModels;
+
+internal partial class MainViewModel : ViewModelBase
 {
-    internal partial class MainViewModel : ViewModelBase
-    {
-        [ObservableProperty]
-        private string _greeting = "I am from MainViewModel";
-        [ObservableProperty]
-        private ViewModelBase _ouseViewModel;
-        [ObservableProperty]
-        private ViewModelBase _moduleBViewModel;
+    [ObservableProperty]
+    private string _greeting = "Crystal.Avalonia Example";
 
-        public MainViewModel(OuseViewModel ouseViewModel, ModuleBViewModel moduleBViewModel)
-        {
-            _ouseViewModel = ouseViewModel;
-            _moduleBViewModel = moduleBViewModel;
-        }
+    [ObservableProperty]
+    private OuseViewModel _ouseViewModel;
+
+    [ObservableProperty]
+    private ModuleBViewModel _moduleBViewModel;
+
+    public MainViewModel(OuseViewModel ouseViewModel, ModuleBViewModel moduleBViewModel)
+    {
+        _ouseViewModel = ouseViewModel;
+        _moduleBViewModel = moduleBViewModel;
     }
 }

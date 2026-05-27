@@ -12,8 +12,10 @@ namespace Crystal.Avalonia
     /// <remarks>
     /// After registering View/ViewModel pairs using this class, the system will automatically:
     /// <list type="bullet">
+    ///   <item>Register the ViewModel in DI (<see cref="AddMvvmTransient{TView, TViewModel}(IServiceCollection)"/> or <see cref="AddMvvmSingleton{TView, TViewModel}(IServiceCollection)"/>)</item>
+    ///   <item>Record the View ↔ ViewModel type mapping (<typeparamref name="TView"/> is not registered in DI)</item>
     ///   <item>Inject the DataContext via <see cref="ViewModelLocator"/> when <see cref="CrystalOptions.EnableViewModelLocator"/> is enabled</item>
-    ///   <item>Resolve the corresponding View via <see cref="ViewLocator"/> based on the ViewModel type</item>
+    ///   <item>Instantiate the corresponding View via <see cref="ViewLocator"/> when using ViewModel-first binding</item>
     /// </list>
     /// </remarks>
     public static class MvvmManager
@@ -34,8 +36,9 @@ namespace Crystal.Avalonia
         }
 
         /// <summary>
-        /// Registers a View and ViewModel pair as Transient.
-        /// Both the View and ViewModel are created as new instances each time they are resolved.
+        /// Registers a ViewModel as Transient in DI and records the View ↔ ViewModel mapping.
+        /// Only <typeparamref name="TViewModel"/> is added to DI via <c>services.AddTransient&lt;TViewModel&gt;()</c>.
+        /// <typeparamref name="TView"/> is used for mapping only; views are created by XAML or <see cref="ViewLocator"/>.
         /// </summary>
         /// <typeparam name="TView">The View type, must inherit from <see cref="Control"/>.</typeparam>
         /// <typeparam name="TViewModel">The ViewModel type, can be any class.</typeparam>
@@ -49,37 +52,14 @@ namespace Crystal.Avalonia
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(this IServiceCollection services)
             where TView : Control where TViewModel : class
         {
-            services.AddTransient<TView>();
             services.AddTransient<TViewModel>();
             RegisterMapping(typeof(TView), typeof(TViewModel));
         }
 
         /// <summary>
-        /// Registers a View and ViewModel pair as Hybrid.
-        /// The View is Transient (new instance each time), while the ViewModel is Singleton (same instance reused).
-        /// Useful when you want the ViewModel to maintain state across multiple View instances.
-        /// </summary>
-        /// <typeparam name="TView">The View type, must inherit from <see cref="Control"/>.</typeparam>
-        /// <typeparam name="TViewModel">The ViewModel type, can be any class.</typeparam>
-        /// <param name="services">The service collection.</param>
-        /// <example>
-        /// <code>
-        /// services.AddMvvmHybrid&lt;SettingsView, SettingsViewModel&gt;();
-        /// </code>
-        /// </example>
-        public static void AddMvvmHybrid<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TView,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(this IServiceCollection services)
-            where TView : Control where TViewModel : class
-        {
-            services.AddTransient<TView>();
-            services.AddSingleton<TViewModel>();
-            RegisterMapping(typeof(TView), typeof(TViewModel));
-        }
-
-        /// <summary>
-        /// Registers a View and ViewModel pair as Singleton.
-        /// Both the View and ViewModel are created once and reused for the lifetime of the application.
-        /// Use this when the View and ViewModel represent a single, long-lived instance.
+        /// Registers a ViewModel as Singleton in DI and records the View ↔ ViewModel mapping.
+        /// Only <typeparamref name="TViewModel"/> is added to DI via <c>services.AddSingleton&lt;TViewModel&gt;()</c>.
+        /// <typeparamref name="TView"/> is used for mapping only; views are created by XAML or <see cref="ViewLocator"/>.
         /// </summary>
         /// <typeparam name="TView">The View type, must inherit from <see cref="Control"/>.</typeparam>
         /// <typeparam name="TViewModel">The ViewModel type, can be any class.</typeparam>
@@ -93,7 +73,6 @@ namespace Crystal.Avalonia
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(this IServiceCollection services)
             where TView : Control where TViewModel : class
         {
-            services.AddSingleton<TView>();
             services.AddSingleton<TViewModel>();
             RegisterMapping(typeof(TView), typeof(TViewModel));
         }
@@ -103,6 +82,8 @@ namespace Crystal.Avalonia
         /// </summary>
         /// <param name="vmType">The ViewModel type.</param>
         /// <returns>The corresponding View type, or <c>null</c> if not found.</returns>
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+        [UnconditionalSuppressMessage("Trimming", "IL2073", Justification = "View types are registered via AddMvvm* with PublicConstructors annotation.")]
         public static Type? GetViewType(Type vmType) => _vmToView.GetValueOrDefault(vmType);
 
         /// <summary>

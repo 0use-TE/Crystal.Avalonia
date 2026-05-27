@@ -1,4 +1,6 @@
 using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -29,12 +31,12 @@ namespace Crystal.Avalonia
     ///     public override void RegisterServices(IServiceCollection services)
     ///     {
     ///         services.AddMvvmTransient&lt;MainView, MainViewModel&gt;();
+    ///         services.AddTransient&lt;MainWindow&gt;();
     ///     }
     ///
     ///     public override void CreateShell(IServiceProvider serviceProvider)
     ///     {
-    ///         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-    ///             desktop.MainWindow = new MainWindow();
+    ///         CreateShellFromDi&lt;MainWindow, MainView&gt;(serviceProvider);
     ///     }
     /// }
     /// </code>
@@ -87,7 +89,7 @@ namespace Crystal.Avalonia
         /// <summary>
         /// Override this method to register application-level services.
         /// It is recommended to use <see cref="MvvmManager.AddMvvmTransient{TView, TViewModel}(IServiceCollection)"/>
-        /// or <see cref="MvvmManager.AddMvvmHybrid{TView, TViewModel}(IServiceCollection)"/> to register View/ViewModel pairs.
+        /// or <see cref="MvvmManager.AddMvvmSingleton{TView, TViewModel}(IServiceCollection)"/> to register View/ViewModel pairs.
         /// </summary>
         /// <param name="services">The service collection to add application-level services to.</param>
         public virtual void RegisterServices(IServiceCollection services)
@@ -100,6 +102,25 @@ namespace Crystal.Avalonia
         /// <param name="serviceProvider">The service provider, can be used to resolve services registered in <see cref="RegisterServices"/> or modules.</param>
         public virtual void CreateShell(IServiceProvider serviceProvider)
         {
+        }
+
+        /// <summary>
+        /// Resolves the shell from DI based on <see cref="ApplicationLifetime"/>.
+        /// Register shell types explicitly, e.g. <c>services.AddTransient&lt;MainWindow&gt;()</c>.
+        /// </summary>
+        /// <typeparam name="TWindow">Desktop main window type.</typeparam>
+        /// <typeparam name="TView">Single-view main view type.</typeparam>
+        /// <param name="serviceProvider">The service provider.</param>
+        protected void CreateShellFromDi<TWindow, TView>(IServiceProvider serviceProvider)
+            where TWindow : Window
+            where TView : Control
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                desktop.MainWindow = serviceProvider.GetRequiredService<TWindow>();
+            else if (ApplicationLifetime is IActivityApplicationLifetime factory)
+                factory.MainViewFactory = () => serviceProvider.GetRequiredService<TView>();
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime single)
+                single.MainView = serviceProvider.GetRequiredService<TView>();
         }
     }
 }

@@ -1,20 +1,6 @@
-- name: Introduction
-  href: introduction.md
-- name: Getting Started
-  href: getting-started.md
-- name: Tutorials
-  items:
-    - name: Create Your First App
-      href: tutorials/create-first-app.md
-    - name: MVVM Pattern
-      href: tutorials/mvvm-pattern.md
-    - name: Navigation
-      href: tutorials/navigation.md
-    - name: Module Development
-      href: tutorials/module-development.md
-
-    - name: Migrate from Avalonia
-      href: tutorials/migrate-from-avalonia.md
-- name: AOT Compatibility
-  href: aot-compatibility.md
-- name: API Reference
+- name: v2.0 (Current)
+  href: v2.0/
+  topicHref: v2.0/introduction.md
+- name: v1.2 (Legacy)
+  href: v1.2/
+  topicHref: v1.2/introduction.md

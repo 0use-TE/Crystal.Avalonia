@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Crystal.Avalonia
@@ -18,19 +15,11 @@ namespace Crystal.Avalonia
     /// <see cref="System.Diagnostics.Trace"/>.
     /// </remarks>
     /// <example>
-    /// A ViewModel that initializes data on load and cleans up on unload:
     /// <code>
     /// public class MyViewModel : ObservableObject, ILifecycleAware
     /// {
-    ///     public async Task OnLoadedAsync()
-    ///     {
-    ///         await LoadDataAsync();
-    ///     }
-    ///
-    ///     public async Task OnUnloaded()
-    ///     {
-    ///         await SaveStateAsync();
-    ///     }
+    ///     public async Task OnLoadedAsync() => await LoadDataAsync();
+    ///     public async Task OnUnloaded() => await SaveStateAsync();
     /// }
     /// </code>
     /// </example>
@@ -38,14 +27,11 @@ namespace Crystal.Avalonia
     {
         /// <summary>
         /// Called once when the View is loaded and ready for interaction.
-        /// Use for async initialization like loading data, starting animations,
-        /// or subscribing to events.
         /// </summary>
         Task OnLoadedAsync();
 
         /// <summary>
         /// Called once when the View is unloaded and no longer part of the visual tree.
-        /// Use for cleanup like releasing resources, saving state, or canceling operations.
         /// </summary>
         Task OnUnloaded();
     }

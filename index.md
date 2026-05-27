@@ -4,7 +4,7 @@ _layout: landing
 
 # Crystal.Avalonia
 
-A lightweight, AOT-friendly MVVM framework for Avalonia UI applications.
+A lightweight infrastructure layer for Avalonia UI applications.
 
 ## Quick Start
 
@@ -16,10 +16,13 @@ cd MyApp && dotnet run
 
 ## Documentation
 
-- [Introduction](docs/introduction.md) - Overview of Crystal.Avalonia
-- [Getting Started](docs/getting-started.md) - Step-by-step tutorial
-- [Migrate from Avalonia](docs/tutorials/migrate-from-avalonia.md) - Convert official template
+| Version | Link |
+|---------|------|
+| **v2.0 (Current)** | [Documentation](docs/v2.0/introduction.md) |
+| **v1.2 (Legacy)** | [Documentation](docs/v1.2/introduction.md) |
+
+- [Upgrade from v1.2](docs/v2.0/upgrade-from-1.2.md)
 
 ## API Reference
 
-- [API Documentation](https://0use.net/Crystal.Avalonia/api/Crystal.Avalonia.md) - Generated API reference
+- [API Reference](api/Crystal.Avalonia.html)

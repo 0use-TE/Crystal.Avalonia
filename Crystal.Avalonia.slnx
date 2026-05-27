@@ -25,11 +25,6 @@
       <Deploy />
     </Project>
     <Project Path="Crystal.AvaloniaExample/Crystal.AvaloniaExample/Crystal.AvaloniaExample.csproj" Id="e6a6d13c-2025-49f7-baf8-15e15534bde9" />
-    <Project Path="Crystal.AvaloniaExample/ShareBaseClass/ShareContract.csproj" />
-  </Folder>
-  <Folder Name="/Example/Modules/">
-    <Project Path="Crystal.AvaloniaExample/ModuleA/ModuleAExample.csproj" />
-    <Project Path="Crystal.AvaloniaExample/ModuleB/ModuleBExample.csproj" />
   </Folder>
   <Folder Name="/解决方案项/">
     <File Path="Directory.Packages.props" />
