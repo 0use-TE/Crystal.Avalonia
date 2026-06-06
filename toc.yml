@@ -3,7 +3,7 @@
 - name: Documentation
   dropdown: true
   items:
-    - name: v2.0 (Current)
+    - name: 2.0.1 (Current)
       href: docs/v2.0/
     - name: v1.2 (Legacy)
       href: docs/v1.2/

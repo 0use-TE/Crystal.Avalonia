@@ -18,7 +18,7 @@ cd MyApp && dotnet run
 
 | Version | Link |
 |---------|------|
-| **v2.0 (Current)** | [Documentation](docs/v2.0/introduction.md) |
+| **2.0.1 (Current)** | [Documentation](docs/v2.0/introduction.md) |
 | **v1.2 (Legacy)** | [Documentation](docs/v1.2/introduction.md) |
 
 - [Upgrade Guide](docs/v2.0/upgrade.md)
