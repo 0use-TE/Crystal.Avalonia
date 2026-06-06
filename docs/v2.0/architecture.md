@@ -106,20 +106,26 @@ Used by both `ViewModelLocator` and `ViewLocator`.
 
 ## Shell Creation
 
-Shell views (`MainWindow`, `MainView`) are **not** registered by `AddMvvm*`. Register manually:
+Shell views (`MainWindow`, `MainView`) are **not** in DI — created with `new`:
 
 ```csharp
-services.AddTransient<MainWindow>();
-services.AddTransient<MainView>();
+public override void CreateShell(IServiceProvider sp)
+{
+    CreateShell<MainWindow, MainView>();
+}
 ```
 
-`CreateShellFromDi<TWindow, TView>(sp)` resolves by `ApplicationLifetime`:
+`CreateShell<TWindow, TView>()` assigns by `ApplicationLifetime`:
 
 | Lifetime | Action |
 |----------|--------|
-| `IClassicDesktopStyleApplicationLifetime` | `desktop.MainWindow = sp.GetRequiredService<TWindow>()` |
-| `ISingleViewApplicationLifetime` | `single.MainView = sp.GetRequiredService<TView>()` |
-| `IActivityApplicationLifetime` | `factory.MainViewFactory = () => sp.GetRequiredService<TView>()` |
+| `IClassicDesktopStyleApplicationLifetime` | `desktop.MainWindow = new TWindow()` |
+| `ISingleViewApplicationLifetime` | `single.MainView = new TView()` |
+| `IActivityApplicationLifetime` | `factory.MainViewFactory = () => new TView()` |
+
+Child content ViewModels are wired when the View loads (`AutoWireViewModel="True"`).
+
+If a shell **does** need constructor injection, override `CreateShell` and resolve manually — that is the exception, not the default.
 
 ## Design Decisions
 
@@ -147,9 +153,9 @@ Only two modes — no Hybrid. Choose per ViewModel:
 | View + ViewModel in DI | ViewModel only in DI |
 | `AddMvvmHybrid` | Removed |
 | ViewLocator resolves View from DI | `Activator.CreateInstance` |
-| `new MainWindow()` in CreateShell | `CreateShellFromDi` + shell in DI |
+| `new MainWindow()` in CreateShell | `CreateShell<MainWindow, MainView>()` (same idea, helper method) |
 
-See [Upgrade from v1.2](upgrade-from-1.2.md).
+See [Upgrade Guide](upgrade.md).
 
 ## AOT & Trimming
 

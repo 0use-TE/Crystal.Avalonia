@@ -60,13 +60,11 @@ public class App : CrystalApplication  // Change base class
     public override void RegisterServices(IServiceCollection services)
     {
         services.AddMvvmTransient<MainView, MainViewModel>();
-        services.AddTransient<MainWindow>();
-        services.AddTransient<MainView>();
     }
 
     public override void CreateShell(IServiceProvider serviceProvider)
     {
-        CreateShellFromDi<MainWindow, MainView>(serviceProvider);
+        CreateShell<MainWindow, MainView>();
     }
 }
 ```
@@ -190,7 +188,7 @@ MyApp/
 | Base class | `Application` → `CrystalApplication` |
 | App startup | Override `CreateShell()` instead of `OnFrameworkInitializationCompleted()` |
 | View/VM wiring | `AddMvvmTransient` + `AutoWireViewModel="True"` |
-| Shell | `AddTransient<MainWindow>()` + `CreateShellFromDi` |
+| Shell | `CreateShell<MainWindow, MainView>()` |
 | Modules | Create classes implementing `IModule` and register via `RegisterModules()` |
 
 ## Next Steps

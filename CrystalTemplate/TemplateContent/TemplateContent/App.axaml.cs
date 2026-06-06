@@ -15,13 +15,11 @@ namespace TemplateContent
         public override void RegisterServices(IServiceCollection services)
         {
             services.AddMvvmTransient<MainView, MainViewModel>();
-            services.AddTransient<MainWindow>();
-            services.AddTransient<MainView>();
         }
 
         public override void CreateShell(IServiceProvider serviceProvider)
         {
-            CreateShellFromDi<MainWindow, MainView>(serviceProvider);
+            CreateShell<MainWindow, MainView>();
         }
     }
 }

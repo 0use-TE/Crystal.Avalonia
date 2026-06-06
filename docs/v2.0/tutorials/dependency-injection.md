@@ -68,11 +68,10 @@ public override void RegisterServices(IServiceCollection services)
     services.AddSingleton<INavigationService, NavigationService>();
 
     services.AddMvvmTransient<MainView, MainViewModel>();
-    services.AddTransient<MainWindow>();
 }
 ```
 
-`AddMvvm*` registers ViewModel in DI + View mapping. Shell views register separately.
+`AddMvvm*` registers ViewModel in DI + View mapping. Shell: `CreateShell<MainWindow, MainView>()`.
 
 ### View/ViewModel Registration
 

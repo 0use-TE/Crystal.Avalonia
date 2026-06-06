@@ -36,7 +36,7 @@ public partial class CounterViewModel : ObservableObject
 
 ```csharp
 services.AddMvvmTransient<CounterView, CounterViewModel>();
-services.AddTransient<MainWindow>();
+// MainWindow: CreateShell<MainWindow, MainView>() in CreateShell
 ```
 
 ```bash

@@ -42,6 +42,8 @@ dotnet run
 
 - [v2.0 (Current)](https://0use.net/Crystal.Avalonia/docs/v2.0/introduction.html)
 - [v1.2 (Legacy)](https://0use.net/Crystal.Avalonia/docs/v1.2/introduction.html)
+- [Upgrade Guide](https://0use.net/Crystal.Avalonia/docs/v2.0/upgrade.html)
+- [Upgrade from 2.0.0](https://0use.net/Crystal.Avalonia/docs/v2.0/upgrade-from-2.0.0.html)
 - [Upgrade from v1.2](https://0use.net/Crystal.Avalonia/docs/v2.0/upgrade-from-1.2.html)
 - [API Reference](https://0use.net/Crystal.Avalonia/api/) — v2.0+
 

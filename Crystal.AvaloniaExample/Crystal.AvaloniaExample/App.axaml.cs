@@ -17,12 +17,10 @@ public partial class App : CrystalApplication
         services.AddMvvmTransient<OuseView, OuseViewModel>();
         services.AddMvvmTransient<ModuleAView, ModuleAViewModel>();
         services.AddMvvmTransient<ModuleBView, ModuleBViewModel>();
-        services.AddTransient<MainWindow>();
-        services.AddTransient<MainView>();
     }
 
     public override void CreateShell(IServiceProvider serviceProvider)
     {
-        CreateShellFromDi<MainWindow, MainView>(serviceProvider);
+        CreateShell<MainWindow, MainView>();
     }
 }

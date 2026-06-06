@@ -16,11 +16,10 @@ services.AddMvvmTransient<MainView, MainViewModel>();
 services.AddMvvmSingleton<AboutView, AboutViewModel>();
 ```
 
-Shell views (`MainWindow`, etc.) are **not** included — register separately:
+Shell views (`MainWindow`, etc.) are **not** in DI — use `CreateShell`:
 
 ```csharp
-services.AddTransient<MainWindow>();
-CreateShellFromDi<MainWindow, MainView>(serviceProvider);
+CreateShell<MainWindow, MainView>();
 ```
 
 ## ILifecycleAware (Optional)
@@ -43,7 +42,7 @@ public partial class MainViewModel : ObservableObject, ILifecycleAware
 |-----|-------------|
 | `AddMvvmTransient<TView, TViewModel>()` | `AddTransient<TViewModel>()` + mapping |
 | `AddMvvmSingleton<TView, TViewModel>()` | `AddSingleton<TViewModel>()` + mapping |
-| `CreateShellFromDi<TWindow, TView>(sp)` | Resolve shell from DI by platform lifetime |
+| `CreateShell<TWindow, TView>()` | Create shell with `new` by platform lifetime |
 | `ILifecycleAware` | Optional load/unload hooks |
 
 ## Further Reading

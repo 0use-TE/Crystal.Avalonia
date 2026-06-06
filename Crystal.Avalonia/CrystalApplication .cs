@@ -31,12 +31,11 @@ namespace Crystal.Avalonia
     ///     public override void RegisterServices(IServiceCollection services)
     ///     {
     ///         services.AddMvvmTransient&lt;MainView, MainViewModel&gt;();
-    ///         services.AddTransient&lt;MainWindow&gt;();
     ///     }
     ///
     ///     public override void CreateShell(IServiceProvider serviceProvider)
     ///     {
-    ///         CreateShellFromDi&lt;MainWindow, MainView&gt;(serviceProvider);
+    ///         CreateShell&lt;MainWindow, MainView&gt;();
     ///     }
     /// }
     /// </code>
@@ -105,22 +104,22 @@ namespace Crystal.Avalonia
         }
 
         /// <summary>
-        /// Resolves the shell from DI based on <see cref="ApplicationLifetime"/>.
-        /// Register shell types explicitly, e.g. <c>services.AddTransient&lt;MainWindow&gt;()</c>.
+        /// Creates the shell based on <see cref="ApplicationLifetime"/>.
+        /// Shell views are not resolved from DI; use <c>new</c> (no constructor injection expected).
+        /// Child ViewModels are wired via <see cref="ViewModelLocator"/> when <c>AutoWireViewModel="True"</c>.
         /// </summary>
         /// <typeparam name="TWindow">Desktop main window type.</typeparam>
         /// <typeparam name="TView">Single-view main view type.</typeparam>
-        /// <param name="serviceProvider">The service provider.</param>
-        protected void CreateShellFromDi<TWindow, TView>(IServiceProvider serviceProvider)
-            where TWindow : Window
-            where TView : Control
+        protected void CreateShell<TWindow, TView>()
+            where TWindow : Window, new()
+            where TView : Control, new()
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-                desktop.MainWindow = serviceProvider.GetRequiredService<TWindow>();
+                desktop.MainWindow = new TWindow();
             else if (ApplicationLifetime is IActivityApplicationLifetime factory)
-                factory.MainViewFactory = () => serviceProvider.GetRequiredService<TView>();
+                factory.MainViewFactory = () => new TView();
             else if (ApplicationLifetime is ISingleViewApplicationLifetime single)
-                single.MainView = serviceProvider.GetRequiredService<TView>();
+                single.MainView = new TView();
         }
     }
 }

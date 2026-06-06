@@ -1,4 +1,4 @@
-# Introduction (v2.0)
+# Introduction (v2.0 — 2.0.1)
 
 Crystal.Avalonia is a lightweight infrastructure layer for Avalonia applications:
 
@@ -31,19 +31,20 @@ No ViewModel base classes, commands, or bindings — use CommunityToolkit.Mvvm, 
 
 ```csharp
 services.AddMvvmTransient<MainView, MainViewModel>(); // ViewModel → DI, View → mapping only
-services.AddTransient<MainWindow>();                  // Shell views → register manually in DI
+// Shell: CreateShell<MainWindow, MainView>() — not from DI
 ```
 
 | Component | Role |
 |-----------|------|
 | `CrystalApplication` | App base with module/DI bootstrap |
+| `CreateShell<TWindow, TView>()` | Shell via `new`; ViewModel wired by ViewModelLocator |
 | `AddMvvmTransient` / `AddMvvmSingleton` | ViewModel lifetime + View mapping |
 | `ViewModelLocator` | View-first DataContext injection |
 | `ViewLocator` | ViewModel-first View creation |
 
 ## Next Steps
 
+- [Upgrade Guide](upgrade.md) — migrate from 2.0.0 or v1.2
 - [Architecture](architecture.md) — how it works internally
-- [Upgrade from v1.2](upgrade-from-1.2.md)
 - [Getting Started](getting-started.md)
 - [MVVM Pattern](tutorials/mvvm-pattern.md)
