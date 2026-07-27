@@ -1,0 +1,185 @@
+# 架构原理
+
+Crystal.Avalonia 的内部工作方式。用法请见 [快速开始](getting-started.md) 与 [教程](tutorials/mvvm-pattern.md)。
+
+<a id="bootstrap-pipeline"></a>
+## 启动流程
+
+`CrystalApplication.OnFrameworkInitializationCompleted()` 按以下顺序执行：
+
+```
+RegisterServices(services)          ← 应用级 DI
+    ↓
+创建并注册 ModuleManager
+RegisterModules(moduleRegistrar)    ← 应用注册 IModule
+    ↓
+moduleManager.InitService(services) ← 各 module.RegisterServices()
+    ↓
+services.BuildServiceProvider()
+    ↓
+将 ViewLocator 加入 DataTemplates  ← 若 EnableViewModelLocator
+    ↓
+moduleManager.InitModules(sp)       ← 各 module.InitializeModule()
+    ↓
+MvvmManager.ServiceProvider = sp
+    ↓
+CreateShell(sp)                     ← 创建 MainWindow / MainView
+```
+
+要点：
+
+- **先 App 后模块** — `App.RegisterServices` 在 `InitService` 之前执行
+- **单一 `ServiceProvider`** — 只构建一次；模块在容器就绪后初始化
+- **`MvvmManager.ServiceProvider`** — 在 `CreateShell` 前赋值，供 `ViewModelLocator` 使用
+
+<a id="module-system"></a>
+## 模块系统
+
+`ModuleManager` 实现 `IModuleRegistrar`：
+
+| 阶段 | 方法 | 时机 |
+|------|------|------|
+| 注册 | `RegisterModule<T>()` | 构建容器前；`Activator.CreateInstance<T>()` |
+| 服务 | `IModule.RegisterServices()` | `InitService` 期间，`BuildServiceProvider` 之前 |
+| 初始化 | `IModule.InitializeModule()` | 容器构建后，`InitModules` 期间 |
+
+模块是普通类 —— 无程序集扫描。每个模块在 `RegisterModules` 中显式注册。
+
+<a id="mvvm-wiring"></a>
+## MVVM 绑定
+
+### 类型映射（`MvvmManager`）
+
+`AddMvvmTransient` / `AddMvvmSingleton` 做两件事：
+
+1. 仅将 **ViewModel** 注册进 DI（`AddTransient` / `AddSingleton`）
+2. 在静态字典中记录 View ↔ ViewModel 映射（`_viewToVm`、`_vmToView`）
+
+`TView` **不会**加入 `IServiceCollection`。
+
+### View-First（`ViewModelLocator`）
+
+附加属性 `AutoWireViewModel="True"` 在变更时触发：
+
+```
+XAML 加载 View
+    ↓
+ViewModelLocator 读取 view.GetType()
+    ↓
+MvvmManager.GetVmType(viewType)
+    ↓
+ServiceProvider.GetRequiredService(vmType)
+    ↓
+view.DataContext = viewModel
+    ↓
+ViewLifecycleBinder.AttachIfNeeded()
+```
+
+设计时模式（`Design.IsDesignMode`）会跳过。
+
+### ViewModel-First（`ViewLocator`）
+
+注册为 `Application.DataTemplates` 上的 `IDataTemplate`：
+
+```
+ContentControl.Content = viewModel
+    ↓
+ViewLocator.Match(vm) — 是否有映射？
+    ↓
+MvvmManager.GetViewType(vmType)
+    ↓
+Activator.CreateInstance(viewType)   ← 不从 DI
+    ↓
+view.DataContext = viewModel
+    ↓
+ViewLifecycleBinder.AttachIfNeeded()
+```
+
+仅匹配已注册映射的类型。
+
+### 生命周期（`ViewLifecycleBinder`）
+
+当 DataContext 实现 `ILifecycleAware`：
+
+- 订阅 View `Loaded` → 调用一次 `OnLoadedAsync()` 后取消订阅
+- 订阅 View `Unloaded` → 调用一次 `OnUnloaded()` 后取消订阅
+- 异常捕获并写入 `Trace`
+
+`ViewModelLocator` 与 `ViewLocator` 都会使用。
+
+## Shell 创建
+
+Shell 视图（`MainWindow`、`MainView`）**不进 DI** — 用 `new` 创建：
+
+```csharp
+public override void CreateShell(IServiceProvider sp)
+{
+    CreateShell<MainWindow, MainView>();
+}
+```
+
+`CreateShell<TWindow, TView>()` 按 `ApplicationLifetime` 赋值：
+
+| Lifetime | 行为 |
+|----------|------|
+| `IClassicDesktopStyleApplicationLifetime` | `desktop.MainWindow = new TWindow()` |
+| `ISingleViewApplicationLifetime` | `single.MainView = new TView()` |
+| `IActivityApplicationLifetime` | `factory.MainViewFactory = () => new TView()` |
+
+子内容 ViewModel 在 View 加载时注入（`AutoWireViewModel="True"`）。
+
+若 Shell **确实**需要构造注入，可重写 `CreateShell` 手动解析 —— 这是例外，不是默认。
+
+<a id="design-decisions"></a>
+## 设计决策
+
+### 为什么 View 不进 DI
+
+| | View | ViewModel |
+|---|------|-----------|
+| 创建方式 | XAML 解析 / `Activator.CreateInstance` | DI 容器 |
+| 生命周期 | 绑定视觉树 | Transient 或 Singleton |
+| 构造依赖 | 通常无（code-behind 精简） | 服务、仓储等 |
+
+View 是 UI 产物；ViewModel 承载业务逻辑与依赖。View 不进 DI 可避免容器管理 UI 生命周期，并简化 AOT 裁剪。
+
+### Transient vs Singleton
+
+仅两种模式 —— 无 Hybrid。按 ViewModel 选择：
+
+- **Transient** — 每次导航新实例（页面常见）
+- **Singleton** — 共享状态（设置、会话）
+
+### v1.2 → v2.0 变更
+
+| v1.2 | v2.0 |
+|------|------|
+| View + ViewModel 都在 DI | 仅 ViewModel 在 DI |
+| `AddMvvmHybrid` | 已移除 |
+| ViewLocator 从 DI 取 View | `Activator.CreateInstance` |
+| CreateShell 中 `new MainWindow()` | `CreateShell<MainWindow, MainView>()`（同一思路，辅助方法） |
+
+见 [升级指南](upgrade.md)。
+
+<a id="aot--trimming"></a>
+## AOT 与裁剪
+
+Crystal.Avalonia 避免运行时程序集扫描。类型发现均为编译期泛型：
+
+- `AddMvvmTransient<TView, TViewModel>` — 通过 `[DynamicallyAccessedMembers(PublicConstructors)]` 保留构造函数
+- `ModuleManager.RegisterModule<TModule>()` — 同上
+- `ViewLocator.CreateView` — 映射字典中的 View 类型已注解
+
+库设置 `IsAotCompatible=true`。发布命令见 [AOT 兼容性](aot-compatibility.md)。
+
+## 组件关系
+
+```
+CrystalApplication
+├── ModuleManager ────────── IModule.RegisterServices / InitializeModule
+├── MvvmManager ──────────── 映射字典 + AddMvvm* 扩展
+├── ViewModelLocator ─────── 附加属性 → DI 解析 ViewModel
+├── ViewLocator ──────────── IDataTemplate → Activator.CreateInstance View
+├── ViewLifecycleBinder ──── ILifecycleAware 钩子
+└── CrystalOptions ───────── EnableViewModelLocator（默认 true）
+```

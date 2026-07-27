@@ -33,10 +33,11 @@
       }
     ],
     "output": "_site",
-    "template": ["default", "modern"],
+    "template": ["default", "modern", "docfx/template"],
     "globalMetadata": {
       "_appName": "Crystal.Avalonia",
       "_appTitle": "Crystal.Avalonia Documentation",
+      "_appBasePath": "/Crystal.Avalonia/",
       "_enableSearch": true,
       "pdf": true,
       "_appFooter": "Crystal.Avalonia © 2024"

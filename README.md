@@ -2,6 +2,8 @@
 
 A lightweight infrastructure layer for Avalonia UI applications with modular architecture and dependency injection.
 
+Thanks to the community, Crystal.Avalonia is feature-complete and mature enough for commercial use. We appreciate your support!
+
 [![NuGet](https://img.shields.io/nuget/v/Crystal.Avalonia.svg)](https://www.nuget.org/packages/Crystal.Avalonia)
 [![AOT Compatible](https://img.shields.io/badge/AOT-Compatible-brightgreen)](https://0use.net/Crystal.Avalonia/docs/v2.0/aot-compatibility.html)
 

@@ -1,0 +1,21 @@
+.crystal-switchers {
+  margin-left: auto;
+  margin-right: 0.75rem;
+}
+
+.crystal-switchers label {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.crystal-switchers select {
+  min-width: 8.5rem;
+}
+
+@media (max-width: 767.98px) {
+  .crystal-switchers {
+    margin: 0.5rem 0 0;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

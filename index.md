@@ -16,10 +16,10 @@ cd MyApp && dotnet run
 
 ## Documentation
 
-| Version | Link |
-|---------|------|
-| **2.0.1 (Current)** | [Documentation](docs/v2.0/introduction.md) |
-| **v1.2 (Legacy)** | [Documentation](docs/v1.2/introduction.md) |
+| Version | English | 中文 |
+|---------|---------|------|
+| **2.0.1 (Current)** | [Documentation](docs/v2.0/introduction.md) | [文档](docs/v2.0/zh-CN/introduction.md) |
+| **v1.2 (Legacy)** | [Documentation](docs/v1.2/introduction.md) | [文档](docs/v1.2/zh-CN/introduction.md) |
 
 - [Upgrade Guide](docs/v2.0/upgrade.md)
 - [Upgrade from 2.0.0](docs/v2.0/upgrade-from-2.0.0.md)
