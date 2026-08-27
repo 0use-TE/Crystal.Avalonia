@@ -7,12 +7,19 @@ namespace Crystal.Avalonia
 {
     internal class ViewLocator : IDataTemplate
     {
+        private readonly MvvmManager _mvvm;
+
+        public ViewLocator(MvvmManager mvvm)
+        {
+            _mvvm = mvvm;
+        }
+
         public Control? Build(object? param)
         {
             if (param == null) return null;
 
             var vmType = param.GetType();
-            var viewType = MvvmManager.GetViewType(vmType);
+            var viewType = _mvvm.GetViewType(vmType);
 
             if (viewType == null)
             {
@@ -39,7 +46,7 @@ namespace Crystal.Avalonia
 
         public bool Match(object? data)
         {
-            return data != null && MvvmManager.GetViewType(data.GetType()) != null;
+            return data != null && _mvvm.GetViewType(data.GetType()) != null;
         }
     }
 }

@@ -11,12 +11,15 @@ public partial class App : CrystalApplication
 {
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
+    public override void RegisterModules(IModuleRegistrar moduleRegistrar)
+    {
+        moduleRegistrar.RegisterModule<DemoModule>();
+    }
+
     public override void RegisterServices(IServiceCollection services)
     {
         services.AddMvvmTransient<MainView, MainViewModel>();
         services.AddMvvmTransient<OuseView, OuseViewModel>();
-        services.AddMvvmTransient<ModuleAView, ModuleAViewModel>();
-        services.AddMvvmTransient<ModuleBView, ModuleBViewModel>();
     }
 
     public override void CreateShell(IServiceProvider serviceProvider)

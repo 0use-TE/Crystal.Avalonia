@@ -1,0 +1,30 @@
+- name: Introduction
+  href: introduction.md
+- name: Upgrade Guide
+  href: upgrade.md
+- name: Upgrade from 2.0
+  href: upgrade-from-2.0.md
+- name: Upgrade from 2.0.0
+  href: upgrade-from-2.0.0.md
+- name: Upgrade from v1.2
+  href: upgrade-from-1.2.md
+- name: Getting Started
+  href: getting-started.md
+- name: Architecture
+  href: architecture.md
+- name: Tutorials
+  items:
+    - name: Create Your First App
+      href: tutorials/create-first-app.md
+    - name: MVVM Pattern
+      href: tutorials/mvvm-pattern.md
+    - name: Navigation
+      href: tutorials/navigation.md
+    - name: Module Development
+      href: tutorials/module-development.md
+    - name: Dependency Injection
+      href: tutorials/dependency-injection.md
+    - name: Migrate from Avalonia
+      href: tutorials/migrate-from-avalonia.md
+- name: AOT Compatibility
+  href: aot-compatibility.md

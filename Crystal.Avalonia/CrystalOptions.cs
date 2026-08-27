@@ -6,15 +6,15 @@ namespace Crystal.Avalonia
     public static class CrystalOptions
     {
         /// <summary>
-        /// Gets or sets whether the ViewModelLocator is enabled.
-        /// When enabled, the system automatically resolves the corresponding ViewModel
-        /// based on the View type and injects it into the DataContext.
+        /// Gets or sets whether ViewModel-first view location is enabled.
+        /// When enabled, a ViewLocator is added to <c>Application.DataTemplates</c>
+        /// so a ContentControl can display a registered View for a ViewModel.
         /// Defaults to <c>true</c>.
         /// </summary>
         /// <remarks>
-        /// When enabled, the <see cref="ViewModelLocator.AutoWireViewModelProperty"/> attached property takes effect.
-        /// You can set <c>ViewModelLocator.AutoWireViewModel="True"</c> in XAML to enable auto-binding.
+        /// This option does <b>not</b> control <see cref="ViewModelLocator.AutoWireViewModelProperty"/>.
+        /// View-first auto-wiring via the attached property always works when a mapping is registered.
         /// </remarks>
-        public static bool EnableViewModelLocator { get; set; } = true;
+        public static bool EnableViewLocator { get; set; } = true;
     }
 }

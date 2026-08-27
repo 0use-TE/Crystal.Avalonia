@@ -1,9 +1,11 @@
 # Upgrade from v1.2
 
+Complete the 2.0 ViewModel-only DI and shell changes below, then [Upgrade from 2.0](upgrade-from-2.0.md) for 3.0.0 (`EnableViewLocator`, `ILifecycleAware`, instance `MvvmManager`).
+
 ## Breaking Changes in v2.0
 
-| v1.2 | v2.0 |
-|------|------|
+| v1.2 | v2.0+ |
+|------|-------|
 | `AddMvvm*` registers **View + ViewModel** in DI | Only **ViewModel** in DI; `TView` is mapping only |
 | `AddMvvmHybrid` available | **Removed** — use `AddMvvmTransient` or `AddMvvmSingleton` |
 | `ViewLocator` resolves View from DI | `ViewLocator` uses `Activator.CreateInstance` |
@@ -14,10 +16,6 @@
 ### 1. Replace `AddMvvmHybrid`
 
 ```csharp
-// v1.2
-services.AddMvvmHybrid<SettingsView, SettingsViewModel>();
-
-// v2.0 — pick one lifetime for the ViewModel
 services.AddMvvmSingleton<SettingsView, SettingsViewModel>();
 // or
 services.AddMvvmTransient<SettingsView, SettingsViewModel>();
@@ -34,22 +32,10 @@ public override void CreateShell(IServiceProvider sp)
 
 Do not `AddTransient<MainWindow>()` — shell views are not in DI (2.0.1+).
 
-> Upgrading from **2.0.0**? See [Upgrade from 2.0.0](upgrade-from-2.0.0.md) (`CreateShellFromDi` was removed in 2.0.1).
+> From **2.0.0**? See [Upgrade from 2.0.0](upgrade-from-2.0.0.md), then [Upgrade from 2.0](upgrade-from-2.0.md).
 
 ### 3. Navigation
 
 ```csharp
-// v1.2 — View from DI
-var view = sp.GetRequiredService<MainView>();
-
-// v2.0 — prefer ViewModel-first
 NavigationHost.Content = sp.GetRequiredService<MainViewModel>();
-// or View-first: new MainView() with AutoWireViewModel
 ```
-
-## Unchanged
-
-- `ILifecycleAware`
-- `IModule` / module system
-- `ViewModelLocator` / View-first binding
-- AOT annotations

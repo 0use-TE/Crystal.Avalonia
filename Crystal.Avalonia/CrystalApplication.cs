@@ -42,12 +42,19 @@ namespace Crystal.Avalonia
     /// </example>
     public class CrystalApplication : Application
     {
+        /// <summary>
+        /// Gets the MVVM mapping and service-provider holder for this application instance.
+        /// </summary>
+        public MvvmManager Mvvm { get; } = new();
+
         /// <inheritdoc />
         public override void OnFrameworkInitializationCompleted()
         {
             base.OnFrameworkInitializationCompleted();
 
             var services = new ServiceCollection();
+            services.AddSingleton(Mvvm);
+
             RegisterServices(services);
 
             var moduleManager = new ModuleManager();
@@ -59,12 +66,13 @@ namespace Crystal.Avalonia
 
             var serviceProvider = services.BuildServiceProvider();
 
-            if (CrystalOptions.EnableViewModelLocator)
-                DataTemplates.Add(new ViewLocator());
+            Mvvm.ServiceProvider = serviceProvider;
+
+            if (CrystalOptions.EnableViewLocator)
+                DataTemplates.Add(new ViewLocator(Mvvm));
 
             moduleManager.InitModules(serviceProvider);
 
-            MvvmManager.ServiceProvider = serviceProvider;
             CreateShell(serviceProvider);
         }
 
@@ -87,8 +95,8 @@ namespace Crystal.Avalonia
 
         /// <summary>
         /// Override this method to register application-level services.
-        /// It is recommended to use <see cref="MvvmManager.AddMvvmTransient{TView, TViewModel}(IServiceCollection)"/>
-        /// or <see cref="MvvmManager.AddMvvmSingleton{TView, TViewModel}(IServiceCollection)"/> to register View/ViewModel pairs.
+        /// It is recommended to use <see cref="MvvmServiceCollectionExtensions.AddMvvmTransient{TView, TViewModel}(IServiceCollection)"/>
+        /// or <see cref="MvvmServiceCollectionExtensions.AddMvvmSingleton{TView, TViewModel}(IServiceCollection)"/> to register View/ViewModel pairs.
         /// </summary>
         /// <param name="services">The service collection to add application-level services to.</param>
         public virtual void RegisterServices(IServiceCollection services)

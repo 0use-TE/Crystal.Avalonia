@@ -9,7 +9,7 @@ namespace Crystal.Avalonia
     /// Manages and initializes application modules.
     /// Automatically created and used by the framework during <see cref="CrystalApplication.OnFrameworkInitializationCompleted"/>.
     /// </summary>
-    public class ModuleManager : IModuleRegistrar
+    public class ModuleManager : IModuleRegistrar   
     {
         /// <summary>
         /// Gets the list of registered modules.

@@ -1,0 +1,30 @@
+- name: 简介
+  href: introduction.md
+- name: 升级指南
+  href: upgrade.md
+- name: 从 2.0 升级
+  href: upgrade-from-2.0.md
+- name: 从 2.0.0 升级
+  href: upgrade-from-2.0.0.md
+- name: 从 v1.2 升级
+  href: upgrade-from-1.2.md
+- name: 快速开始
+  href: getting-started.md
+- name: 架构原理
+  href: architecture.md
+- name: 教程
+  items:
+    - name: 创建第一个应用
+      href: tutorials/create-first-app.md
+    - name: MVVM 模式
+      href: tutorials/mvvm-pattern.md
+    - name: 导航
+      href: tutorials/navigation.md
+    - name: 模块开发
+      href: tutorials/module-development.md
+    - name: 依赖注入
+      href: tutorials/dependency-injection.md
+    - name: 从 Avalonia 迁移
+      href: tutorials/migrate-from-avalonia.md
+- name: AOT 兼容性
+  href: aot-compatibility.md

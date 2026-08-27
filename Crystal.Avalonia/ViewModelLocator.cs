@@ -7,12 +7,9 @@ namespace Crystal.Avalonia
 {
     /// <summary>
     /// Provides automatic ViewModel binding via an attached property.
-    /// Works in conjunction with <see cref="CrystalOptions.EnableViewModelLocator"/>.
+    /// Independent of <see cref="CrystalOptions.EnableViewLocator"/>, which only gates ViewModel-first view location.
     /// </summary>
     /// <remarks>
-    /// Usage in XAML:
-    /// <code>
-    /// &lt;Window xmlns
     /// When <c>AutoWireViewModel</c> is set to <c>True</c>,
     /// the system automatically resolves the corresponding ViewModel from the DI container
     /// and assigns it to the control's <c>DataContext</c>.
@@ -55,17 +52,23 @@ namespace Crystal.Avalonia
         {
             if (Design.IsDesignMode) return;
 
+            if (Application.Current is not CrystalApplication app)
+            {
+                throw new InvalidOperationException("ServiceProvider is not initialized. Make sure to use CrystalApplication as your base class.");
+            }
+
+            var mvvm = app.Mvvm;
             var viewType = view.GetType();
-            var vmType = MvvmManager.GetVmType(viewType);
+            var vmType = mvvm.GetVmType(viewType);
 
             if (vmType != null)
             {
-                if (MvvmManager.ServiceProvider == null)
+                if (mvvm.ServiceProvider == null)
                 {
                     throw new InvalidOperationException("ServiceProvider is not initialized. Make sure to use CrystalApplication as your base class.");
                 }
 
-                var viewModel = MvvmManager.ServiceProvider.GetRequiredService(vmType);
+                var viewModel = mvvm.ServiceProvider.GetRequiredService(vmType);
                 view.DataContext = viewModel;
                 ViewLifecycleBinder.AttachIfNeeded(view, viewModel);
             }

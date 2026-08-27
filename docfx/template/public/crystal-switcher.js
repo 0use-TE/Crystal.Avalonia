@@ -8,10 +8,11 @@
 
   /** @type {{ default: string, defaultPage: string, versions: { id: string, label: string }[], pages: string[], pagesByVersion?: Record<string, string[]> }} */
   let config = {
-    default: 'v2.0',
+    default: 'v3.0',
     defaultPage: 'introduction',
     versions: [
-      { id: 'v2.0', label: '2.0.1 (Current)' },
+      { id: 'v3.0', label: '3.0.0 (Current)' },
+      { id: 'v2.0', label: '2.0.1 (Legacy)' },
       { id: 'v1.2', label: 'v1.2 (Legacy)' },
     ],
     pages: [
@@ -20,6 +21,7 @@
       'architecture',
       'aot-compatibility',
       'upgrade',
+      'upgrade-from-2.0',
       'upgrade-from-2.0.0',
       'upgrade-from-1.2',
       'tutorials/create-first-app',
