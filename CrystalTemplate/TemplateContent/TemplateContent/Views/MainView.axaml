@@ -8,10 +8,15 @@
              ViewModelLocator.AutoWireViewModel="True"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-    to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  <StackPanel Spacing="12" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center"/>
+    <Button Content="EventToCommand Ping"
+            HorizontalAlignment="Center"
+            EventToCommand.EventName="Click"
+            EventToCommand.Command="{Binding PingCommand}"/>
+    <TextBlock Text="{Binding Status}" HorizontalAlignment="Center" Opacity="0.75"/>
+  </StackPanel>
 </UserControl>

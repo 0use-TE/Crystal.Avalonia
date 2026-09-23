@@ -37,7 +37,7 @@ The library does not include navigation, regions, or an event aggregator.
 ### Install the Template
 
 ```bash
-dotnet new install CrystalTemplate
+dotnet new install CrystalTemplate::3.1.0
 ```
 
 ### Create a New Project

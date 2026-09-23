@@ -37,6 +37,7 @@ Lightweight event → `ICommand` wiring in the default Avalonia xmlns (no extra 
 
 - Live WASM demo published to `/demo/` alongside DocFX
 - Upgrade guides nested under **Upgrade Guide** in the sidebar
+- **CrystalTemplate 3.1.0** — `ConfigureOptions`, `EventToCommand` sample, package reference `Crystal.Avalonia` 3.1.0
 
 ## 3.0.0
 

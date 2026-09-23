@@ -1,4 +1,3 @@
-using Avalonia;
 using Avalonia.Markup.Xaml;
 using Crystal.Avalonia;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +10,11 @@ namespace TemplateContent
     public partial class App : CrystalApplication
     {
         public override void Initialize() => AvaloniaXamlLoader.Load(this);
+
+        public override void ConfigureOptions(CrystalOptions options)
+        {
+            options.EnableViewLocator = true; // default
+        }
 
         public override void RegisterServices(IServiceCollection services)
         {

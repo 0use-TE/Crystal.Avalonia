@@ -37,6 +37,7 @@ public override void ConfigureOptions(CrystalOptions options)
 
 - WASM 在线 demo 随 DocFX 发布到 `/demo/`
 - 侧栏将各版本升级说明收纳在 **升级指南** 下
+- **CrystalTemplate 3.1.0** — `ConfigureOptions`、`EventToCommand` 示例、包引用 `Crystal.Avalonia` 3.1.0
 
 ## 3.0.0
 
