@@ -11,6 +11,8 @@ internal partial class MainViewModel : ViewModelBase
 
     [ObservableProperty]
     private string _clickStatus = "Click the button (EventToCommand)";
+    [ObservableProperty]
+    private string _tappedStatus = "Tap the button (EventToCommand)";
 
     [ObservableProperty]
     private OuseViewModel _ouseViewModel;
@@ -33,6 +35,6 @@ internal partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private void DoublePing()
     {
-        ClickStatus = $"DoubleTapped at {DateTime.Now:HH:mm:ss}";
+        TappedStatus = $"DoubleTapped at {DateTime.Now:HH:mm:ss}";
     }
 }

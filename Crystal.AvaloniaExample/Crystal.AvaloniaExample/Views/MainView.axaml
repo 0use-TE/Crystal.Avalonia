@@ -11,14 +11,23 @@
     <StackPanel Spacing="16" Margin="24" VerticalAlignment="Center">
         <TextBlock Text="{Binding Greeting}" FontSize="22" HorizontalAlignment="Center"/>
 
-        <Button Content="EventToCommand (multi)"
+        <Button Content="EventToCommand"
+                 EventToCommand.EventName="Click"
+                 EventToCommand.Command="{Binding  PingCommand}"
+                 HorizontalAlignment="Center">
+        </Button>
+
+        <TextBlock Text="{Binding ClickStatus}" HorizontalAlignment="Center" Opacity="0.75"/>
+
+           <Button Content="EventToCommand (multi)"
+                 EventToCommand.EventName="Click"
                 HorizontalAlignment="Center">
             <EventToCommand.Bindings>
-                <EventBinding EventName="Click" Command="{Binding PingCommand}" />
                 <EventBinding EventName="DoubleTapped" Command="{Binding DoublePingCommand}"/>
             </EventToCommand.Bindings>
         </Button>
-        <TextBlock Text="{Binding ClickStatus}" HorizontalAlignment="Center" Opacity="0.75"/>
+
+        <TextBlock Text="{Binding TappedStatus}" HorizontalAlignment="Center" Opacity="0.75"/>
 
         <ContentControl Content="{Binding OuseViewModel}"/>
 
