@@ -52,6 +52,7 @@ dotnet run
 
 - [Live Demo (WASM)](https://0use.net/Crystal.Avalonia/demo/)
 - [3.1.0 (Current)](https://0use.net/Crystal.Avalonia/docs/v3.0/introduction.html)
+- [Release Notes](https://0use.net/Crystal.Avalonia/docs/v3.0/release-notes.html)
 - [2.0.1 (Legacy)](https://0use.net/Crystal.Avalonia/docs/v2.0/introduction.html)
 - [v1.2 (Legacy)](https://0use.net/Crystal.Avalonia/docs/v1.2/introduction.html)
 - [Upgrade Guide](https://0use.net/Crystal.Avalonia/docs/v3.0/upgrade.html)

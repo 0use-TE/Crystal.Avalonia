@@ -52,6 +52,7 @@ services.AddMvvmTransient<MainView, MainViewModel>(); // ViewModel → DI, View 
 
 ## Next Steps
 
+- [Release Notes](release-notes.md)
 - [Upgrade Guide](upgrade.md) — migrate from 3.0, 2.0.x, or v1.2
 - [Architecture](architecture.md) — how it works internally
 - [Getting Started](getting-started.md)

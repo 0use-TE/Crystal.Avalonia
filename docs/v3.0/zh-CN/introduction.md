@@ -52,6 +52,7 @@ services.AddMvvmTransient<MainView, MainViewModel>(); // ViewModel → DI，View
 
 ## 下一步
 
+- [发行说明](release-notes.md)
 - [升级指南](upgrade.md) — 从 3.0、2.0.x 或 v1.2 迁移
 - [架构原理](architecture.md) — 内部如何工作
 - [快速开始](getting-started.md)

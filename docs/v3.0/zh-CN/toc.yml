@@ -1,15 +1,20 @@
 - name: 简介
   href: introduction.md
+- name: 发行说明
+  href: release-notes.md
 - name: 升级指南
   href: upgrade.md
-- name: 从 3.0 升级
-  href: upgrade-from-3.0.md
-- name: 从 2.0 升级
-  href: upgrade-from-2.0.md
-- name: 从 2.0.0 升级
-  href: upgrade-from-2.0.0.md
-- name: 从 v1.2 升级
-  href: upgrade-from-1.2.md
+  items:
+    - name: 总览
+      href: upgrade.md
+    - name: 从 3.0 升级
+      href: upgrade-from-3.0.md
+    - name: 从 2.0 升级
+      href: upgrade-from-2.0.md
+    - name: 从 2.0.0 升级
+      href: upgrade-from-2.0.0.md
+    - name: 从 v1.2 升级
+      href: upgrade-from-1.2.md
 - name: 快速开始
   href: getting-started.md
 - name: 架构原理
