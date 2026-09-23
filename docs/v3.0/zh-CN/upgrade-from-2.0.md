@@ -25,6 +25,8 @@ CrystalOptions.EnableViewModelLocator = false;
 CrystalOptions.EnableViewLocator = false;
 ```
 
+> 直接升到 **3.1+**？静态 `CrystalOptions` 已改为实例 — 见 [从 3.0 升级](upgrade-from-3.0.md)（`ConfigureOptions`）。
+
 ### 2. 更新 `ILifecycleAware`
 
 ```csharp

@@ -1,4 +1,4 @@
-# 简介（3.0.0）
+# 简介（3.1.0）
 
 Crystal.Avalonia 是面向 Avalonia 应用的轻量基础设施层：
 
@@ -30,6 +30,11 @@ Crystal.Avalonia 是面向 Avalonia 应用的轻量基础设施层：
 ## 注册
 
 ```csharp
+public override void ConfigureOptions(CrystalOptions options)
+{
+    options.EnableViewLocator = true; // 默认；也可通过 DI 注入
+}
+
 services.AddMvvmTransient<MainView, MainViewModel>(); // ViewModel → DI，View → 仅映射
 // Shell: CreateShell<MainWindow, MainView>() — 不进 DI
 ```
@@ -37,15 +42,17 @@ services.AddMvvmTransient<MainView, MainViewModel>(); // ViewModel → DI，View
 | 组件 | 作用 |
 |------|------|
 | `CrystalApplication` | 带模块/DI 启动的应用基类 |
+| `CrystalApplication.Options` | 每应用一份 `CrystalOptions`（DI 单例）；经 `ConfigureOptions` 设置 |
 | `CrystalApplication.Mvvm` | 每应用一份 View↔VM 映射和 `ServiceProvider` |
 | `CreateShell<TWindow, TView>()` | 用 `new` 创建 Shell；ViewModel 由 ViewModelLocator 注入 |
 | `AddMvvmTransient` / `AddMvvmSingleton` | ViewModel 生命周期 + View 映射 |
 | `ViewModelLocator` | View-first 的 DataContext 注入 |
 | `ViewLocator` | ViewModel-first 的 View 创建（`EnableViewLocator`） |
+| `EventToCommand` | 事件 → `ICommand`（默认 Avalonia xmlns，无需前缀） |
 
 ## 下一步
 
-- [升级指南](upgrade.md) — 从 2.0.x 或 v1.2 迁移
+- [升级指南](upgrade.md) — 从 3.0、2.0.x 或 v1.2 迁移
 - [架构原理](architecture.md) — 内部如何工作
 - [快速开始](getting-started.md)
-- [MVVM 模式](tutorials/mvvm-pattern.md)
+- [教程](tutorials/create-first-app.md)

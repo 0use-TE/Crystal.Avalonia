@@ -2,6 +2,8 @@
   href: introduction.md
 - name: Upgrade Guide
   href: upgrade.md
+- name: Upgrade from 3.0
+  href: upgrade-from-3.0.md
 - name: Upgrade from 2.0
   href: upgrade-from-2.0.md
 - name: Upgrade from 2.0.0

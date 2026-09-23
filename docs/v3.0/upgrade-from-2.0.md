@@ -25,6 +25,8 @@ CrystalOptions.EnableViewModelLocator = false;
 CrystalOptions.EnableViewLocator = false;
 ```
 
+> Targeting **3.1+**? Static `CrystalOptions` becomes an instance — see [Upgrade from 3.0](upgrade-from-3.0.md) (`ConfigureOptions`).
+
 ### 2. Update `ILifecycleAware`
 
 ```csharp

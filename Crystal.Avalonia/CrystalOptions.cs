@@ -1,9 +1,11 @@
 namespace Crystal.Avalonia
 {
     /// <summary>
-    /// Provides global configuration options for the Crystal.Avalonia framework.
+    /// Configuration options for the Crystal.Avalonia framework.
+    /// Registered as a singleton in DI and available via <see cref="CrystalApplication.Options"/>.
+    /// Configure by overriding <see cref="CrystalApplication.ConfigureOptions"/>.
     /// </summary>
-    public static class CrystalOptions
+    public class CrystalOptions
     {
         /// <summary>
         /// Gets or sets whether ViewModel-first view location is enabled.
@@ -15,6 +17,6 @@ namespace Crystal.Avalonia
         /// This option does <b>not</b> control <see cref="ViewModelLocator.AutoWireViewModelProperty"/>.
         /// View-first auto-wiring via the attached property always works when a mapping is registered.
         /// </remarks>
-        public static bool EnableViewLocator { get; set; } = true;
+        public bool EnableViewLocator { get; set; } = true;
     }
 }

@@ -8,9 +8,9 @@ Crystal.Avalonia 的内部工作方式。用法请见 [快速开始](getting-sta
 `CrystalApplication.OnFrameworkInitializationCompleted()` 按以下顺序执行：
 
 ```
-创建 CrystalApplication.Mvvm
+ConfigureOptions(Options)           ← 应用配置 CrystalOptions
     ↓
-services.AddSingleton(Mvvm)
+services.AddSingleton(Options, Mvvm)
 RegisterServices(services)          ← 应用级 DI（AddMvvm 写入该实例的映射）
     ↓
 创建并注册 ModuleManager
@@ -22,7 +22,7 @@ services.BuildServiceProvider()
     ↓
 Mvvm.ServiceProvider = sp           ← 在 InitModules 之前（ViewModelLocator 可解析）
     ↓
-将 ViewLocator 加入 DataTemplates  ← 若 EnableViewLocator
+将 ViewLocator 加入 DataTemplates  ← 若 Options.EnableViewLocator
     ↓
 moduleManager.InitModules(sp)       ← 各 module.InitializeModule()
     ↓
@@ -31,6 +31,7 @@ CreateShell(sp)                     ← 创建 MainWindow / MainView
 
 要点：
 
+- **先 Options 后 DI** — `ConfigureOptions` 最先执行；`CrystalOptions` 作为单例进入容器
 - **先 App 后模块** — `App.RegisterServices` 在 `InitService` 之前执行
 - **单一 `ServiceProvider`** — 只构建一次；模块在容器就绪后初始化
 - **`CrystalApplication.Mvvm.ServiceProvider`** — 在 `InitModules` 与 `CreateShell` 前赋值，供 `ViewModelLocator` 使用
@@ -63,7 +64,7 @@ CreateShell(sp)                     ← 创建 MainWindow / MainView
 
 ### View-First（`ViewModelLocator`）
 
-附加属性 `AutoWireViewModel="True"` 在变更时触发。**不**依赖 `CrystalOptions.EnableViewLocator`。
+附加属性 `AutoWireViewModel="True"` 在变更时触发。**不**依赖 `Options.EnableViewLocator`。
 
 ```
 XAML 加载 View
@@ -83,7 +84,7 @@ ViewLifecycleBinder.AttachIfNeeded()
 
 ### ViewModel-First（`ViewLocator`）
 
-当 `CrystalOptions.EnableViewLocator` 为 `true`（默认）时，注册为 `Application.DataTemplates` 上的 `IDataTemplate`：
+当 `CrystalApplication.Options.EnableViewLocator` 为 `true`（默认）时，注册为 `Application.DataTemplates` 上的 `IDataTemplate`：
 
 ```
 ContentControl.Content = viewModel
@@ -162,6 +163,7 @@ View 是 UI 产物；ViewModel 承载业务逻辑与依赖。View 不进 DI 可�
 | v1.2 | 2.0 | 仅 ViewModel 进 DI；无 `AddMvvmHybrid` |
 | 2.0.0 | 2.0.1 | Shell 用 `CreateShell` / `new`；移除 `CreateShellFromDi` |
 | 2.0.1 | 3.0.0 | 实例 `MvvmManager`；`EnableViewLocator`；`OnLoadedAsync(bool)` |
+| 3.0.0 | 3.1.0 | 实例 `CrystalOptions`（`ConfigureOptions` / DI 单例；原为静态类） |
 
 见 [升级指南](upgrade.md)。
 
@@ -180,10 +182,11 @@ Crystal.Avalonia 避免运行时程序集扫描。类型发现均为编译期泛
 
 ```
 CrystalApplication
+├── Options (CrystalOptions) ─ EnableViewLocator（默认 true）；DI 单例
 ├── Mvvm (MvvmManager) ───── 每应用一份映射 + ServiceProvider
 ├── ModuleManager ────────── IModule.RegisterServices / InitializeModule
 ├── ViewModelLocator ─────── 附加属性 → DI 解析 ViewModel
 ├── ViewLocator ──────────── IDataTemplate → Activator.CreateInstance View
-├── ViewLifecycleBinder ──── ILifecycleAware 钩子
-└── CrystalOptions ───────── EnableViewLocator（默认 true）
+├── EventToCommand ───────── 事件 → ICommand（默认 Avalonia xmlns）
+└── ViewLifecycleBinder ──── ILifecycleAware 钩子
 ```

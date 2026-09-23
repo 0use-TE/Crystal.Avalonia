@@ -8,9 +8,9 @@ How Crystal.Avalonia works internally. For usage, see [Getting Started](getting-
 `CrystalApplication.OnFrameworkInitializationCompleted()` runs this sequence:
 
 ```
-CrystalApplication.Mvvm created
+ConfigureOptions(Options)           ← App configures CrystalOptions
     ↓
-services.AddSingleton(Mvvm)
+services.AddSingleton(Options, Mvvm)
 RegisterServices(services)          ← App-level DI (AddMvvm writes mappings on Mvvm)
     ↓
 ModuleManager created + registered
@@ -22,7 +22,7 @@ services.BuildServiceProvider()
     ↓
 Mvvm.ServiceProvider = sp           ← before InitModules (ViewModelLocator can resolve)
     ↓
-ViewLocator added to DataTemplates  ← if EnableViewLocator
+ViewLocator added to DataTemplates  ← if Options.EnableViewLocator
     ↓
 moduleManager.InitModules(sp)       ← Each module.InitializeModule()
     ↓
@@ -31,6 +31,7 @@ CreateShell(sp)                     ← App creates MainWindow / MainView
 
 Key points:
 
+- **Options before DI** — `ConfigureOptions` runs first; `CrystalOptions` is a singleton in the container.
 - **App runs first**, then modules — `RegisterServices` in `App` executes before `InitService`.
 - **Single `ServiceProvider`** — built once; modules initialize after it exists.
 - **`CrystalApplication.Mvvm.ServiceProvider`** — set before `InitModules` and `CreateShell`, required by `ViewModelLocator`.
@@ -63,7 +64,7 @@ Modules are plain classes — no assembly scanning. Each module is explicitly re
 
 ### View-First (`ViewModelLocator`)
 
-Attached property `AutoWireViewModel="True"` triggers on property change. This does **not** depend on `CrystalOptions.EnableViewLocator`.
+Attached property `AutoWireViewModel="True"` triggers on property change. This does **not** depend on `Options.EnableViewLocator`.
 
 ```
 View loaded in XAML
@@ -83,7 +84,7 @@ Skipped in design mode (`Design.IsDesignMode`).
 
 ### ViewModel-First (`ViewLocator`)
 
-Registered as `IDataTemplate` on `Application.DataTemplates` when `CrystalOptions.EnableViewLocator` is `true` (default):
+Registered as `IDataTemplate` on `Application.DataTemplates` when `CrystalApplication.Options.EnableViewLocator` is `true` (default):
 
 ```
 ContentControl.Content = viewModel
@@ -162,6 +163,7 @@ Only two modes — no Hybrid. Choose per ViewModel:
 | v1.2 | 2.0 | ViewModel-only DI; no `AddMvvmHybrid` |
 | 2.0.0 | 2.0.1 | Shell via `CreateShell` / `new`; `CreateShellFromDi` removed |
 | 2.0.1 | 3.0.0 | Instance `MvvmManager`; `EnableViewLocator`; `OnLoadedAsync(bool)` |
+| 3.0.0 | 3.1.0 | Instance `CrystalOptions` via `ConfigureOptions` / DI singleton (was static) |
 
 See [Upgrade Guide](upgrade.md).
 
@@ -180,10 +182,11 @@ Library sets `IsAotCompatible=true`. See [AOT Compatibility](aot-compatibility.m
 
 ```
 CrystalApplication
+├── Options (CrystalOptions) ─ EnableViewLocator (default: true); DI singleton
 ├── Mvvm (MvvmManager) ───── per-app mappings + ServiceProvider
 ├── ModuleManager ────────── IModule.RegisterServices / InitializeModule
 ├── ViewModelLocator ─────── attached property → DI resolve ViewModel
 ├── ViewLocator ──────────── IDataTemplate → Activator.CreateInstance View
-├── ViewLifecycleBinder ──── ILifecycleAware hooks
-└── CrystalOptions ───────── EnableViewLocator (default: true)
+├── EventToCommand ───────── event → ICommand (default Avalonia xmlns)
+└── ViewLifecycleBinder ──── ILifecycleAware hooks
 ```

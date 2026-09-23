@@ -42,6 +42,10 @@ Similarly, `AddMvvmSingleton` also uses these annotations to ensure AOT compatib
 
 This tells the trimmer exactly what members are needed at runtime, preventing accidental removal.
 
+### EventToCommand
+
+`EventToCommand` resolves events by name (public static `*Event` routed fields, or public CLR `EventHandler`). Avalonia control public API is retained under typical publish settings. App-defined custom events on heavily trimmed types may need an RD.xml / dynamic dependency if those members are removed.
+
 ## Publishing with AOT
 
 ### Desktop Application

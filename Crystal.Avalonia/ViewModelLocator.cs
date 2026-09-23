@@ -7,7 +7,7 @@ namespace Crystal.Avalonia
 {
     /// <summary>
     /// Provides automatic ViewModel binding via an attached property.
-    /// Independent of <see cref="CrystalOptions.EnableViewLocator"/>, which only gates ViewModel-first view location.
+    /// Independent of <see cref="CrystalOptions.EnableViewLocator"/> on the app options instance, which only gates ViewModel-first view location.
     /// </summary>
     /// <remarks>
     /// When <c>AutoWireViewModel</c> is set to <c>True</c>,

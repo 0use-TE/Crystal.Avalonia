@@ -47,12 +47,22 @@ namespace Crystal.Avalonia
         /// </summary>
         public MvvmManager Mvvm { get; } = new();
 
+        /// <summary>
+        /// Gets the framework options for this application instance.
+        /// Also registered as a singleton in the DI container.
+        /// Prefer configuring via <see cref="ConfigureOptions"/>.
+        /// </summary>
+        public CrystalOptions Options { get; } = new();
+
         /// <inheritdoc />
         public override void OnFrameworkInitializationCompleted()
         {
             base.OnFrameworkInitializationCompleted();
 
+            ConfigureOptions(Options);
+
             var services = new ServiceCollection();
+            services.AddSingleton(Options);
             services.AddSingleton(Mvvm);
 
             RegisterServices(services);
@@ -68,12 +78,28 @@ namespace Crystal.Avalonia
 
             Mvvm.ServiceProvider = serviceProvider;
 
-            if (CrystalOptions.EnableViewLocator)
+            if (Options.EnableViewLocator)
                 DataTemplates.Add(new ViewLocator(Mvvm));
 
             moduleManager.InitModules(serviceProvider);
 
             CreateShell(serviceProvider);
+        }
+
+        /// <summary>
+        /// Override this method to configure <see cref="CrystalOptions"/> before the DI container is built.
+        /// </summary>
+        /// <param name="options">The options instance for this application.</param>
+        /// <example>
+        /// <code>
+        /// public override void ConfigureOptions(CrystalOptions options)
+        /// {
+        ///     options.EnableViewLocator = false;
+        /// }
+        /// </code>
+        /// </example>
+        public virtual void ConfigureOptions(CrystalOptions options)
+        {
         }
 
         /// <summary>
@@ -97,6 +123,7 @@ namespace Crystal.Avalonia
         /// Override this method to register application-level services.
         /// It is recommended to use <see cref="MvvmServiceCollectionExtensions.AddMvvmTransient{TView, TViewModel}(IServiceCollection)"/>
         /// or <see cref="MvvmServiceCollectionExtensions.AddMvvmSingleton{TView, TViewModel}(IServiceCollection)"/> to register View/ViewModel pairs.
+        /// <see cref="CrystalOptions"/> is already registered as a singleton before this method runs.
         /// </summary>
         /// <param name="services">The service collection to add application-level services to.</param>
         public virtual void RegisterServices(IServiceCollection services)

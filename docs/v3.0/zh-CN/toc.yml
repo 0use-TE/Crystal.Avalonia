@@ -2,6 +2,8 @@
   href: introduction.md
 - name: 升级指南
   href: upgrade.md
+- name: 从 3.0 升级
+  href: upgrade-from-3.0.md
 - name: 从 2.0 升级
   href: upgrade-from-2.0.md
 - name: 从 2.0.0 升级

@@ -1,4 +1,4 @@
-# Introduction (3.0.0)
+# Introduction (3.1.0)
 
 Crystal.Avalonia is a lightweight infrastructure layer for Avalonia applications:
 
@@ -30,6 +30,11 @@ No ViewModel base classes, commands, or bindings — use CommunityToolkit.Mvvm, 
 ## Registration
 
 ```csharp
+public override void ConfigureOptions(CrystalOptions options)
+{
+    options.EnableViewLocator = true; // default; also available via DI
+}
+
 services.AddMvvmTransient<MainView, MainViewModel>(); // ViewModel → DI, View → mapping only
 // Shell: CreateShell<MainWindow, MainView>() — not from DI
 ```
@@ -37,15 +42,17 @@ services.AddMvvmTransient<MainView, MainViewModel>(); // ViewModel → DI, View 
 | Component | Role |
 |-----------|------|
 | `CrystalApplication` | App base with module/DI bootstrap |
+| `CrystalApplication.Options` | Per-app `CrystalOptions` (DI singleton); set via `ConfigureOptions` |
 | `CrystalApplication.Mvvm` | Per-app View↔VM mappings and `ServiceProvider` |
 | `CreateShell<TWindow, TView>()` | Shell via `new`; ViewModel wired by ViewModelLocator |
 | `AddMvvmTransient` / `AddMvvmSingleton` | ViewModel lifetime + View mapping |
 | `ViewModelLocator` | View-first DataContext injection |
 | `ViewLocator` | ViewModel-first View creation (`EnableViewLocator`) |
+| `EventToCommand` | Event → `ICommand` (default Avalonia xmlns, no prefix) |
 
 ## Next Steps
 
-- [Upgrade Guide](upgrade.md) — migrate from 2.0.x or v1.2
+- [Upgrade Guide](upgrade.md) — migrate from 3.0, 2.0.x, or v1.2
 - [Architecture](architecture.md) — how it works internally
 - [Getting Started](getting-started.md)
-- [MVVM Pattern](tutorials/mvvm-pattern.md)
+- [Tutorials](tutorials/create-first-app.md)

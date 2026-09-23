@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  actions: read
+  contents: read
   pages: write
   id-token: write
 
@@ -16,29 +17,55 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
-  
+
 jobs:
-  publish-docs:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-    - name: Dotnet Setup
-      uses: actions/setup-dotnet@v3
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.x
+        dotnet-version: 10.0.x
 
-    - run: dotnet tool update -g docfx
-    - run: docfx docfx.json
+    - name: Install DocFX
+      run: dotnet tool update -g docfx
 
-    - name: Upload artifact
+    - name: Install wasm workload
+      run: dotnet workload install wasm-tools
+
+    - name: Build docs
+      run: docfx docfx.json
+
+    - name: Publish WASM demo
+      run: dotnet publish Crystal.AvaloniaExample/Crystal.AvaloniaExample.Browser/Crystal.AvaloniaExample.Browser.csproj -c Release
+
+    - name: Merge WASM demo into site
+      run: |
+        mkdir -p _site/demo
+        cp -r Crystal.AvaloniaExample/Crystal.AvaloniaExample.Browser/bin/Release/net10.0-browser/publish/wwwroot/. _site/demo/
+        BUILD_ID="${{ github.sha }}"
+        # GitHub Pages subpath + cache bust (stale dotnet.js → 404 wasm → SRI error)
+        sed -i 's|<head>|<head>\n    <base href="/Crystal.Avalonia/demo/" />|' _site/demo/index.html
+        sed -i "s|\./main.js|\./main.js?v=${BUILD_ID}|g" _site/demo/index.html
+        sed -i "s|'\./_framework/dotnet.js'|'./_framework/dotnet.js?v=${BUILD_ID}'|g" _site/demo/main.js
+        cp _site/demo/index.html _site/demo/404.html
+        touch _site/.nojekyll
+
+    - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        # Upload entire repository
         path: '_site'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4

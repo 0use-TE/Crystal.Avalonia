@@ -42,6 +42,10 @@ public static void AddMvvmTransient<
 
 这会让裁剪器明确知道运行时需要的成员，避免误删。
 
+### EventToCommand
+
+`EventToCommand` 按名称解析事件（公开静态 `*Event` 路由字段，或公开 CLR `EventHandler`）。常规发布设置下 Avalonia 控件公开 API 会保留。若应用自定义事件所在类型被强裁剪，可能需要 RD.xml / 动态依赖以保留这些成员。
+
 ## 使用 AOT 发布
 
 ### 桌面应用

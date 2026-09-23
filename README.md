@@ -11,7 +11,7 @@ Thanks to the community, Crystal.Avalonia is feature-complete and mature enough 
 
 - **Module System** - Organize code into independent, self-contained modules
 - **Dependency Injection** - Built-in support via Microsoft.Extensions.DependencyInjection
-- **View/ViewModel Wiring** - Simple registration with automatic DataContext injection
+- **View/ViewModel Wiring** - AutoWire, ViewLocator, and lightweight `EventToCommand` (default Avalonia xmlns)
 - **AOT Friendly** - Full trimming and AOT compilation support
 - **Cross-Platform** - Works with all Avalonia-supported platforms (Windows, macOS, Linux, Android, iOS, WebAssembly)
 
@@ -29,7 +29,7 @@ The library does not include navigation, regions, or an event aggregator.
 ## Versioning (3.0+)
 
 - **3.0.x** — bug fixes only
-- **3.1+** — new abstractions without breaking existing APIs
+- **3.1+** — new abstractions (3.1 moves `CrystalOptions` to an instance / DI singleton — see [Upgrade from 3.0](https://0use.net/Crystal.Avalonia/docs/v3.0/upgrade-from-3.0.html))
 - **4.0** — breaking changes
 
 ## Quick Start
@@ -50,13 +50,15 @@ dotnet run
 
 ## Documentation
 
-- [3.0.0 (Current)](https://0use.net/Crystal.Avalonia/docs/v3.0/introduction.html)
+- [Live Demo (WASM)](https://0use.net/Crystal.Avalonia/demo/)
+- [3.1.0 (Current)](https://0use.net/Crystal.Avalonia/docs/v3.0/introduction.html)
 - [2.0.1 (Legacy)](https://0use.net/Crystal.Avalonia/docs/v2.0/introduction.html)
 - [v1.2 (Legacy)](https://0use.net/Crystal.Avalonia/docs/v1.2/introduction.html)
 - [Upgrade Guide](https://0use.net/Crystal.Avalonia/docs/v3.0/upgrade.html)
+- [Upgrade from 3.0](https://0use.net/Crystal.Avalonia/docs/v3.0/upgrade-from-3.0.html)
 - [Upgrade from 2.0](https://0use.net/Crystal.Avalonia/docs/v3.0/upgrade-from-2.0.html)
 - [Upgrade from v1.2](https://0use.net/Crystal.Avalonia/docs/v3.0/upgrade-from-1.2.html)
-- [API Reference](https://0use.net/Crystal.Avalonia/api/) — 3.0.0+
+- [API Reference](https://0use.net/Crystal.Avalonia/api/) — 3.1.0+
 
 ## AOT & Trimming Support
 

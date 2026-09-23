@@ -17,7 +17,7 @@ namespace Crystal.Avalonia
     ///   <item>Register the ViewModel in DI</item>
     ///   <item>Record the View ↔ ViewModel type mapping (<c>TView</c> is not registered in DI)</item>
     ///   <item>Inject the DataContext via <see cref="ViewModelLocator"/> when <c>AutoWireViewModel</c> is set</item>
-    ///   <item>Instantiate the corresponding View via ViewLocator when <see cref="CrystalOptions.EnableViewLocator"/> is enabled</item>
+    ///   <item>Instantiate the corresponding View via ViewLocator when <see cref="CrystalOptions.EnableViewLocator"/> is enabled on app options</item>
     /// </list>
     /// </remarks>
     public sealed class MvvmManager
