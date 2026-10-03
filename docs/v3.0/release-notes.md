@@ -24,7 +24,9 @@ must register their events before using name-based resolution.
 
 See [EventToCommand](event-to-command.md) and [AOT Compatibility](aot-compatibility.md).
 The documentation retains the existing `docs/v3.0/` URLs for the 3.x series.
-CrystalTemplate has a separate version and remains at 3.1.0 in this release.
+CrystalTemplate **3.1.1** generates applications referencing Crystal.Avalonia **3.1.1**.
+Install or update it with `dotnet new install CrystalTemplate::3.1.1`.
+Existing generated applications must update their library references separately.
 
 ## 3.1.0
 

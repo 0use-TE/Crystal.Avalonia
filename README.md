@@ -37,7 +37,7 @@ The library does not include navigation, regions, or an event aggregator.
 ### Install the Template
 
 ```bash
-dotnet new install CrystalTemplate::3.1.0
+dotnet new install CrystalTemplate::3.1.1
 ```
 
 ### Create a New Project
@@ -104,8 +104,9 @@ dotnet add package Crystal.Avalonia --version 3.1.1
 ```
 
 Existing routed event XAML remains valid. App-specific `DynamicDependency` workarounds
-for these event fields can be removed after upgrading. CrystalTemplate remains a separate
-package; the template install command above refers to its existing 3.1.0 release.
+for these event fields can be removed after upgrading. CrystalTemplate 3.1.1 generates
+applications referencing Crystal.Avalonia 3.1.1. Reinstalling the template affects newly
+generated applications; update existing applications' library references separately.
 
 ## License
 

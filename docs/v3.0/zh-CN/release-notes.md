@@ -19,7 +19,10 @@
 自定义事件或附加事件推荐直接使用 `RoutedEvent`；按名称解析自定义事件前，需要先完成事件注册。
 
 详见 [EventToCommand](event-to-command.md) 和 [AOT 兼容性](aot-compatibility.md)。
-3.x 文档沿用现有 `docs/v3.0/` 地址。CrystalTemplate 独立发布，本次仍为 3.1.0。
+3.x 文档沿用现有 `docs/v3.0/` 地址。
+CrystalTemplate **3.1.1** 生成的应用引用 Crystal.Avalonia **3.1.1**，
+执行 `dotnet new install CrystalTemplate::3.1.1` 安装或更新模板。
+已生成的应用需要单独更新库引用。
 
 ## 3.1.0
 

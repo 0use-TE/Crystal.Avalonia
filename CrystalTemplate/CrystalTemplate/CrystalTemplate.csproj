@@ -9,12 +9,16 @@
 
 	<PropertyGroup>
 		<PackageType>Template</PackageType>
-		<Version>3.1.0</Version>
+		<NoDefaultExcludes>true</NoDefaultExcludes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Version>3.1.1</Version>
+		<PackageReleaseNotes>Update generated applications to Crystal.Avalonia 3.1.1, including the EventToCommand Native AOT fix.</PackageReleaseNotes>
 		<Authors>Ouse</Authors>
 		<Company>TE</Company>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="/" />
 		<Content Include="..\TemplateContent\**\*" Pack="true" PackagePath="content\" Exclude="..\TemplateContent\.vs\**;**\bin\**\*;**\obj\**\*" />
 	</ItemGroup>
 
