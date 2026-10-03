@@ -1,4 +1,4 @@
-# 简介（3.1.0）
+# 简介（3.1.1）
 
 Crystal.Avalonia 是面向 Avalonia 应用的轻量基础设施层：
 

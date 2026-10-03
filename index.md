@@ -22,7 +22,7 @@ cd MyApp && dotnet run
 
 | Version | English | 中文 |
 |---------|---------|------|
-| **3.1.0 (Current)** | [Documentation](docs/v3.0/introduction.md) | [文档](docs/v3.0/zh-CN/introduction.md) |
+| **3.1.1 (Current)** | [Documentation](docs/v3.0/introduction.md) | [文档](docs/v3.0/zh-CN/introduction.md) |
 | **2.0.1 (Legacy)** | [Documentation](docs/v2.0/introduction.md) | [文档](docs/v2.0/zh-CN/introduction.md) |
 | **v1.2 (Legacy)** | [Documentation](docs/v1.2/introduction.md) | [文档](docs/v1.2/zh-CN/introduction.md) |
 

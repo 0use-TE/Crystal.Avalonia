@@ -89,6 +89,11 @@ Multiple events:
 
 Shorthand and `Bindings` can be used together. Prefer Avalonia routed events (`Click` → `ClickEvent`).
 
+In 3.1.1, name-based routed event bindings work with Native AOT without event-field
+preservation attributes. You can also use `EventToCommand.RoutedEvent` or
+`EventBinding.RoutedEvent` to supply the event directly. See the
+[EventToCommand guide](../event-to-command.md) for examples and CLR event limitations.
+
 ## API Summary
 
 | API | Description |

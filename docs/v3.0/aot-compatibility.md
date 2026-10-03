@@ -1,6 +1,6 @@
 # AOT Compatibility
 
-Crystal.Avalonia is fully compatible with .NET AOT (Ahead-of-Time) compilation and trimming.
+Crystal.Avalonia supports .NET AOT (Ahead-of-Time) compilation and trimming. Registered routed events work with Native AOT; the legacy CLR event fallback requires JIT and retained metadata.
 
 ## What is AOT?
 
@@ -44,7 +44,29 @@ This tells the trimmer exactly what members are needed at runtime, preventing ac
 
 ### EventToCommand
 
-`EventToCommand` resolves events by name (public static `*Event` routed fields, or public CLR `EventHandler`). Avalonia control public API is retained under typical publish settings. App-defined custom events on heavily trimmed types may need an RD.xml / dynamic dependency if those members are removed.
+Starting with **3.1.1**, `EventToCommand.EventName` resolves registered routed events through
+`RoutedEventRegistry`, including events inherited from base controls. No event field
+reflection or event-field `DynamicDependency` is required for names such as `Loaded`,
+`Click`, and `TextChanged`.
+
+For custom or attached events, reference the routed event explicitly:
+
+```xml
+<Button EventToCommand.RoutedEvent="{x:Static Button.ClickEvent}"
+        EventToCommand.Command="{Binding SaveCommand}" />
+```
+
+`EventBinding.RoutedEvent` also works inside `EventToCommand.Bindings`. An explicit event
+takes precedence over `EventName` and ensures its declaring type is initialized.
+Name-based lookup requires the custom event owner to have registered its event already.
+
+The legacy CLR fallback supports ordinary `EventHandler` events on JIT runtimes only.
+Trimmed JIT applications must retain their CLR event metadata. Generic CLR
+`EventHandler<TEventArgs>` bindings are not supported by this fallback, and the fallback
+is disabled under Native AOT. Use registered routed events for AOT applications.
+Failed resolution produces an Avalonia warning in the `Crystal.Avalonia` log area.
+
+See the [EventToCommand guide](event-to-command.md) for parameters, multiple events, and upgrading.
 
 ## Publishing with AOT
 

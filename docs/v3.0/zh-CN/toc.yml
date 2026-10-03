@@ -19,6 +19,8 @@
   href: getting-started.md
 - name: 架构原理
   href: architecture.md
+- name: EventToCommand
+  href: event-to-command.md
 - name: 教程
   items:
     - name: 创建第一个应用

@@ -89,6 +89,10 @@ public Task OnLoadedAsync(bool isFirstLoad)
 
 简写与 `Bindings` 可同时使用。优先 Avalonia 路由事件（`Click` → `ClickEvent`）。
 
+3.1.1 的路由事件名称绑定支持 Native AOT，无需添加事件字段保留属性。
+也可使用 `EventToCommand.RoutedEvent` 或 `EventBinding.RoutedEvent` 直接传入事件。
+示例和 CLR 事件限制见 [EventToCommand 指南](../event-to-command.md)。
+
 ## API 摘要
 
 | API | 说明 |

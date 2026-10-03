@@ -1,6 +1,6 @@
 # AOT 兼容性
 
-Crystal.Avalonia 完全兼容 .NET AOT（Ahead-of-Time，提前编译）与裁剪（trimming）。
+Crystal.Avalonia 支持 .NET AOT（Ahead-of-Time，提前编译）与裁剪（trimming）。已注册的路由事件支持 Native AOT；旧的 CLR 事件回退需要 JIT 和保留的事件元数据。
 
 ## 什么是 AOT？
 
@@ -44,7 +44,27 @@ public static void AddMvvmTransient<
 
 ### EventToCommand
 
-`EventToCommand` 按名称解析事件（公开静态 `*Event` 路由字段，或公开 CLR `EventHandler`）。常规发布设置下 Avalonia 控件公开 API 会保留。若应用自定义事件所在类型被强裁剪，可能需要 RD.xml / 动态依赖以保留这些成员。
+从 **3.1.1** 开始，`EventToCommand.EventName` 通过 `RoutedEventRegistry` 查找已注册的路由事件，
+包括继承自基类的事件。`Loaded`、`Click`、`TextChanged` 等名称不再依赖事件字段反射，
+也无需为这些事件字段添加 `DynamicDependency`。
+
+自定义事件或附加事件可直接引用路由事件：
+
+```xml
+<Button EventToCommand.RoutedEvent="{x:Static Button.ClickEvent}"
+        EventToCommand.Command="{Binding SaveCommand}" />
+```
+
+`EventToCommand.Bindings` 中的 `EventBinding.RoutedEvent` 同样支持此用法。
+显式事件优先于 `EventName`，并确保声明事件的类型完成初始化。
+按名称查找自定义事件时，事件所属类型必须已经完成注册。
+
+旧的 CLR 回退仅支持 JIT 运行时的普通 `EventHandler` 事件。
+裁剪的 JIT 应用需保留 CLR 事件元数据；该回退不支持泛型 `EventHandler<TEventArgs>`，
+Native AOT 下也不启用该回退。AOT 应用应使用已注册的路由事件。
+无法解析的绑定会在 Avalonia 的 `Crystal.Avalonia` 日志区域产生警告。
+
+参数、多事件和升级示例见 [EventToCommand 指南](event-to-command.md)。
 
 ## 使用 AOT 发布
 

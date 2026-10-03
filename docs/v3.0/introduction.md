@@ -1,4 +1,4 @@
-# Introduction (3.1.0)
+# Introduction (3.1.1)
 
 Crystal.Avalonia is a lightweight infrastructure layer for Avalonia applications:
 

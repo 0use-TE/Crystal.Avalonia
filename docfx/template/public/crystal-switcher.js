@@ -11,11 +11,14 @@
     default: 'v3.0',
     defaultPage: 'introduction',
     versions: [
-      { id: 'v3.0', label: '3.0.0 (Current)' },
+      { id: 'v3.0', label: '3.1.1 (Current)' },
       { id: 'v2.0', label: '2.0.1 (Legacy)' },
       { id: 'v1.2', label: 'v1.2 (Legacy)' },
     ],
     pages: [
+      'release-notes',
+      'event-to-command',
+      'upgrade-from-3.0',
       'introduction',
       'getting-started',
       'architecture',

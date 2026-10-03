@@ -19,6 +19,8 @@
   href: getting-started.md
 - name: Architecture
   href: architecture.md
+- name: EventToCommand
+  href: event-to-command.md
 - name: Tutorials
   items:
     - name: Create Your First App
